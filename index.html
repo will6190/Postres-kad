@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Postres KAD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #fff0f5;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: #f8a5c2;
+            padding: 20px;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav {
+            background-color: #ffc0cb;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #d63384;
+            border-radius: 10px;
+        }
+        .section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #d63384;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        p, li {
+            font-size: 1.1em;
+            color: #333;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        .icon {
+            margin-right: 10px;
+            color: #d63384;
+        }
+        footer {
+            background-color: #f8a5c2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 5px solid #d63384;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .menu-table th, .menu-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        .menu-table th {
+            background-color: #ffd6e0;
+        }
+    </style>
+</head>
+<body>
+
+<header>POSTRES KAD</header>
+
+<nav>
+    <a href="#menu"><i class="fas fa-birthday-cake icon"></i>Menú</a>
+    <a href="#galeria"><i class="fas fa-image icon"></i>Galería</a>
+    <a href="#mision"><i class="fas fa-bullseye icon"></i>Misión</a>
+    <a href="#vision"><i class="fas fa-eye icon"></i>Visión</a>
+    <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
+    <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
+</nav>
+
+<div class="section" id="menu">
+    <h2>Menú de Postres</h2>
+    <table class="menu-table">
+        <tr><th>Producto</th><th>Precio</th></tr>
+        <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
+        <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
+        <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
+        <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
+    </table>
+</div>
+
+<div class="section" id="galeria">
+    <h2>Galería de Fotos</h2>
+    <div class="gallery">
+        <img src="https://i.imgur.com/Tj3IXOi.jpg" alt="Pastel decorado">
+        <img src="https://i.imgur.com/g2NiJzI.jpg" alt="Cupcake colorido">
+        <img src="https://i.imgur.com/yZrFQmp.jpg" alt="Brownies de chocolate">
+        <img src="https://i.imgur.com/Wf8x1TW.jpg" alt="Galletas decoradas">
+        <img src="https://i.imgur.com/f9Yc9Hq.jpg" alt="Mesa de postres">
+    </div>
+</div>
+
+<div class="section" id="mision">
+    <h2>Misión</h2>
+    <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
+</div>
+
+<div class="section" id="vision">
+    <h2>Visión</h2>
+    <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
+</div>
+
+<div class="section" id="valores">
+    <h2>Valores</h2>
+    <ul>
+        <li>Calidad</li>
+        <li>Creatividad</li>
+        <li>Compromiso</li>
+        <li>Pasión</li>
+        <li>Amor por los detalles</li>
+    </ul>
+</div>
+
+<div class="section" id="contacto">
+    <h2>Contacto y Redes Sociales</h2>
+    <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank">Postres Kad</a></p>
+    <p><i class="fab fa-instagram icon"></i><strong>Instagram:</strong> <a href="https://www.instagram.com/postres_kad" target="_blank">@postres_kad</a></p>
+    <p><i class="fas fa-envelope icon"></i><strong>Correo:</strong> postreakad@gmail.com</p>
+    <p><i class="fas fa-phone icon"></i><strong>Teléfono:</strong> +52 5648184476</p>
+    <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingos de 12:00 a 20:00 hrs</p>
+    <p><strong>Frase:</strong> "En Postres Kad, cada bocado es una experiencia única."</p>
+</div>
+
+<footer>
+    &copy; 2025 Postres Kad - Diseñado con amor
+</footer>
+
+</body>
+</html>
