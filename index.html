@@ -1,142 +1,121 @@
-<!DOCTYPE html><html lang="es">
->
-<head>
-  <meta charset="UTF-8">
-  <title>Postres KAD</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff0f5;
+import React, { useState } from 'react';
+import DessertHeader from './components/DessertHeader';
+import DessertCard from './components/DessertCard';
+import DessertFilter from './components/DessertFilter';
+import WelcomeScreen from './components/WelcomeScreen';
+import CartScreen from './components/CartScreen';
+import PaymentScreen from './components/PaymentScreen';
+import ServiceScreen from './components/ServiceScreen';
+import LocationScreen from './components/LocationScreen';
+import MissionScreen from './components/MissionScreen';
+import VisionScreen from './components/VisionScreen';
+import CreditsScreen from './components/CreditsScreen';
+import BackButton from './components/BackButton';
+import desserts from './mock/desserts';
+
+const App = () => {
+  const [currentView, setCurrentView] = useState('welcome');
+  const [filteredDesserts, setFilteredDesserts] = useState(desserts);
+  const [cartItems, setCartItems] = useState([]);
+  const [paymentTotal, setPaymentTotal] = useState(0);
+  
+  const categories = [...new Set(desserts.map(dessert => dessert.category))];
+
+  const handleFilterChange = (category) => {
+    if (category === 'todos') {
+      setFilteredDesserts(desserts);
+    } else {
+      setFilteredDesserts(desserts.filter(dessert => dessert.category === category));
     }
-    header {
-      background-color: #f8a5c2;
-      color: white;
-      padding: 30px 10px;
-      text-align: center;
-      font-size: 2.5em;
-      font-family: 'Pacifico', cursive;
+  };
+
+  const handleBack = () => {
+    if (currentView === 'payment') {
+      setCurrentView('cart');
+    } else if (currentView === 'cart') {
+      setCurrentView('menu');
+    } else {
+      setCurrentView('welcome');
     }
-    .section {
-      padding: 30px 20px;
-      max-width: 1000px;
-      margin: auto;
-      background-color: white;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
+  };
+
+  const handleAddToCart = (item) => {
+    setCartItems(prev => [...prev, item]);
+    setCurrentView('cart');
+  };
+
+  const handleProceedToPayment = (total) => {
+    setPaymentTotal(total);
+    setCurrentView('payment');
+  };
+
+  const handlePaymentSuccess = () => {
+    alert('¡Pago exitoso! Gracias por tu compra.');
+    setCartItems([]);
+    setCurrentView('welcome');
+  };
+
+  const renderView = () => {
+    switch(currentView) {
+      case 'menu':
+        return (
+          <div className="min-h-screen bg-gray-50">
+            <DessertHeader />
+            <main className="container mx-auto px-4 py-8">
+              <div className="mb-6">
+                <BackButton onClick={handleBack} />
+                <DessertFilter 
+                  categories={categories} 
+                  onFilterChange={handleFilterChange} 
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredDesserts.map(dessert => (
+                  <DessertCard 
+                    key={dessert.id} 
+                    dessert={dessert} 
+                    onAddToCart={handleAddToCart}
+                  />
+                ))}
+              </div>
+            </main>
+          </div>
+        );
+      case 'cart':
+        return (
+          <CartScreen 
+            cartItems={cartItems} 
+            onBack={handleBack}
+            onProceedToPayment={handleProceedToPayment}
+          />
+        );
+      case 'payment':
+        return (
+          <PaymentScreen 
+            cartItems={cartItems}
+            total={paymentTotal}
+            onBack={handleBack}
+            onPaymentSuccess={handlePaymentSuccess}
+          />
+        );
+      case 'servicio':
+        return <ServiceScreen onBack={handleBack} />;
+      case 'ubicacion':
+        return <LocationScreen onBack={handleBack} />;
+      case 'mision':
+        return <MissionScreen onBack={handleBack} />;
+      case 'vision':
+        return <VisionScreen onBack={handleBack} />;
+      case 'creditos':
+        return <CreditsScreen onBack={handleBack} />;
+      default:
+        return <WelcomeScreen onNavigate={setCurrentView} />;
     }
-    h2 {
-      color: #d63384;
-    }
-    .btn-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
-    }
-    .btn {
-      background-color: #d63384;
-      color: white;
-      border: none;
-      padding: 15px;
-      font-size: 1em;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background-color: #ad1f65;
-    }
-    .content {
-      display: none;
-      margin-top: 20px;
-      text-align: left;
-    }
-    .active {
-      display: block;
-    }
-    ul {
-      padding-left: 20px;
-    }
-  </style>
-</head>
-<body>
-<header>Postres KAD</header><div class="section">
-  <h2>Menú de Categorías</h2>
-  <div class="btn-grid">
-    <button class="btn" onclick="show('pasteles')">Pasteles</button>
-    <button class="btn" onclick="show('carlotas')">Carlotas</button>
-    <button class="btn" onclick="show('pays')">Pays</button>
-    <button class="btn" onclick="show('brownies')">Brownies</button>
-    <button class="btn" onclick="show('donas')">Donas</button>
-  </div>
-</div><!-- Secciones Pasteles y Carlotas aquí --><div class="section" id="pays">
-  <h2>Pays</h2>
-  <div class="btn-grid">
-    <button class="btn" onclick="toggle('sabores-pays')">Sabores</button>
-    <button class="btn" onclick="toggle('rellenos-pays')">Rellenos</button>
-    <button class="btn" onclick="toggle('coberturas-pays')">Coberturas</button>
-  </div>
-  <div id="sabores-pays" class="content">
-    <ul>
-      <li>Limón, Queso, Manzana, Fresa, Mango, Zarzamora, Nuez, Chocolate, Plátano, Calabaza</li>
-    </ul>
-  </div>
-  <div id="rellenos-pays" class="content">
-    <ul>
-      <li>Queso crema, crema pastelera, ganache, dulce de leche, mousse de frutas</li>
-      <li>Manzana caramelizada, fresas con gelatina, durazno, mango</li>
-      <li>Nutella, Oreo, plátano con crema, nuez caramelizada</li>
-    </ul>
-  </div>
-  <div id="coberturas-pays" class="content">
-    <ul>
-      <li>Frutas frescas, mermeladas, ganache, crema batida</li>
-      <li>Chispas, nueces, coco, glaseados y confites</li>
-    </ul>
-  </div>
-</div><div class="section" id="brownies">
-  <h2>Brownies</h2>
-  <div class="btn-grid">
-    <button class="btn" onclick="toggle('sabores-brownies')">Sabores / Rellenos</button>
-  </div>
-  <div id="sabores-brownies" class="content">
-    <ul>
-      <li>Clásicos, con Nutella, dulce de leche, queso, cacahuate, caramelo</li>
-      <li>Chocolate blanco, plátano, Oreo</li>
-    </ul>
-  </div>
-</div><div class="section" id="donas">
-  <h2>Donas</h2>
-  <div class="btn-grid">
-    <button class="btn" onclick="toggle('sabores-donas')">Sabores</button>
-    <button class="btn" onclick="toggle('coberturas-donas')">Coberturas</button>
-  </div>
-  <div id="sabores-donas" class="content">
-    <ul>
-      <li>Vainilla, canela, rellenas de crema pastelera, fresa, Nutella, cajeta</li>
-      <li>Queso crema, dulce de leche, moka, red velvet</li>
-    </ul>
-  </div>
-  <div id="coberturas-donas" class="content">
-    <ul>
-      <li>Azúcar glass, azúcar y canela, glaseado de vainilla</li>
-      <li>Chocolate oscuro, blanco, fresa, maple, cajeta</li>
-      <li>Nutella, Oreo, confites, chispas, coco, nueces</li>
-    </ul>
-  </div>
-</div><script>
-  function show(id) {
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-  }
-  function toggle(id) {
-    const el = document.getElementById(id);
-    el.style.display = el.style.display === 'block' ? 'none' : 'block';
-  }
-</script></body>
-</html>
+  };
+
+  return renderView();
+};
+
+export default App;
+
+// DONE
