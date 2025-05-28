@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
+>
 <head>
   <meta charset="UTF-8">
   <title>Postres KAD</title>
@@ -10,138 +10,133 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('https://i.imgur.com/QTe8TJH.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: #fff0f5;
     }
     header {
-      background-color: rgba(248, 165, 194, 0.9);
+      background-color: #f8a5c2;
       color: white;
+      padding: 30px 10px;
       text-align: center;
-      padding: 40px 10px;
-      font-size: 3em;
+      font-size: 2.5em;
       font-family: 'Pacifico', cursive;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    .intro, .menu, .galeria, .seccion {
-      text-align: center;
-      padding: 40px 20px;
-      background-color: rgba(255, 255, 255, 0.95);
+    .section {
+      padding: 30px 20px;
       max-width: 1000px;
-      margin: 30px auto;
+      margin: auto;
+      background-color: white;
       border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+    h2 {
+      color: #d63384;
+    }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .btn {
+      background-color: #d63384;
+      color: white;
+      border: none;
+      padding: 15px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background-color: #ad1f65;
+    }
+    .content {
       display: none;
+      margin-top: 20px;
+      text-align: left;
     }
     .active {
       display: block;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .button {
-      background-color: #d63384;
-      color: white;
-      border: none;
-      padding: 20px;
-      font-size: 1.1em;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .button i {
-      display: block;
-      font-size: 1.8em;
-      margin-bottom: 10px;
-    }
-    .button:hover {
-      background-color: #ad1457;
-    }
-    .back-btn {
-      margin-top: 30px;
-      background-color: #ffc0cb;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-    .text-left {
-      text-align: left;
+    ul {
+      padding-left: 20px;
     }
   </style>
 </head>
 <body>
-
-<header>Postres KAD</header>
-
-<!-- Pantalla de Introducción -->
-<div class="intro active" id="intro-screen">
-  <h2>Bienvenidos</h2>
-  <div class="grid">
-    <button class="button" onclick="show('menu-screen')"><i class="fas fa-birthday-cake"></i>Menú</button>
-    <a class="button" href="https://www.instagram.com/postres_kad" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
-    <a class="button" href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank"><i class="fab fa-facebook"></i>Facebook</a>
-    <button class="button" onclick="show('atencion')"><i class="fas fa-headset"></i>Atención</button>
-    <button class="button" onclick="show('ubicacion')"><i class="fas fa-map-marker-alt"></i>Ubicación</button>
-    <button class="button" onclick="show('mision')"><i class="fas fa-bullseye"></i>Misión</button>
-    <button class="button" onclick="show('vision')"><i class="fas fa-eye"></i>Visión</button>
-    <button class="button" onclick="show('creditos')"><i class="fas fa-star"></i>Créditos</button>
+<header>Postres KAD</header><div class="section">
+  <h2>Menú de Categorías</h2>
+  <div class="btn-grid">
+    <button class="btn" onclick="show('pasteles')">Pasteles</button>
+    <button class="btn" onclick="show('carlotas')">Carlotas</button>
+    <button class="btn" onclick="show('pays')">Pays</button>
+    <button class="btn" onclick="show('brownies')">Brownies</button>
+    <button class="btn" onclick="show('donas')">Donas</button>
   </div>
-</div>
-
-<!-- Sección Atención -->
-<div class="seccion" id="atencion">
-  <h2>Servicio a Cliente</h2>
-  <div class="text-left">
-    <p><strong>Atención personalizada:</strong> Brindamos atención especial y asesoramiento en la elección de postres.</p>
-    <p><strong>Pedidos personalizados:</strong> Tartas y pasteles con diseño a gusto del cliente.</p>
-    <p><strong>Entrega a domicilio:</strong> Llevamos tus postres a casa.</p>
-    <p><strong>Catering para eventos:</strong> Bodas, cumpleaños y más.</p>
-    <p><strong>Información nutricional:</strong> Aclaramos alérgenos y calorías.</p>
-    <p><strong>Atención a necesidades especiales:</strong> Alergias, dietas y restricciones.</p>
-    <p><strong>Promociones:</strong> Ofertas para clientes frecuentes.</p>
-    <p><strong>Comunicación:</strong> Vía redes, email y teléfono.</p>
+</div><!-- Secciones Pasteles y Carlotas aquí --><div class="section" id="pays">
+  <h2>Pays</h2>
+  <div class="btn-grid">
+    <button class="btn" onclick="toggle('sabores-pays')">Sabores</button>
+    <button class="btn" onclick="toggle('rellenos-pays')">Rellenos</button>
+    <button class="btn" onclick="toggle('coberturas-pays')">Coberturas</button>
   </div>
-  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
-</div>
-
-<!-- Sección Ubicación -->
-<div class="seccion" id="ubicacion">
-  <h2>Ubicación</h2>
-  <p>Siempre Villa 126, Geovillas De Santa Bárbara, Ixtapaluca, México</p>
-  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
-</div>
-
-<!-- Sección Misión -->
-<div class="seccion" id="mision">
-  <h2>Misión</h2>
-  <p>Ofrecer postres caseros de alta calidad, elaborados con ingredientes frescos y recetas artesanales, brindando momentos dulces y especiales a nuestros clientes.</p>
-  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
-</div>
-
-<!-- Sección Visión -->
-<div class="seccion" id="vision">
-  <h2>Visión</h2>
-  <p>Ser la opción preferida en postres artesanales, reconocidos por nuestro sabor, calidad y servicio excepcional, expandiéndonos a más clientes a través de ventas en línea y puntos de distribución.</p>
-  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
-</div>
-
-<!-- Sección Créditos -->
-<div class="seccion" id="creditos">
-  <h2>Créditos</h2>
-  <p>&copy; 2025 Postres KAD. Todos los derechos reservados.</p>
-  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
-</div>
-
-<script>
+  <div id="sabores-pays" class="content">
+    <ul>
+      <li>Limón, Queso, Manzana, Fresa, Mango, Zarzamora, Nuez, Chocolate, Plátano, Calabaza</li>
+    </ul>
+  </div>
+  <div id="rellenos-pays" class="content">
+    <ul>
+      <li>Queso crema, crema pastelera, ganache, dulce de leche, mousse de frutas</li>
+      <li>Manzana caramelizada, fresas con gelatina, durazno, mango</li>
+      <li>Nutella, Oreo, plátano con crema, nuez caramelizada</li>
+    </ul>
+  </div>
+  <div id="coberturas-pays" class="content">
+    <ul>
+      <li>Frutas frescas, mermeladas, ganache, crema batida</li>
+      <li>Chispas, nueces, coco, glaseados y confites</li>
+    </ul>
+  </div>
+</div><div class="section" id="brownies">
+  <h2>Brownies</h2>
+  <div class="btn-grid">
+    <button class="btn" onclick="toggle('sabores-brownies')">Sabores / Rellenos</button>
+  </div>
+  <div id="sabores-brownies" class="content">
+    <ul>
+      <li>Clásicos, con Nutella, dulce de leche, queso, cacahuate, caramelo</li>
+      <li>Chocolate blanco, plátano, Oreo</li>
+    </ul>
+  </div>
+</div><div class="section" id="donas">
+  <h2>Donas</h2>
+  <div class="btn-grid">
+    <button class="btn" onclick="toggle('sabores-donas')">Sabores</button>
+    <button class="btn" onclick="toggle('coberturas-donas')">Coberturas</button>
+  </div>
+  <div id="sabores-donas" class="content">
+    <ul>
+      <li>Vainilla, canela, rellenas de crema pastelera, fresa, Nutella, cajeta</li>
+      <li>Queso crema, dulce de leche, moka, red velvet</li>
+    </ul>
+  </div>
+  <div id="coberturas-donas" class="content">
+    <ul>
+      <li>Azúcar glass, azúcar y canela, glaseado de vainilla</li>
+      <li>Chocolate oscuro, blanco, fresa, maple, cajeta</li>
+      <li>Nutella, Oreo, confites, chispas, coco, nueces</li>
+    </ul>
+  </div>
+</div><script>
   function show(id) {
-    document.querySelectorAll('.intro, .menu, .galeria, .seccion').forEach(el => el.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
   }
-</script>
-
-</body>
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  }
+</script></body>
 </html>
