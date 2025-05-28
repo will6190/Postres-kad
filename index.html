@@ -2,53 +2,108 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Bienvenida</title>
+  <title>Postres Deliciosos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .view { display: none; }
+    .active { display: block; }
+  </style>
 </head>
-<body class="bg-pink-50 flex items-center justify-center min-h-screen">
-  <div class="text-center space-y-6">
-    <h1 class="text-4xl font-bold">Bienvenido a Postres Deliciosos</h1>
-    <p class="text-lg text-gray-700">Explora nuestras delicias o conoce más de nosotros</p>
-    <div class="space-x-4">
-      <a href="menu.html" class="bg-pink-500 text-white px-4 py-2 rounded">Menú</a>
-      <a href="service.html" class="bg-blue-500 text-white px-4 py-2 rounded">Atención</a>
-      <a href="location.html" class="bg-green-500 text-white px-4 py-2 rounded">Ubicación</a>
-      <a href="mission.html" class="bg-yellow-500 text-white px-4 py-2 rounded">Misión</a>
-      <a href="vision.html" class="bg-purple-500 text-white px-4 py-2 rounded">Visión</a>
-      <a href="credits.html" class="bg-gray-700 text-white px-4 py-2 rounded">Créditos</a>
+<body class="bg-pink-50 text-center min-h-screen">
+
+  <!-- Bienvenida -->
+  <section id="welcome" class="view active p-10">
+    <h1 class="text-4xl font-bold mb-4">¡Bienvenido a Postres Deliciosos!</h1>
+    <div class="space-y-4">
+      <button onclick="showView('menu')" class="bg-yellow-400 text-white font-bold py-2 px-4 rounded">Menú</button>
+      <button onclick="showView('service')" class="bg-purple-500 text-white font-bold py-2 px-4 rounded">Atención</button>
+      <button onclick="showView('location')" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Ubicación</button>
+      <button onclick="showView('mission')" class="bg-green-500 text-white font-bold py-2 px-4 rounded">Misión</button>
+      <button onclick="showView('vision')" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded">Visión</button>
+      <button onclick="showView('credits')" class="bg-gray-700 text-white font-bold py-2 px-4 rounded">Créditos</button>
     </div>
-  </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Menú</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <a href="welcome.html" class="text-blue-500 underline">← Volver</a>
-  <h1 class="text-3xl font-bold my-4">Nuestro Menú</h1>
-  <div class="mb-4">
-    <label class="mr-2 font-medium">Filtrar por categoría:</label>
-    <select class="p-2 border rounded">
-      <option>Todos</option>
-      <option>Pasteles</option>
-      <option>Carlotas</option>
-      <option>Pays</option>
-      <option>Brownies</option>
-      <option>Donas</option>
-    </select>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="bg-white p-4 rounded shadow">
-      <img src="https://via.placeholder.com/300x200" alt="Pastel" class="mb-2 rounded">
-      <h3 class="font-bold text-lg">Pastel de Chocolate</h3>
-      <p class="text-gray-600 mb-2">Delicioso pastel con relleno de ganache.</p>
-      <button onclick="location.href='cart.html'" class="bg-pink-500 text-white px-4 py-2 rounded">Agregar al carrito</button>
+  </section>
+
+  <!-- Menú -->
+  <section id="menu" class="view p-6">
+    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold my-4">Menú de Postres</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white p-4 rounded shadow">
+        <h3 class="text-xl font-bold">Pastel de Chocolate</h3>
+        <p>Delicioso pastel con cobertura de ganache.</p>
+        <button onclick="showView('cart')" class="mt-2 bg-green-500 text-white px-4 py-2 rounded">Agregar al carrito</button>
+      </div>
+      <!-- Puedes agregar más tarjetas aquí -->
     </div>
-    <!-- Puedes duplicar este bloque para más postres -->
-  </div>
+  </section>
+
+  <!-- Carrito -->
+  <section id="cart" class="view p-6">
+    <button onclick="showView('menu')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold mb-4">Tu Carrito</h2>
+    <ul class="text-left mx-auto max-w-md space-y-2">
+      <li class="flex justify-between"><span>Pastel de Chocolate</span><span>$150</span></li>
+    </ul>
+    <button onclick="showView('payment')" class="mt-4 bg-green-500 text-white px-4 py-2 rounded">Proceder al Pago</button>
+  </section>
+
+  <!-- Pago -->
+  <section id="payment" class="view p-6">
+    <button onclick="showView('cart')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold mb-4">Pago</h2>
+    <p class="mb-4">Total a pagar: $150</p>
+    <button onclick="completePayment()" class="bg-blue-600 text-white px-4 py-2 rounded">Confirmar Pago</button>
+  </section>
+
+  <!-- Atención -->
+  <section id="service" class="view p-6">
+    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold mb-4">Atención al Cliente</h2>
+    <p>Horario: Lunes a Viernes, 9am - 6pm</p>
+    <p>Email: contacto@postresdeliciosos.com</p>
+  </section>
+
+  <!-- Ubicación -->
+  <section id="location" class="view p-6">
+    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold mb-4">Ubicación</h2>
+    <p>Av. Dulce 123, Ciudad Sabor, País Pastel</p>
+  </section>
+
+  <!-- Misión -->
+  <section id="mission" class="view p-6">
+    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold mb-4">Nuestra Misión</h2>
+    <p>Endulzar la vida de nuestros clientes con postres artesanales de alta calidad.</p>
+  </section>
+
+  <!-- Visión -->
+  <section id="vision" class="view p-6">
+    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold mb-4">Nuestra Visión</h2>
+    <p>Ser la pastelería más querida de la región por nuestro sabor y servicio.</p>
+  </section>
+
+  <!-- Créditos -->
+  <section id="credits" class="view p-6">
+    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
+    <h2 class="text-3xl font-bold mb-4">Créditos</h2>
+    <p>Desarrollado por Tu Nombre</p>
+    <p>Diseño inspirado en postres reales y amor por el azúcar ❤️</p>
+  </section>
+
+  <script>
+    function showView(viewId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+    }
+
+    function completePayment() {
+      alert('¡Pago exitoso! Gracias por tu compra.');
+      showView('welcome');
+    }
+  </script>
 </body>
 </html>
