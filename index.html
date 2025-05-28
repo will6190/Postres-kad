@@ -1,41 +1,122 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Postres Deliciosos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    .view { display: none; }
-    .active { display: block; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Postres KAD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #fff0f5;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: #f8a5c2;
+            padding: 20px;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav {
+            background-color: #ffc0cb;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #d63384;
+            border-radius: 10px;
+        }
+        .section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #d63384;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        p, li {
+            font-size: 1.1em;
+            color: #333;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        .icon {
+            margin-right: 10px;
+            color: #d63384;
+        }
+        footer {
+            background-color: #f8a5c2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 5px solid #d63384;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .menu-table th, .menu-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        .menu-table th {
+            background-color: #ffd6e0;
+        }
+    </style>
 </head>
-<body class="bg-pink-50 text-center min-h-screen">
-
-  <!-- Bienvenida -->
-  <section id="welcome" class="view active p-10">
-    <h1 class="text-4xl font-bold mb-4">¡Bienvenido a Postres Deliciosos!</h1>
-    <div class="space-y-4">
-      <button onclick="showView('menu')" class="bg-yellow-400 text-white font-bold py-2 px-4 rounded">Menú</button>
-      <button onclick="showView('service')" class="bg-purple-500 text-white font-bold py-2 px-4 rounded">Atención</button>
-      <button onclick="showView('location')" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Ubicación</button>
-      <button onclick="showView('mission')" class="bg-green-500 text-white font-bold py-2 px-4 rounded">Misión</button>
-      <button onclick="showView('vision')" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded">Visión</button>
-      <button onclick="showView('credits')" class="bg-gray-700 text-white font-bold py-2 px-4 rounded">Créditos</button>
-    </div>
-  </section>
-
-  <!-- Menú -->
-  <section id="menu" class="view p-6">
-    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold my-4">Menú de Postres</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-white p-4 rounded shadow">
-        <h3 class="text-xl font-bold">Pastel de Chocolate</h3>
-        <p>Delicioso pastel con cobertura de ganache.</p>
-        <button onclick="showView('cart')" class="mt-2 bg-green-500 text-white px-4 py-2 rounded">Agregar al carrito</button>
-      </div>
-      <!-- Puedes agregar más tarjetas aquí -->
+<body><header>POSTRES KAD</header><nav>
+    <a href="#menu"><i class="fas fa-birthday-cake icon"></i>Menú</a>
+    <a href="#galeria"><i class="fas fa-image icon"></i>Galería</a >
+     class="menu-table">
+        <tr><th>Producto</th><th>Precio</th></tr>
+        <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
+        <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
+        <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
+        <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
+    </table>
+</div><div class="section" id="galeria">
+    <h2>Galería de Fotos</h2>
+    <div class="gallery">
+        <img src="https://i.imgur.com/Tj3IXOi.jpg" alt="Pastel decorado">
+        <img src="https://i.imgur.com/g2NiJzI.jpg" alt="Cupcake colorido">
+        <img src="https://i.imgur.com/yZrFQmp.jpg" alt="Brownies de chocolate">
+        <img src="https://i.imgur.com/Wf8x1TW.jpg" alt="Galletas decoradas">
+        <img src="https://i.imgur.com/f9Yc9Hq.jpg" alt="Mesa de postres">más tarjetas aquí -->
     </div>
   </section>
 
