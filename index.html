@@ -1,141 +1,162 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Postres KAD</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      background-image: url('https://i.imgur.com/axQ9VWD.jpg'); /* Fondo floral */
-      background-size: cover;
-      background-repeat: no-repeat;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #f8a5c2;
-      padding: 20px;
-      text-align: center;
-      font-size: 2.5em;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    nav {
-      background-color: #ffc0cb;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 10px 0;
-    }
-
-    nav a {
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    nav a:hover {
-      background-color: #d63384;
-      border-radius: 10px;
-    }
-
-    .menu-screen {
-      padding: 40px 20px;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      margin: 20px auto;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 15px;
-    }
-
-    .menu-title {
-      font-size: 2em;
-      color: #6e005f;
-      margin-bottom: 30px;
-    }
-
-    .hex-button {
-      width: 120px;
-      height: 69.28px;
-      background-color: #6e005f;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      line-height: 69.28px;
-      margin: 20px auto;
-      position: relative;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .hex-button:hover {
-      background-color: #9c27b0;
-    }
-
-    .menu-images img {
-      width: 100px;
-      height: auto;
-      border-radius: 10px;
-      margin: 10px;
-    }
-
-    footer {
-      background-color: #f8a5c2;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      border-top: 5px solid #d63384;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Postres KAD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff0f5;
+        }
+        .pantalla {
+            display: none;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .activa {
+            display: block;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #d63384;
+        }
+        .botonera {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 300px;
+        }
+        .botonera button {
+            padding: 15px;
+            font-size: 1.1em;
+            background-color: #d63384;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .botonera button:hover {
+            background-color: #a82562;
+        }
+        .iconos-redes {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .iconos-redes a {
+            margin: 0 15px;
+            font-size: 2em;
+            color: #d63384;
+        }
+        .menu-categorias {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .volver-btn {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .volver-btn button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #999;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body>
-
-<header>POSTRES KAD</header>
-
-<nav>
-  <a href="#menu"><i class="fas fa-birthday-cake icon"></i>Menú</a>
-  <a href="#galeria"><i class="fas fa-image icon"></i>Galería</a>
-  <a href="#mision"><i class="fas fa-bullseye icon"></i>Misión</a>
-  <a href="#vision"><i class="fas fa-eye icon"></i>Visión</a>
-  <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
-  <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
-</nav>
-
-<div class="menu-screen" id="menu">
-  <div class="menu-title">MENÚ DE POSTRES</div>
-  
-  <div class="hex-button">PASTELES</div>
-  <div class="menu-images">
-    <img src="https://i.imgur.com/Tj3IXOi.jpg" alt="Pastel decorado">
-  </div>
-
-  <div class="hex-button">CARLOTAS</div>
-  <div class="menu-images">
-    <img src="https://i.imgur.com/g2NiJzI.jpg" alt="Carlotas">
-  </div>
-
-  <div class="hex-button">PAYS</div>
-  <div class="menu-images">
-    <img src="https://i.imgur.com/yZrFQmp.jpg" alt="Pays">
-  </div>
-
-  <div class="hex-button">OTROS</div>
-  <div class="menu-images">
-    <img src="https://i.imgur.com/f9Yc9Hq.jpg" alt="Otros postres">
-  </div>
-</div>
-
-<footer>
-  &copy; 2025 Postres Kad - Diseñado con amor
-</footer>
-
-</body>
+<body><div id="pantallaInicio" class="pantalla activa">
+    <h1>Bienvenidos a Postres KAD</h1>
+    <div class="botonera">
+        <button onclick="mostrarPantalla('menu')">Menú</button>
+        <button onclick="mostrarPantalla('redes')">Redes Sociales</button>
+        <button onclick="mostrarPantalla('atencion')">Atención al Cliente</button>
+        <button onclick="mostrarPantalla('ubicacion')">Ubicación</button>
+        <button onclick="mostrarPantalla('valores')">Valores</button>
+        <button onclick="mostrarPantalla('mision')">Misión</button>
+        <button onclick="mostrarPantalla('vision')">Visión</button>
+        <button onclick="mostrarPantalla('creditos')">Créditos</button>
+    </div>
+</div><div id="pantallaMenu" class="pantalla">
+    <h2>Menú de Postres</h2>
+    <div class="menu-categorias">
+        <button>Pasteles</button>
+        <button>Carlotas</button>
+        <button>Pays</button>
+        <button>Otros</button>
+    </div>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><div id="pantallaRedes" class="pantalla">
+    <h2>Síguenos</h2>
+    <div class="iconos-redes">
+        <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/postres_kad" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><div id="pantallaAtencion" class="pantalla">
+    <h2>Atención al Cliente</h2>
+    <p>Correo: postreakad@gmail.com</p>
+    <p>Teléfono: +52 5648184476</p>
+    <p>Horario: Jueves a domingos de 12:00 a 20:00 hrs</p>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><div id="pantallaUbicacion" class="pantalla">
+    <h2>Ubicación</h2>
+    <p>Estamos ubicados en Ciudad de México, consulta nuestras redes para más información.</p>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><div id="pantallaValores" class="pantalla">
+    <h2>Valores</h2>
+    <ul>
+        <li>Calidad</li>
+        <li>Creatividad</li>
+        <li>Compromiso</li>
+        <li>Pasíon</li>
+        <li>Amor por los detalles</li>
+    </ul>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><div id="pantallaMision" class="pantalla">
+    <h2>Misión</h2>
+    <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><div id="pantallaVision" class="pantalla">
+    <h2>Visión</h2>
+    <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><div id="pantallaCreditos" class="pantalla">
+    <h2>Créditos</h2>
+    <p>&copy; 2025 Postres Kad - Diseñado con amor</p>
+    <div class="volver-btn">
+        <button onclick="mostrarPantalla('inicio')">Volver</button>
+    </div>
+</div><script>
+    function mostrarPantalla(pantalla) {
+        document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+        document.getElementById('pantalla' + pantalla.charAt(0).toUpperCase() + pantalla.slice(1)).classList.add('activa');
+    }
+</script></body>
 </html>
