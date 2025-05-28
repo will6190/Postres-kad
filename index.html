@@ -1,121 +1,132 @@
-import React, { useState } from 'react';
-import DessertHeader from './components/DessertHeader';
-import DessertCard from './components/DessertCard';
-import DessertFilter from './components/DessertFilter';
-import WelcomeScreen from './components/WelcomeScreen';
-import CartScreen from './components/CartScreen';
-import PaymentScreen from './components/PaymentScreen';
-import ServiceScreen from './components/ServiceScreen';
-import LocationScreen from './components/LocationScreen';
-import MissionScreen from './components/MissionScreen';
-import VisionScreen from './components/VisionScreen';
-import CreditsScreen from './components/CreditsScreen';
-import BackButton from './components/BackButton';
-import desserts from './mock/desserts';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Postres KAD</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #fff0f5; }
+    header { background-color: #f8a5c2; color: white; text-align: center; padding: 20px; font-size: 2em; }
+    .container { padding: 20px; max-width: 900px; margin: auto; }
+    .view { display: none; }
+    .active { display: block; }
+    .btn { background: #d63384; color: white; padding: 10px 20px; margin: 10px; border: none; border-radius: 8px; cursor: pointer; }
+    .card { background: #fff; border-radius: 10px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <header>Postres KAD</header>
 
-const App = () => {
-  const [currentView, setCurrentView] = useState('welcome');
-  const [filteredDesserts, setFilteredDesserts] = useState(desserts);
-  const [cartItems, setCartItems] = useState([]);
-  const [paymentTotal, setPaymentTotal] = useState(0);
-  
-  const categories = [...new Set(desserts.map(dessert => dessert.category))];
+  <div class="container">
+    <!-- Welcome -->
+    <div id="welcome" class="view active">
+      <h2>Bienvenido</h2>
+      <button class="btn" onclick="showView('menu')">Ver Menú</button>
+      <button class="btn" onclick="showView('servicio')">Atención</button>
+      <button class="btn" onclick="showView('ubicacion')">Ubicación</button>
+      <button class="btn" onclick="showView('mision')">Misión</button>
+      <button class="btn" onclick="showView('vision')">Visión</button>
+      <button class="btn" onclick="showView('creditos')">Créditos</button>
+    </div>
 
-  const handleFilterChange = (category) => {
-    if (category === 'todos') {
-      setFilteredDesserts(desserts);
-    } else {
-      setFilteredDesserts(desserts.filter(dessert => dessert.category === category));
+    <!-- Menu -->
+    <div id="menu" class="view">
+      <h2>Menú</h2>
+      <div class="card">Pastel de Chocolate <button class="btn" onclick="addToCart('Pastel de Chocolate')">Añadir</button></div>
+      <div class="card">Carlota de Limón <button class="btn" onclick="addToCart('Carlota de Limón')">Añadir</button></div>
+      <div class="card">Pay de Queso <button class="btn" onclick="addToCart('Pay de Queso')">Añadir</button></div>
+      <button class="btn" onclick="showView('cart')">Ver Carrito</button>
+      <button class="btn" onclick="showView('welcome')">← Regresar</button>
+    </div>
+
+    <!-- Cart -->
+    <div id="cart" class="view">
+      <h2>Carrito</h2>
+      <ul id="cart-items"></ul>
+      <button class="btn" onclick="showView('payment')">Pagar</button>
+      <button class="btn" onclick="showView('menu')">← Regresar</button>
+    </div>
+
+    <!-- Payment -->
+    <div id="payment" class="view">
+      <h2>Pago</h2>
+      <p>Total: <span id="total">0</span> MXN</p>
+      <button class="btn" onclick="paymentSuccess()">Confirmar Pago</button>
+      <button class="btn" onclick="showView('cart')">← Regresar</button>
+    </div>
+
+    <!-- Servicio -->
+    <div id="servicio" class="view">
+      <h2>Atención al Cliente</h2>
+      <p>Brindamos atención personalizada, pedidos a domicilio y más.</p>
+      <button class="btn" onclick="showView('welcome')">← Regresar</button>
+    </div>
+
+    <!-- Ubicación -->
+    <div id="ubicacion" class="view">
+      <h2>Ubicación</h2>
+      <p>Siempre Villa 126, Ixtapaluca, México</p>
+      <button class="btn" onclick="showView('welcome')">← Regresar</button>
+    </div>
+
+    <!-- Misión -->
+    <div id="mision" class="view">
+      <h2>Misión</h2>
+      <p>Ofrecer postres de alta calidad con amor.</p>
+      <button class="btn" onclick="showView('welcome')">← Regresar</button>
+    </div>
+
+    <!-- Visión -->
+    <div id="vision" class="view">
+      <h2>Visión</h2>
+      <p>Ser líderes en postres artesanales en línea.</p>
+      <button class="btn" onclick="showView('welcome')">← Regresar</button>
+    </div>
+
+    <!-- Créditos -->
+    <div id="creditos" class="view">
+      <h2>Créditos</h2>
+      <p>&copy; 2025 Postres KAD</p>
+      <button class="btn" onclick="showView('welcome')">← Regresar</button>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function showView(viewId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
     }
-  };
 
-  const handleBack = () => {
-    if (currentView === 'payment') {
-      setCurrentView('cart');
-    } else if (currentView === 'cart') {
-      setCurrentView('menu');
-    } else {
-      setCurrentView('welcome');
+    function addToCart(item) {
+      cart.push(item);
+      alert(item + ' agregado al carrito');
     }
-  };
 
-  const handleAddToCart = (item) => {
-    setCartItems(prev => [...prev, item]);
-    setCurrentView('cart');
-  };
-
-  const handleProceedToPayment = (total) => {
-    setPaymentTotal(total);
-    setCurrentView('payment');
-  };
-
-  const handlePaymentSuccess = () => {
-    alert('¡Pago exitoso! Gracias por tu compra.');
-    setCartItems([]);
-    setCurrentView('welcome');
-  };
-
-  const renderView = () => {
-    switch(currentView) {
-      case 'menu':
-        return (
-          <div className="min-h-screen bg-gray-50">
-            <DessertHeader />
-            <main className="container mx-auto px-4 py-8">
-              <div className="mb-6">
-                <BackButton onClick={handleBack} />
-                <DessertFilter 
-                  categories={categories} 
-                  onFilterChange={handleFilterChange} 
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredDesserts.map(dessert => (
-                  <DessertCard 
-                    key={dessert.id} 
-                    dessert={dessert} 
-                    onAddToCart={handleAddToCart}
-                  />
-                ))}
-              </div>
-            </main>
-          </div>
-        );
-      case 'cart':
-        return (
-          <CartScreen 
-            cartItems={cartItems} 
-            onBack={handleBack}
-            onProceedToPayment={handleProceedToPayment}
-          />
-        );
-      case 'payment':
-        return (
-          <PaymentScreen 
-            cartItems={cartItems}
-            total={paymentTotal}
-            onBack={handleBack}
-            onPaymentSuccess={handlePaymentSuccess}
-          />
-        );
-      case 'servicio':
-        return <ServiceScreen onBack={handleBack} />;
-      case 'ubicacion':
-        return <LocationScreen onBack={handleBack} />;
-      case 'mision':
-        return <MissionScreen onBack={handleBack} />;
-      case 'vision':
-        return <VisionScreen onBack={handleBack} />;
-      case 'creditos':
-        return <CreditsScreen onBack={handleBack} />;
-      default:
-        return <WelcomeScreen onNavigate={setCurrentView} />;
+    function paymentSuccess() {
+      alert('¡Pago exitoso! Gracias por tu compra.');
+      cart = [];
+      document.getElementById('cart-items').innerHTML = '';
+      document.getElementById('total').innerText = '0';
+      showView('welcome');
     }
-  };
 
-  return renderView();
-};
+    function showViewCart() {
+      const cartList = document.getElementById('cart-items');
+      cartList.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item + ' - $50 MXN';
+        cartList.appendChild(li);
+        total += 50;
+      });
+      document.getElementById('total').innerText = total;
+      showView('cart');
+    }
 
-export default App;
-
-// DONE
+    document.querySelector('[onclick="showView(\'cart\')"]').addEventListener('click', showViewCart);
+  </script>
+</body>
+</html>
