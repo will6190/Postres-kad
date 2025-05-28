@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Postres KAD</title>
@@ -21,10 +22,10 @@
       font-family: 'Pacifico', cursive;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    .intro, .menu, .galeria {
+    .intro, .menu, .galeria, .seccion {
       text-align: center;
       padding: 40px 20px;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.95);
       max-width: 1000px;
       margin: 30px auto;
       border-radius: 20px;
@@ -34,7 +35,7 @@
     .active {
       display: block;
     }
-    .grid, .card-grid {
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
@@ -58,22 +59,6 @@
     .button:hover {
       background-color: #ad1457;
     }
-    .card {
-      background: #ffe0ec;
-      border-radius: 12px;
-      padding: 15px;
-    }
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .card h3 {
-      margin: 10px 0 5px;
-      color: #d63384;
-    }
-    .card p {
-      font-size: 0.9em;
-    }
     .back-btn {
       margin-top: 30px;
       background-color: #ffc0cb;
@@ -83,73 +68,80 @@
       font-size: 1em;
       cursor: pointer;
     }
+    .text-left {
+      text-align: left;
+    }
   </style>
 </head>
-<body><header>Postres KAD</header><div class="intro active" id="intro-screen">
+<body>
+
+<header>Postres KAD</header>
+
+<!-- Pantalla de Introducción -->
+<div class="intro active" id="intro-screen">
   <h2>Bienvenidos</h2>
   <div class="grid">
     <button class="button" onclick="show('menu-screen')"><i class="fas fa-birthday-cake"></i>Menú</button>
     <a class="button" href="https://www.instagram.com/postres_kad" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
     <a class="button" href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank"><i class="fab fa-facebook"></i>Facebook</a>
-    <button class="button" onclick="alert('Atención al cliente: +52 5648184476')"><i class="fas fa-headset"></i>Atención</button>
-    <button class="button" onclick="alert('Ubicación: Ciudad de México')"><i class="fas fa-map-marker-alt"></i>Ubicación</button>
-    <button class="button" onclick="alert('Misión: Endulzar momentos con amor y calidad')"><i class="fas fa-bullseye"></i>Misión</button>
-    <button class="button" onclick="alert('Visión: Ser reconocidos como la mejor repostería local')"><i class="fas fa-eye"></i>Visión</button>
-    <button class="button" onclick="alert('Créditos: Diseño por Postres KAD')"><i class="fas fa-star"></i>Créditos</button>
+    <button class="button" onclick="show('atencion')"><i class="fas fa-headset"></i>Atención</button>
+    <button class="button" onclick="show('ubicacion')"><i class="fas fa-map-marker-alt"></i>Ubicación</button>
+    <button class="button" onclick="show('mision')"><i class="fas fa-bullseye"></i>Misión</button>
+    <button class="button" onclick="show('vision')"><i class="fas fa-eye"></i>Visión</button>
+    <button class="button" onclick="show('creditos')"><i class="fas fa-star"></i>Créditos</button>
   </div>
-</div><div class="menu" id="menu-screen">
-  <h2>Menú de Postres</h2>
-  <div class="card-grid">
-    <div class="card" onclick="show('pasteles')">
-      <img src="https://i.imgur.com/Tj3IXOi.jpg" alt="Pasteles">
-      <h3>Pasteles</h3>
-    </div>
-    <div class="card" onclick="show('carlotas')">
-      <img src="https://i.imgur.com/g2NiJzI.jpg" alt="Carlotas">
-      <h3>Carlotas</h3>
-    </div>
-    <div class="card" onclick="show('pays')">
-      <img src="https://i.imgur.com/yZrFQmp.jpg" alt="Pays">
-      <h3>Pays</h3>
-    </div>
-    <div class="card" onclick="show('otros')">
-      <img src="https://i.imgur.com/f9Yc9Hq.jpg" alt="Otros">
-      <h3>Otros</h3>
-    </div>
+</div>
+
+<!-- Sección Atención -->
+<div class="seccion" id="atencion">
+  <h2>Servicio a Cliente</h2>
+  <div class="text-left">
+    <p><strong>Atención personalizada:</strong> Brindamos atención especial y asesoramiento en la elección de postres.</p>
+    <p><strong>Pedidos personalizados:</strong> Tartas y pasteles con diseño a gusto del cliente.</p>
+    <p><strong>Entrega a domicilio:</strong> Llevamos tus postres a casa.</p>
+    <p><strong>Catering para eventos:</strong> Bodas, cumpleaños y más.</p>
+    <p><strong>Información nutricional:</strong> Aclaramos alérgenos y calorías.</p>
+    <p><strong>Atención a necesidades especiales:</strong> Alergias, dietas y restricciones.</p>
+    <p><strong>Promociones:</strong> Ofertas para clientes frecuentes.</p>
+    <p><strong>Comunicación:</strong> Vía redes, email y teléfono.</p>
   </div>
   <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
-</div><div class="galeria" id="pasteles">
-  <h2>Galería de Pasteles</h2>
-  <div class="card-grid">
-    <div class="card"><img src="https://i.imgur.com/Tj3IXOi.jpg"><h3>Chocolate</h3><p>Con trufa y cobertura de ganache.</p></div>
-    <div class="card"><img src="https://i.imgur.com/8lAJIhA.jpg"><h3>Red Velvet</h3><p>Con frosting de queso crema.</p></div>
-  </div>
-  <button class="back-btn" onclick="show('menu-screen')">← Regresar</button>
-</div><div class="galeria" id="carlotas">
-  <h2>Galería de Carlotas</h2>
-  <div class="card-grid">
-    <div class="card"><img src="https://i.imgur.com/Wf8x1TW.jpg"><h3>Limón</h3><p>Con leche condensada y base de galleta.</p></div>
-    <div class="card"><img src="https://i.imgur.com/hV6d3r6.jpg"><h3>Frutos rojos</h3><p>Con mermelada y topping de frutas frescas.</p></div>
-  </div>
-  <button class="back-btn" onclick="show('menu-screen')">← Regresar</button>
-</div><div class="galeria" id="pays">
-  <h2>Galería de Pays</h2>
-  <div class="card-grid">
-    <div class="card"><img src="https://i.imgur.com/yZrFQmp.jpg"><h3>Queso</h3><p>Pay clásico horneado con base de galleta.</p></div>
-    <div class="card"><img src="https://i.imgur.com/kSEq0Ym.jpg"><h3>Manzana</h3><p>Con canela y masa crujiente.</p></div>
-  </div>
-  <button class="back-btn" onclick="show('menu-screen')">← Regresar</button>
-</div><div class="galeria" id="otros">
-  <h2>Galería de Otros Postres</h2>
-  <div class="card-grid">
-    <div class="card"><img src="https://i.imgur.com/f9Yc9Hq.jpg"><h3>Brownies</h3><p>De chocolate con relleno de Nutella.</p></div>
-    <div class="card"><img src="https://i.imgur.com/sZu9xBA.jpg"><h3>Galletas</h3><p>Decoradas artesanalmente.</p></div>
-  </div>
-  <button class="back-btn" onclick="show('menu-screen')">← Regresar</button>
-</div><script>
+</div>
+
+<!-- Sección Ubicación -->
+<div class="seccion" id="ubicacion">
+  <h2>Ubicación</h2>
+  <p>Siempre Villa 126, Geovillas De Santa Bárbara, Ixtapaluca, México</p>
+  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
+</div>
+
+<!-- Sección Misión -->
+<div class="seccion" id="mision">
+  <h2>Misión</h2>
+  <p>Ofrecer postres caseros de alta calidad, elaborados con ingredientes frescos y recetas artesanales, brindando momentos dulces y especiales a nuestros clientes.</p>
+  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
+</div>
+
+<!-- Sección Visión -->
+<div class="seccion" id="vision">
+  <h2>Visión</h2>
+  <p>Ser la opción preferida en postres artesanales, reconocidos por nuestro sabor, calidad y servicio excepcional, expandiéndonos a más clientes a través de ventas en línea y puntos de distribución.</p>
+  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
+</div>
+
+<!-- Sección Créditos -->
+<div class="seccion" id="creditos">
+  <h2>Créditos</h2>
+  <p>&copy; 2025 Postres KAD. Todos los derechos reservados.</p>
+  <button class="back-btn" onclick="show('intro-screen')">← Regresar</button>
+</div>
+
+<script>
   function show(id) {
-    document.querySelectorAll('.intro, .menu, .galeria').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.intro, .menu, .galeria, .seccion').forEach(el => el.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
-</script></body>
+</script>
+
+</body>
 </html>
