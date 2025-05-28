@@ -1,71 +1,88 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Postres KAD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #fff0f5;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             margin: 0;
             padding: 0;
             scroll-behavior: smooth;
+            color: #333;
         }
         header {
-            background-color: #f8a5c2;
-            padding: 20px;
+            background: linear-gradient(to right, #f78fb3, #f8a5c2);
+            padding: 25px 10px;
             text-align: center;
-            font-size: 2.5em;
-            font-weight: bold;
+            font-size: 3em;
+            font-family: 'Pacifico', cursive;
             color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 10;
         }
         nav {
-            background-color: #ffc0cb;
+            background-color: #ffd6e0;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            padding: 10px 0;
+            padding: 12px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
         nav a {
-            color: white;
-            padding: 10px 20px;
+            color: #d63384;
+            padding: 12px 18px;
             text-decoration: none;
             font-weight: bold;
-            transition: background 0.3s;
+            font-size: 1.1em;
+            transition: background 0.3s, transform 0.3s;
         }
         nav a:hover {
-            background-color: #d63384;
-            border-radius: 10px;
+            background-color: #f8a5c2;
+            border-radius: 12px;
+            transform: scale(1.05);
+            color: white;
         }
         .section {
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.95);
-            margin-top: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 50px 20px;
+            max-width: 960px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.8s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h2 {
             color: #d63384;
             text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
         img {
             max-width: 100%;
-            border-radius: 10px;
-            margin: 15px 0;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.03);
         }
         p, li {
             font-size: 1.1em;
-            color: #333;
+            line-height: 1.6;
         }
         ul {
             list-style-type: square;
-            padding-left: 20px;
+            padding-left: 25px;
         }
         .icon {
             margin-right: 10px;
@@ -75,95 +92,109 @@
             background-color: #f8a5c2;
             color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: 25px;
+            font-size: 1.1em;
+            margin-top: 50px;
             border-top: 5px solid #d63384;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
         }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
         }
         .menu-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            font-size: 1.05em;
         }
         .menu-table th, .menu-table td {
-            border: 1px solid #ccc;
-            padding: 10px;
+            border: 1px solid #ffd6e0;
+            padding: 12px;
             text-align: left;
         }
         .menu-table th {
-            background-color: #ffd6e0;
+            background-color: #ffe3ec;
+            color: #d63384;
         }
+        .menu-table td {
+            background-color: #fff8fb;
+        }
+        a {
+            color: #d63384;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>POSTRES KAD</header>
+    <nav>
+        <a href="#menu"><i class="fas fa-birthday-cake icon"></i>Menú</a>
+        <a href="#galeria"><i class="fas fa-image icon"></i>Galería</a>
+        <a href="#mision"><i class="fas fa-bullseye icon"></i>Misión</a>
+        <a href="#vision"><i class="fas fa-eye icon"></i>Visión</a>
+        <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
+        <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
+    </nav>
 
+    <div class="section" id="menu">
+        <h2>Menú de Postres</h2>
+        <table class="menu-table">
+            <tr><th>Producto</th><th>Precio</th></tr>
+            <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
+            <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
+            <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
+            <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
+        </table>
+    </div>
 
-  <!-- Carrito -->
-  <section id="cart" class="view p-6">
-    <button onclick="showView('menu')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold mb-4">Tu Carrito</h2>
-    <ul class="text-left mx-auto max-w-md space-y-2">
-      <li class="flex justify-between"><span>Pastel de Chocolate</span><span>$150</span></li>
-    </ul>
-    <button onclick="showView('payment')" class="mt-4 bg-green-500 text-white px-4 py-2 rounded">Proceder al Pago</button>
-  </section>
+    <div class="section" id="galeria">
+        <h2>Galería de Fotos</h2>
+        <div class="gallery">
+            <img src="https://i.imgur.com/Tj3IXOi.jpg" alt="Pastel decorado">
+            <img src="https://i.imgur.com/g2NiJzI.jpg" alt="Cupcake colorido">
+            <img src="https://i.imgur.com/yZrFQmp.jpg" alt="Brownies de chocolate">
+            <img src="https://i.imgur.com/Wf8x1TW.jpg" alt="Galletas decoradas">
+            <img src="https://i.imgur.com/f9Yc9Hq.jpg" alt="Mesa de postres">
+        </div>
+    </div>
 
-  <!-- Pago -->
-  <section id="payment" class="view p-6">
-    <button onclick="showView('cart')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold mb-4">Pago</h2>
-    <p class="mb-4">Total a pagar: $150</p>
-    <button onclick="completePayment()" class="bg-blue-600 text-white px-4 py-2 rounded">Confirmar Pago</button>
-  </section>
+    <div class="section" id="mision">
+        <h2>Misión</h2>
+        <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
+    </div>
 
-  <!-- Atención -->
-  <section id="service" class="view p-6">
-    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold mb-4">Atención al Cliente</h2>
-    <p>Horario: Lunes a Viernes, 9am - 6pm</p>
-    <p>Email: contacto@postresdeliciosos.com</p>
-  </section>
+    <div class="section" id="vision">
+        <h2>Visión</h2>
+        <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
+    </div>
 
-  <!-- Ubicación -->
-  <section id="location" class="view p-6">
-    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold mb-4">Ubicación</h2>
-    <p>Av. Dulce 123, Ciudad Sabor, País Pastel</p>
-  </section>
+    <div class="section" id="valores">
+        <h2>Valores</h2>
+        <ul>
+            <li>Calidad</li>
+            <li>Creatividad</li>
+            <li>Compromiso</li>
+            <li>Pasión</li>
+            <li>Amor por los detalles</li>
+        </ul>
+    </div>
 
-  <!-- Misión -->
-  <section id="mission" class="view p-6">
-    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold mb-4">Nuestra Misión</h2>
-    <p>Endulzar la vida de nuestros clientes con postres artesanales de alta calidad.</p>
-  </section>
+    <div class="section" id="contacto">
+        <h2>Contacto y Redes Sociales</h2>
+        <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank">Postres Kad</a></p>
+        <p><i class="fab fa-instagram icon"></i><strong>Instagram:</strong> <a href="https://www.instagram.com/postres_kad" target="_blank">@postres_kad</a></p>
+        <p><i class="fas fa-envelope icon"></i><strong>Correo:</strong> postreakad@gmail.com</p>
+        <p><i class="fas fa-phone icon"></i><strong>Teléfono:</strong> +52 5648184476</p>
+        <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingos de 12:00 a 20:00 hrs</p>
+        <p><strong>Frase:</strong> "En Postres Kad, cada bocado es una experiencia única."</p>
+    </div>
 
-  <!-- Visión -->
-  <section id="vision" class="view p-6">
-    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold mb-4">Nuestra Visión</h2>
-    <p>Ser la pastelería más querida de la región por nuestro sabor y servicio.</p>
-  </section>
-
-  <!-- Créditos -->
-  <section id="credits" class="view p-6">
-    <button onclick="showView('welcome')" class="text-blue-500 underline">← Volver</button>
-    <h2 class="text-3xl font-bold mb-4">Créditos</h2>
-    <p>Desarrollado por Tu Nombre</p>
-    <p>Diseño inspirado en postres reales y amor por el azúcar ❤️</p>
-  </section>
-
-  <script>
-    function showView(viewId) {
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById(viewId).classList.add('active');
-    }
-
-    function completePayment() {
-      alert('¡Pago exitoso! Gracias por tu compra.');
-      showView('welcome');
-    }
-  </script>
+    <footer>
+        &copy; 2025 Postres Kad - Diseñado con amor
+    </footer>
 </body>
 </html>
