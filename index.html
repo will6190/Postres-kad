@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Postres KAD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -9,154 +10,165 @@
             font-family: 'Segoe UI', sans-serif;
             background-color: #fff0f5;
         }
-        .pantalla {
-            display: none;
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.95);
-            margin-top: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .activa {
-            display: block;
-        }
-        h1, h2 {
+        header {
+            background-color: #f8a5c2;
+            color: white;
+            padding: 30px 10px;
             text-align: center;
-            color: #d63384;
+            font-size: 2em;
         }
-        .botonera {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 30px auto;
-            max-width: 300px;
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
         }
-        .botonera button {
-            padding: 15px;
-            font-size: 1.1em;
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .btn {
             background-color: #d63384;
             color: white;
             border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .botonera button:hover {
-            background-color: #a82562;
-        }
-        .iconos-redes {
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            margin-top: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-        .iconos-redes a {
-            margin: 0 15px;
+        .btn:hover {
+            background-color: #ad1f65;
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .active {
+            display: block;
+        }
+        .social-icons {
             font-size: 2em;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .social-icons a {
             color: #d63384;
         }
-        .menu-categorias {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 300px;
-            margin: auto;
+        .back-btn {
             margin-top: 20px;
-        }
-        .volver-btn {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .volver-btn button {
+            display: inline-block;
+            background-color: #ffc0cb;
             padding: 10px 20px;
-            font-size: 1em;
-            background-color: #999;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            color: black;
         }
     </style>
 </head>
-<body><div id="pantallaInicio" class="pantalla activa">
-    <h1>Bienvenidos a Postres KAD</h1>
-    <div class="botonera">
-        <button onclick="mostrarPantalla('menu')">Menú</button>
-        <button onclick="mostrarPantalla('redes')">Redes Sociales</button>
-        <button onclick="mostrarPantalla('atencion')">Atención al Cliente</button>
-        <button onclick="mostrarPantalla('ubicacion')">Ubicación</button>
-        <button onclick="mostrarPantalla('valores')">Valores</button>
-        <button onclick="mostrarPantalla('mision')">Misión</button>
-        <button onclick="mostrarPantalla('vision')">Visión</button>
-        <button onclick="mostrarPantalla('creditos')">Créditos</button>
+<body>
+    <header>Postres KAD</header>
+    <div class="container">
+        <div id="main-menu" class="section active">
+            <div class="btn-grid">
+                <button class="btn" onclick="showSection('menu-screen')">Menú</button>
+                <button class="btn" onclick="showSection('redes-screen')">Redes Sociales</button>
+                <button class="btn" onclick="alert('Contáctanos al +52 5648184476')">Atención al Cliente</button>
+                <button class="btn" onclick="alert('Ubicación: Ciudad de México')">Ubicación</button>
+                <button class="btn" onclick="showSection('valores')">Valores</button>
+                <button class="btn" onclick="showSection('mision')">Misión</button>
+                <button class="btn" onclick="showSection('vision')">Visión</button>
+                <button class="btn" onclick="alert('Créditos: Diseñado por Postres KAD')">Créditos</button>
+            </div>
+        </div><!-- Menú Principal -->
+    <div id="menu-screen" class="section">
+        <h2>Menú</h2>
+        <div class="btn-grid">
+            <button class="btn" onclick="showSection('pasteles')">Pasteles</button>
+            <button class="btn" onclick="showSection('carlotas')">Carlotas</button>
+            <button class="btn" onclick="showSection('pays')">Pays</button>
+            <button class="btn" onclick="showSection('otros')">Otros</button>
+        </div>
+        <a href="#" class="back-btn" onclick="showSection('main-menu')">Regresar</a>
     </div>
-</div><div id="pantallaMenu" class="pantalla">
-    <h2>Menú de Postres</h2>
-    <div class="menu-categorias">
-        <button>Pasteles</button>
-        <button>Carlotas</button>
-        <button>Pays</button>
-        <button>Otros</button>
+
+    <!-- Redes Sociales -->
+    <div id="redes-screen" class="section">
+        <h2>Redes Sociales</h2>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/postres_kad" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <a href="#" class="back-btn" onclick="showSection('main-menu')">Regresar</a>
     </div>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
+
+    <!-- Submenús -->
+    <div id="pasteles" class="section">
+        <h2>Pasteles</h2>
+        <p>Pastel de tres leches, chocolate, vainilla decorado, etc.</p>
+        <a href="#" class="back-btn" onclick="showSection('menu-screen')">Regresar</a>
     </div>
-</div><div id="pantallaRedes" class="pantalla">
-    <h2>Síguenos</h2>
-    <div class="iconos-redes">
-        <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/postres_kad" target="_blank"><i class="fab fa-instagram"></i></a>
+
+    <div id="carlotas" class="section">
+        <h2>Carlotas</h2>
+        <p>Carlota de limón, de frutas, etc.</p>
+        <a href="#" class="back-btn" onclick="showSection('menu-screen')">Regresar</a>
     </div>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
+
+    <div id="pays" class="section">
+        <h2>Pays</h2>
+        <p>Pay de queso, manzana, nuez, etc.</p>
+        <a href="#" class="back-btn" onclick="showSection('menu-screen')">Regresar</a>
     </div>
-</div><div id="pantallaAtencion" class="pantalla">
-    <h2>Atención al Cliente</h2>
-    <p>Correo: postreakad@gmail.com</p>
-    <p>Teléfono: +52 5648184476</p>
-    <p>Horario: Jueves a domingos de 12:00 a 20:00 hrs</p>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
+
+    <div id="otros" class="section">
+        <h2>Otros</h2>
+        <p>Galletas, brownies, cupcakes, etc.</p>
+        <a href="#" class="back-btn" onclick="showSection('menu-screen')">Regresar</a>
     </div>
-</div><div id="pantallaUbicacion" class="pantalla">
-    <h2>Ubicación</h2>
-    <p>Estamos ubicados en Ciudad de México, consulta nuestras redes para más información.</p>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
+
+    <!-- Secciones Estáticas -->
+    <div id="mision" class="section">
+        <h2>Misión</h2>
+        <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
+        <a href="#" class="back-btn" onclick="showSection('main-menu')">Regresar</a>
     </div>
-</div><div id="pantallaValores" class="pantalla">
-    <h2>Valores</h2>
-    <ul>
-        <li>Calidad</li>
-        <li>Creatividad</li>
-        <li>Compromiso</li>
-        <li>Pasíon</li>
-        <li>Amor por los detalles</li>
-    </ul>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
+
+    <div id="vision" class="section">
+        <h2>Visión</h2>
+        <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
+        <a href="#" class="back-btn" onclick="showSection('main-menu')">Regresar</a>
     </div>
-</div><div id="pantallaMision" class="pantalla">
-    <h2>Misión</h2>
-    <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
+
+    <div id="valores" class="section">
+        <h2>Valores</h2>
+        <ul>
+            <li>Calidad</li>
+            <li>Creatividad</li>
+            <li>Compromiso</li>
+            <li>Pasíon</li>
+            <li>Amor por los detalles</li>
+        </ul>
+        <a href="#" class="back-btn" onclick="showSection('main-menu')">Regresar</a>
     </div>
-</div><div id="pantallaVision" class="pantalla">
-    <h2>Visión</h2>
-    <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
-    </div>
-</div><div id="pantallaCreditos" class="pantalla">
-    <h2>Créditos</h2>
-    <p>&copy; 2025 Postres Kad - Diseñado con amor</p>
-    <div class="volver-btn">
-        <button onclick="mostrarPantalla('inicio')">Volver</button>
-    </div>
-</div><script>
-    function mostrarPantalla(pantalla) {
-        document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
-        document.getElementById('pantalla' + pantalla.charAt(0).toUpperCase() + pantalla.slice(1)).classList.add('activa');
+</div>
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(id).classList.add('active');
     }
-</script></body>
+</script>
+
+</body>
 </html>
