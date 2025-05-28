@@ -1,132 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Postres KAD</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #fff0f5; }
-    header { background-color: #f8a5c2; color: white; text-align: center; padding: 20px; font-size: 2em; }
-    .container { padding: 20px; max-width: 900px; margin: auto; }
-    .view { display: none; }
-    .active { display: block; }
-    .btn { background: #d63384; color: white; padding: 10px 20px; margin: 10px; border: none; border-radius: 8px; cursor: pointer; }
-    .card { background: #fff; border-radius: 10px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 10px 0; }
-  </style>
+  <meta charset="UTF-8">
+  <title>Bienvenida</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <header>Postres KAD</header>
-
-  <div class="container">
-    <!-- Welcome -->
-    <div id="welcome" class="view active">
-      <h2>Bienvenido</h2>
-      <button class="btn" onclick="showView('menu')">Ver Menú</button>
-      <button class="btn" onclick="showView('servicio')">Atención</button>
-      <button class="btn" onclick="showView('ubicacion')">Ubicación</button>
-      <button class="btn" onclick="showView('mision')">Misión</button>
-      <button class="btn" onclick="showView('vision')">Visión</button>
-      <button class="btn" onclick="showView('creditos')">Créditos</button>
-    </div>
-
-    <!-- Menu -->
-    <div id="menu" class="view">
-      <h2>Menú</h2>
-      <div class="card">Pastel de Chocolate <button class="btn" onclick="addToCart('Pastel de Chocolate')">Añadir</button></div>
-      <div class="card">Carlota de Limón <button class="btn" onclick="addToCart('Carlota de Limón')">Añadir</button></div>
-      <div class="card">Pay de Queso <button class="btn" onclick="addToCart('Pay de Queso')">Añadir</button></div>
-      <button class="btn" onclick="showView('cart')">Ver Carrito</button>
-      <button class="btn" onclick="showView('welcome')">← Regresar</button>
-    </div>
-
-    <!-- Cart -->
-    <div id="cart" class="view">
-      <h2>Carrito</h2>
-      <ul id="cart-items"></ul>
-      <button class="btn" onclick="showView('payment')">Pagar</button>
-      <button class="btn" onclick="showView('menu')">← Regresar</button>
-    </div>
-
-    <!-- Payment -->
-    <div id="payment" class="view">
-      <h2>Pago</h2>
-      <p>Total: <span id="total">0</span> MXN</p>
-      <button class="btn" onclick="paymentSuccess()">Confirmar Pago</button>
-      <button class="btn" onclick="showView('cart')">← Regresar</button>
-    </div>
-
-    <!-- Servicio -->
-    <div id="servicio" class="view">
-      <h2>Atención al Cliente</h2>
-      <p>Brindamos atención personalizada, pedidos a domicilio y más.</p>
-      <button class="btn" onclick="showView('welcome')">← Regresar</button>
-    </div>
-
-    <!-- Ubicación -->
-    <div id="ubicacion" class="view">
-      <h2>Ubicación</h2>
-      <p>Siempre Villa 126, Ixtapaluca, México</p>
-      <button class="btn" onclick="showView('welcome')">← Regresar</button>
-    </div>
-
-    <!-- Misión -->
-    <div id="mision" class="view">
-      <h2>Misión</h2>
-      <p>Ofrecer postres de alta calidad con amor.</p>
-      <button class="btn" onclick="showView('welcome')">← Regresar</button>
-    </div>
-
-    <!-- Visión -->
-    <div id="vision" class="view">
-      <h2>Visión</h2>
-      <p>Ser líderes en postres artesanales en línea.</p>
-      <button class="btn" onclick="showView('welcome')">← Regresar</button>
-    </div>
-
-    <!-- Créditos -->
-    <div id="creditos" class="view">
-      <h2>Créditos</h2>
-      <p>&copy; 2025 Postres KAD</p>
-      <button class="btn" onclick="showView('welcome')">← Regresar</button>
+<body class="bg-pink-50 flex items-center justify-center min-h-screen">
+  <div class="text-center space-y-6">
+    <h1 class="text-4xl font-bold">Bienvenido a Postres Deliciosos</h1>
+    <p class="text-lg text-gray-700">Explora nuestras delicias o conoce más de nosotros</p>
+    <div class="space-x-4">
+      <a href="menu.html" class="bg-pink-500 text-white px-4 py-2 rounded">Menú</a>
+      <a href="service.html" class="bg-blue-500 text-white px-4 py-2 rounded">Atención</a>
+      <a href="location.html" class="bg-green-500 text-white px-4 py-2 rounded">Ubicación</a>
+      <a href="mission.html" class="bg-yellow-500 text-white px-4 py-2 rounded">Misión</a>
+      <a href="vision.html" class="bg-purple-500 text-white px-4 py-2 rounded">Visión</a>
+      <a href="credits.html" class="bg-gray-700 text-white px-4 py-2 rounded">Créditos</a>
     </div>
   </div>
-
-  <script>
-    let cart = [];
-
-    function showView(viewId) {
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById(viewId).classList.add('active');
-    }
-
-    function addToCart(item) {
-      cart.push(item);
-      alert(item + ' agregado al carrito');
-    }
-
-    function paymentSuccess() {
-      alert('¡Pago exitoso! Gracias por tu compra.');
-      cart = [];
-      document.getElementById('cart-items').innerHTML = '';
-      document.getElementById('total').innerText = '0';
-      showView('welcome');
-    }
-
-    function showViewCart() {
-      const cartList = document.getElementById('cart-items');
-      cartList.innerHTML = '';
-      let total = 0;
-      cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item + ' - $50 MXN';
-        cartList.appendChild(li);
-        total += 50;
-      });
-      document.getElementById('total').innerText = total;
-      showView('cart');
-    }
-
-    document.querySelector('[onclick="showView(\'cart\')"]').addEventListener('click', showViewCart);
-  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Menú</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+  <a href="welcome.html" class="text-blue-500 underline">← Volver</a>
+  <h1 class="text-3xl font-bold my-4">Nuestro Menú</h1>
+  <div class="mb-4">
+    <label class="mr-2 font-medium">Filtrar por categoría:</label>
+    <select class="p-2 border rounded">
+      <option>Todos</option>
+      <option>Pasteles</option>
+      <option>Carlotas</option>
+      <option>Pays</option>
+      <option>Brownies</option>
+      <option>Donas</option>
+    </select>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-4 rounded shadow">
+      <img src="https://via.placeholder.com/300x200" alt="Pastel" class="mb-2 rounded">
+      <h3 class="font-bold text-lg">Pastel de Chocolate</h3>
+      <p class="text-gray-600 mb-2">Delicioso pastel con relleno de ganache.</p>
+      <button onclick="location.href='cart.html'" class="bg-pink-500 text-white px-4 py-2 rounded">Agregar al carrito</button>
+    </div>
+    <!-- Puedes duplicar este bloque para más postres -->
+  </div>
 </body>
 </html>
