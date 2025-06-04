@@ -127,6 +127,44 @@
         a:hover {
             text-decoration: underline;
         }
+
+        /* Estilos del carrito */
+        #carrito-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff0f5;
+            border: 2px solid #f8a5c2;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            z-index: 100;
+            width: 260px;
+            font-size: 0.95em;
+        }
+
+        #carrito-container h3 {
+            margin-top: 0;
+            color: #d63384;
+        }
+
+        #carrito-container ul {
+            list-style: none;
+            padding-left: 0;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        #carrito-container li {
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        #carrito-container p {
+            margin: 0;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -195,5 +233,50 @@
     <footer>
         &copy; 2025 Postres Kad - Diseñado con amor
     </footer>
+
+    <!-- Carrito flotante -->
+    <div id="carrito-container">
+        <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
+        <ul id="carrito-lista"></ul>
+        <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
+    </div>
+
+    <script>
+        const carrito = [];
+        const lista = document.getElementById('carrito-lista');
+        const totalSpan = document.getElementById('total');
+
+        function agregarAlCarrito(nombre, precio) {
+            const existente = carrito.find(item => item.nombre === nombre);
+            if (existente) {
+                existente.cantidad += 1;
+            } else {
+                carrito.push({ nombre, precio, cantidad: 1 });
+            }
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            lista.innerHTML = '';
+            let total = 0;
+            carrito.forEach(item => {
+                total += item.precio * item.cantidad;
+                const li = document.createElement('li');
+                li.textContent = `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad} MXN`;
+                lista.appendChild(li);
+            });
+            totalSpan.textContent = total;
+        }
+
+        document.querySelectorAll('.menu-table tr').forEach((fila, index) => {
+            if (index === 0) return; // Encabezado
+            fila.style.cursor = 'pointer';
+            fila.addEventListener('click', () => {
+                const nombre = fila.cells[0].textContent;
+                const precio = parseInt(fila.cells[1].textContent.replace('$', '').replace(' MXN', ''));
+                agregarAlCarrito(nombre, precio);
+            });
+        });
+    </script>
 </body>
 </html>
