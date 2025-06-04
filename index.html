@@ -212,24 +212,6 @@
             font-weight: bold;
             color: #d63384;
         }
-
-        /* Estilos de la galería interactiva */
-        .gallery img {
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 24px rgba(216,51,132,0.18);
-        }
-        #lightbox {
-            display: flex !important;
-            animation: fadeInLightbox 0.3s;
-        }
-        @keyframes fadeInLightbox {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -281,22 +263,18 @@
     </div>
 
     <div class="section" id="galeria">
-        <h2>Galería de Fotos</h2>
-        <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Pastel decorado con frutas" class="gal-img">
-            <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" alt="Cupcakes decorados" class="gal-img">
-            <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=600&q=80" alt="Brownies de chocolate" class="gal-img">
-            <img src="https://images.unsplash.com/photo-1458642849426-cfb724f15ef7?auto=format&fit=crop&w=600&q=80" alt="Galletas decoradas" class="gal-img">
-            <img src="https://images.pexels.com/photos/704971/pexels-photo-704971.jpeg?auto=compress&w=600&q=80" alt="Pastel de chocolate" class="gal-img">
-            <img src="https://images.pexels.com/photos/14105/pexels-photo-14105.jpeg?auto=compress&w=600&q=80" alt="Galletas de mantequilla" class="gal-img">
-            <img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&w=600&q=80" alt="Cupcakes de colores" class="gal-img">
-            <img src="https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg?auto=compress&w=600&q=80" alt="Brownies con nuez" class="gal-img">
-        </div>
-        <!-- Lightbox modal -->
-        <div id="lightbox" style="display:none; position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:2000;">
-            <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:80vh;border-radius:20px;box-shadow:0 0 30px #000;">
-        </div>
+    <h2>Galería de Fotos</h2>
+    <div class="gallery">
+        <!-- Pastel -->
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Pastel decorado con frutas">
+        <!-- Cupcake -->
+        <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=500&q=80" alt="Cupcakes decorados coloridos">
+        <!-- Brownie -->
+        <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=500&q=80" alt="Brownies de chocolate con nuez">
+        <!-- Dona -->
+        <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=500&q=80" alt="Donas glaseadas y decoradas">
     </div>
+</div>
 
     <div class="section" id="mision">
         <h2>Misión</h2>
@@ -529,4 +507,12 @@
             const producto = submenu.dataset.producto;
             const relleno = rellenoSelect.value;
             const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.va
+            const cobertura = coberturaSelect.value;
+            const precio = parseInt(btnAddCart.dataset.precio);
+            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
+            agregarAlCarrito(producto, precio, detalles);
+            submenu.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
