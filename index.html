@@ -224,7 +224,7 @@
         <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
         <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
     </nav>
-
+    
     <div class="section" id="menu">
         <h2>Menú de Postres</h2>
         <table class="menu-table">
@@ -232,7 +232,6 @@
             <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
             <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
             <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
-            <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
         </table>
         <!-- Submenú dinámico -->
         <div id="submenu-container">
@@ -263,18 +262,16 @@
     </div>
 
     <div class="section" id="galeria">
-    <h2>Galería de Fotos</h2>
-    <div class="gallery">
-        <!-- Pastel -->
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Pastel decorado con frutas">
-        <!-- Cupcake -->
-        <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=500&q=80" alt="Cupcakes decorados coloridos">
-        <!-- Brownie -->
-        <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=500&q=80" alt="Brownies de chocolate con nuez">
-        <!-- Dona -->
-        <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=500&q=80" alt="Donas glaseadas y decoradas">
+        <h2>Galería de Fotos</h2>
+        <div class="gallery">
+            <!-- Pastel -->
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Pastel decorado con frutas">
+            <!-- Brownie -->
+            <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=500&q=80" alt="Brownies de chocolate con nuez">
+            <!-- Dona -->
+            <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=500&q=80" alt="Donas glaseadas y decoradas">
+        </div>
     </div>
-</div>
 
     <div class="section" id="mision">
         <h2>Misión</h2>
@@ -371,24 +368,15 @@
                     { nombre: "Chocolate derretido", precio: 6 },
                     { nombre: "Sin cobertura", precio: 0 }
                 ]
-            },
-            "Galletas decoradas (paquete)": {
-                base: 60,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla", precio: 3 },
-                    { nombre: "Mantequilla", precio: 4 },
-                    { nombre: "Chocolate", precio: 5 }
-                ],
-                cobertura: [
-                    { nombre: "Glaseado", precio: 5 },
-                    { nombre: "Chocolate", precio: 6 },
-                    { nombre: "Sin cobertura", precio: 0 }
-                ]
             }
         };
+
+        // Funciones para el submenú
+        function limpiarSelect(select) {
+            while (select.options.length > 1) {
+                select.remove(1);
+            }
+        }
 
         // Carrito y lógica
         const carrito = [];
@@ -442,10 +430,12 @@
         function mostrarSubmenu(producto) {
             submenu.style.display = 'block';
             titulo.textContent = `Personaliza tu ${producto}`;
+
             // Limpiar selects
             limpiarSelect(rellenoSelect);
             limpiarSelect(saborSelect);
             limpiarSelect(coberturaSelect);
+
             // Llenar selects con opciones y precios
             opciones[producto].relleno.forEach(opt => {
                 const o = document.createElement('option');
@@ -465,54 +455,39 @@
                 o.textContent = `${opt.nombre} (+$${opt.precio})`;
                 coberturaSelect.appendChild(o);
             });
-            // Reset
-            btnAddCart.disabled = true;
-            precioDiv.textContent = '';
-            // Guardar producto actual
-            submenu.dataset.producto = producto;
-        }
 
-        function limpiarSelect(select) {
-            while (select.options.length > 1) select.remove(1);
-            select.selectedIndex = 0;
-        }
-
-        // Habilitar botón y mostrar precio cuando todo esté seleccionado
-        [rellenoSelect, saborSelect, coberturaSelect].forEach(sel => {
-            sel.addEventListener('change', actualizarPrecioSubmenu);
-        });
-
-        function actualizarPrecioSubmenu() {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value;
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value;
-            if (relleno && sabor && cobertura) {
-                btnAddCart.disabled = false;
-                // Calcular precio
-                const base = opciones[producto].base;
-                const pRelleno = opciones[producto].relleno.find(o => o.nombre === relleno).precio;
-                const pSabor = opciones[producto].sabor.find(o => o.nombre === sabor).precio;
-                const pCobertura = opciones[producto].cobertura.find(o => o.nombre === cobertura).precio;
-                const precioFinal = base + pRelleno + pSabor + pCobertura;
-                precioDiv.textContent = `Precio final: $${precioFinal} MXN`;
-                btnAddCart.dataset.precio = precioFinal;
-            } else {
-                btnAddCart.disabled = true;
-                precioDiv.textContent = '';
+            // Calcular y mostrar el precio total
+            function actualizarPrecio() {
+                let precio = opciones[producto].base;
+                precio += opciones[producto].relleno.find(r => r.nombre === rellenoSelect.value)?.precio || 0;
+                precio += opciones[producto].sabor.find(s => s.nombre === saborSelect.value)?.precio || 0;
+                precio += opciones[producto].cobertura.find(c => c.nombre === coberturaSelect.value)?.precio || 0;
+                precioDiv.textContent = `Precio: $${precio} MXN`;
+                return precio; // Retornar el precio total
             }
-        }
 
-        btnAddCart.addEventListener('click', function() {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value;
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value;
-            const precio = parseInt(btnAddCart.dataset.precio);
-            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
-            agregarAlCarrito(producto, precio, detalles);
-            submenu.style.display = 'none';
-        });
+            // Actualizar el precio cuando cambian las opciones
+            rellenoSelect.addEventListener('change', actualizarPrecio);
+            saborSelect.addEventListener('change', actualizarPrecio);
+            coberturaSelect.addEventListener('change', actualizarPrecio);
+
+            // Habilitar el botón "Agregar al carrito"
+            btnAddCart.disabled = false;
+
+            // Acción del botón "Agregar al carrito"
+            btnAddCart.onclick = () => {
+                const precioFinal = actualizarPrecio(); // Obtener el precio final
+                const relleno = rellenoSelect.value ? `Relleno: ${rellenoSelect.value}` : '';
+                const sabor = saborSelect.value ? `, Sabor: ${saborSelect.value}` : '';
+                const cobertura = coberturaSelect.value ? `, Cobertura: ${coberturaSelect.value}` : '';
+                const detalles = `${relleno}${sabor}${cobertura}`;
+                agregarAlCarrito(producto, precioFinal, detalles); // Usar el precio final
+                submenu.style.display = 'none'; // Ocultar el submenú al agregar al carrito
+            };
+
+            // Llamar a actualizarPrecio() para mostrar el precio inicial al abrir el submenú
+            actualizarPrecio();
+        }
     </script>
 </body>
 </html>
