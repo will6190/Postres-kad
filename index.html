@@ -1,158 +1,127 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Menú de Postres</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    table {
-      width: 60%;
-      margin: 20px auto;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 12px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-
-    tr:hover {
-      background-color: #f9f0f8;
-      cursor: pointer;
-    }
-
-    #submenu {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      border: 2px solid #ffb6c1;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      z-index: 1000;
-    }
-
-    #submenu select, #submenu button {
-      width: 100%;
-      margin: 10px 0;
-      padding: 8px;
-      font-size: 14px;
-    }
-
-    #carrito {
-      width: 60%;
-      margin: 20px auto;
-      border: 2px dashed #d63384;
-      padding: 10px;
-    }
-
-    #carrito ul {
-      list-style: none;
-      padding: 0;
-    }
-  </style>
-</head>
-<body>
-
-<h2 style="text-align:center;">Menú de Postres</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Postre</th>
-      <th>Precio</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr onclick="abrirSubmenu('Pastel de chocolate', 120)">
-      <td>Pastel de chocolate</td>
-      <td>$120</td>
-    </tr>
-    <tr onclick="abrirSubmenu('Cupcake de vainilla', 35)">
-      <td>Cupcake de vainilla</td>
-      <td>$35</td>
-    </tr>
-    <tr onclick="abrirSubmenu('Galleta de mantequilla', 15)">
-      <td>Galleta de mantequilla</td>
-      <td>$15</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SUBMENÚ emergente -->
-<div id="submenu">
-  <h3>Personaliza tu postre</h3>
-  <p><strong id="postreSeleccionado"></strong></p>
-
-  <label for="cobertura">Cobertura:</label>
-  <select id="cobertura">
-    <option>Betún de mantequilla</option>
-    <option>Ganache</option>
-    <option>Merengue</option>
-    <option>Fondant</option>
-  </select>
-
-  <label for="relleno">Relleno:</label>
-  <select id="relleno">
-    <option>Fresa con crema</option>
-    <option>Chocolate</option>
-    <option>Cajeta</option>
-    <option>Nutella</option>
-  </select>
-
-  <label for="sabor">Sabor:</label>
-  <select id="sabor">
-    <option>Vainilla</option>
-    <option>Chocolate</option>
-    <option>Red velvet</option>
-    <option>Limón</option>
-  </select>
-
-  <button onclick="agregarAlCarrito()">Agregar al carrito</button>
-  <button onclick="cerrarSubmenu()">Cancelar</button>
-</div>
-
-<!-- CARRITO -->
-<div id="carrito">
-  <h3>Carrito de postres personalizados:</h3>
-  <ul id="listaCarrito"></ul>
-</div>
-
-<script>
-  let postreActual = '';
-  let precioActual = 0;
-
-  function abrirSubmenu(nombre, precio) {
-    postreActual = nombre;
-    precioActual = precio;
-    document.getElementById('postreSeleccionado').textContent = nombre + " - $" + precio;
-    document.getElementById('submenu').style.display = 'block';
-  }
-
-  function cerrarSubmenu() {
-    document.getElementById('submenu').style.display = 'none';
-  }
-
-  function agregarAlCarrito() {
-    const cobertura = document.getElementById('cobertura').value;
-    const relleno = document.getElementById('relleno').value;
-    const sabor = document.getElementById('sabor').value;
-
-    const descripcion = `${postreActual} (${sabor}) con cobertura de ${cobertura} y relleno de ${relleno} - $${precioActual}`;
-    const li = document.createElement('li');
-    li.textContent = descripcion;
-
-    document.getElementById('listaCarrito').appendChild(li);
-    cerrarSubmenu();
-  }
-</script>
-
-</body>
-</html>
+    <meta charset="UTF-8">
+    <title>Postres KAD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff0f5;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #f78fb3, #f8a5c2);
+            padding: 25px 10px;
+            text-align: center;
+            font-size: 3em;
+            font-family: 'Pacifico', cursive;
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav {
+            background-color: #ffd6e0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 12px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        nav a {
+            color: #d63384;
+            padding: 12px 18px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background 0.3s, transform 0.3s;
+        }
+        nav a:hover {
+            background-color: #f8a5c2;
+            border-radius: 12px;
+            transform: scale(1.05);
+            color: white;
+        }
+        .section {
+            padding: 50px 20px;
+            max-width: 960px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.8s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            color: #d63384;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.03);
+        }
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 25px;
+        }
+        .icon {
+            margin-right: 10px;
+            color: #d63384;
+        }
+        footer {
+            background-color: #f8a5c2;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 1.1em;
+            margin-top: 50px;
+            border-top: 5px solid #d63384;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1.05em;
+        }
+        .menu-table th, .menu-table td {
+            border: 1px solid #ffd6e0;
+            padding: 12px;
+            text-align: left;
+        }
+        .menu-table th {
+            background-color: #ffe3ec;
+            color: #d63384;
+        }
+        .menu-table td {
+            background-color: #fff8fb;
+        }
+        a {
+            color: #d63384;
+        }
+        a
