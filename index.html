@@ -165,6 +165,46 @@
             margin: 0;
             font-weight: bold;
         }
+
+        /* Estilos del submenú */
+        #submenu-container {
+            display: none;
+            margin-top: 20px;
+            background: #fff8fb;
+            border: 2px solid #f8a5c2;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(216,51,132,0.07);
+            max-width: 400px;
+        }
+        #submenu-titulo {
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+        #submenu-opciones {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        #submenu-opciones button {
+            background: #f8a5c2;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 18px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #submenu-opciones button:hover {
+            background: #d63384;
+        }
+        #detalle-opciones ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -187,6 +227,12 @@
             <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
             <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
         </table>
+        <!-- Submenú dinámico -->
+        <div id="submenu-container">
+            <h3 id="submenu-titulo"></h3>
+            <ul id="submenu-opciones"></ul>
+            <div id="detalle-opciones"></div>
+        </div>
     </div>
 
     <div class="section" id="galeria">
@@ -242,6 +288,31 @@
     </div>
 
     <script>
+        // Opciones de cada producto
+        const opciones = {
+            "Pastel decorado (por rebanada)": {
+                relleno: ["Crema pastelera", "Chocolate", "Mermelada de fresa"],
+                sabor: ["Vainilla", "Chocolate", "Red Velvet"],
+                cobertura: ["Fondant", "Chantilly", "Chocolate"]
+            },
+            "Cupcake decorado": {
+                relleno: ["Nutella", "Dulce de leche", "Sin relleno"],
+                sabor: ["Vainilla", "Zanahoria", "Chocolate"],
+                cobertura: ["Betún de mantequilla", "Fondant", "Chantilly"]
+            },
+            "Brownie de chocolate": {
+                relleno: ["Nuez", "Sin relleno"],
+                sabor: ["Chocolate clásico", "Chocolate con menta"],
+                cobertura: ["Chocolate derretido", "Sin cobertura"]
+            },
+            "Galletas decoradas (paquete)": {
+                relleno: ["Sin relleno"],
+                sabor: ["Vainilla", "Mantequilla", "Chocolate"],
+                cobertura: ["Glaseado", "Chocolate", "Sin cobertura"]
+            }
+        };
+
+        // Carrito y lógica original
         const carrito = [];
         const lista = document.getElementById('carrito-lista');
         const totalSpan = document.getElementById('total');
@@ -268,15 +339,57 @@
             totalSpan.textContent = total;
         }
 
-        document.querySelectorAll('.menu-table tr').forEach((fila, index) => {
+        // --- Submenú dinámico ---
+        const filas = document.querySelectorAll('.menu-table tr');
+        filas.forEach((fila, index) => {
             if (index === 0) return; // Encabezado
             fila.style.cursor = 'pointer';
             fila.addEventListener('click', () => {
                 const nombre = fila.cells[0].textContent;
                 const precio = parseInt(fila.cells[1].textContent.replace('$', '').replace(' MXN', ''));
-                agregarAlCarrito(nombre, precio);
+                mostrarSubmenu(nombre, precio);
             });
         });
+
+        function mostrarSubmenu(producto, precio) {
+            const submenu = document.getElementById('submenu-container');
+            const titulo = document.getElementById('submenu-titulo');
+            const opcionesUl = document.getElementById('submenu-opciones');
+            const detalle = document.getElementById('detalle-opciones');
+            submenu.style.display = 'block';
+            titulo.textContent = `Personaliza tu ${producto}`;
+            opcionesUl.innerHTML = '';
+            detalle.innerHTML = '';
+            if (!opciones[producto]) return;
+
+            // Crear botones para Relleno, Sabor, Cobertura
+            ["relleno", "sabor", "cobertura"].forEach(cat => {
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+                btn.onclick = () => mostrarOpciones(producto, cat);
+                li.appendChild(btn);
+                opcionesUl.appendChild(li);
+            });
+
+            // Botón para agregar al carrito con selección simple (puedes extenderlo para selección real)
+            const btnCarrito = document.createElement('button');
+            btnCarrito.textContent = "Agregar al carrito";
+            btnCarrito.style.marginTop = "15px";
+            btnCarrito.style.background = "#d63384";
+            btnCarrito.onclick = function() {
+                agregarAlCarrito(producto, precio);
+                submenu.style.display = 'none';
+            };
+            detalle.appendChild(btnCarrito);
+        }
+
+        function mostrarOpciones(producto, categoria) {
+            const detalle = document.getElementById('detalle-opciones');
+            detalle.innerHTML = `<strong>Opciones de ${categoria}:</strong><ul>` +
+                opciones[producto][categoria].map(opt => `<li>${opt}</li>`).join('') +
+                '</ul>';
+        }
     </script>
 </body>
 </html>
