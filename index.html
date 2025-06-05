@@ -128,21 +128,68 @@
             text-decoration: underline;
         }
 
-        /* Estilos del carrito modal */
+        /* Estilos del submenú */
+        #submenu-container {
+            display: none;
+            margin-top: 20px;
+            background: #fff8fb;
+            border: 2px solid #f8a5c2;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(216,51,132,0.07);
+            max-width: 400px;
+        }
+        #submenu-titulo {
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+        #submenu-opciones label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        #submenu-opciones select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #f8a5c2;
+        }
+        #btn-add-cart {
+            background: #d63384;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        #btn-add-cart:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        #submenu-precio {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #d63384;
+        }
+
+        /* Estilos del modal carrito */
         #modal-carrito-bg {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5);
-            z-index: 200;
+            z-index: 1000;
             justify-content: center;
             align-items: center;
         }
         #modal-carrito {
-            background: #fff;
+            background: #fff0f5;
             border-radius: 15px;
             padding: 25px 30px;
-            max-width: 450px;
+            max-width: 400px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
@@ -204,53 +251,6 @@
             color: #d63384;
             cursor: pointer;
         }
-
-        /* Estilos del submenú */
-        #submenu-container {
-            display: none;
-            margin-top: 20px;
-            background: #fff8fb;
-            border: 2px solid #f8a5c2;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(216,51,132,0.07);
-            max-width: 400px;
-        }
-        #submenu-titulo {
-            color: #d63384;
-            margin-bottom: 10px;
-        }
-        #submenu-opciones label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        #submenu-opciones select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border: 1px solid #f8a5c2;
-        }
-        #btn-add-cart {
-            background: #d63384;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 18px;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
-        }
-        #btn-add-cart:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        #submenu-precio {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #d63384;
-        }
     </style>
 </head>
 <body>
@@ -267,15 +267,11 @@
     <div class="section" id="menu">
         <h2>Menú de Postres</h2>
         <table class="menu-table">
-            <thead>
-                <tr><th>Producto</th><th>Precio</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
-                <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
-                <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
-                <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
-            </tbody>
+            <tr><th>Producto</th><th>Precio</th></tr>
+            <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
+            <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
+            <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
+            <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
         </table>
         <!-- Submenú dinámico -->
         <div id="submenu-container">
@@ -470,6 +466,8 @@
             carrito.forEach(item => {
                 total += item.precio * item.cantidad;
                 const li = document.createElement('li');
+                li.style.padding = "10px 0";
+                li.style.borderBottom = "1px solid #f8a5c2";
                 li.innerHTML = `<strong>${item.nombre}</strong> x${item.cantidad}<br>
                 <small>${item.detalles}</small><br>
                 $${item.precio * item.cantidad} MXN`;
@@ -492,19 +490,19 @@
                 return;
             }
             alert("¡Gracias por tu compra! Pronto nos pondremos en contacto contigo.");
-            carrito.length = 0;
+            carrito.length = 0; // Vaciar carrito
             ocultarModalCarrito();
         });
 
-        // Delegación de eventos para filas de la tabla menú
-        const tablaCuerpo = document.querySelector('.menu-table tbody');
-        tablaCuerpo.addEventListener('click', (event) => {
-            const fila = event.target.closest('tr');
-            if (!fila) return;
-            const nombre = fila.cells[0].textContent.trim();
-            if (nombre) {
+        // Submenú dinámico
+        const filas = document.querySelectorAll('.menu-table tr');
+        filas.forEach((fila, index) => {
+            if (index === 0) return; // Encabezado
+            fila.style.cursor = 'pointer';
+            fila.addEventListener('click', () => {
+                const nombre = fila.cells[0].textContent;
                 mostrarSubmenu(nombre);
-            }
+            });
         });
 
         // Submenú
@@ -563,4 +561,4 @@
             if (sabor) {
                 btnAddCart.disabled = false;
                 const base = opciones[producto].base;
-              
+           
