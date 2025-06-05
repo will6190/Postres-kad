@@ -428,7 +428,7 @@
             }
         };
 
-        // Variables del DOM
+        // Carrito y lógica
         const carrito = [];
         const lista = document.getElementById('carrito-lista');
         const totalSpan = document.getElementById('total');
@@ -440,12 +440,10 @@
         const btnAddCart = document.getElementById('btn-add-cart');
         const precioDiv = document.getElementById('submenu-precio');
 
-        // Función para limpiar select
         function limpiarSelect(select) {
             select.innerHTML = '';
         }
 
-        // Mostrar submenú con opciones
         function mostrarSubmenu(producto) {
             if (!opciones[producto]) {
                 submenu.style.display = 'none';
@@ -458,6 +456,7 @@
             limpiarSelect(saborSelect);
             limpiarSelect(coberturaSelect);
 
+            // Relleno
             opciones[producto].relleno.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
@@ -465,6 +464,8 @@
                 rellenoSelect.appendChild(o);
             });
 
+            // Sabor
+            saborSelect.innerHTML = '<option value="">Selecciona un sabor</option>';
             opciones[producto].sabor.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
@@ -472,6 +473,7 @@
                 saborSelect.appendChild(o);
             });
 
+            // Cobertura
             opciones[producto].cobertura.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
@@ -481,6 +483,11 @@
 
             btnAddCart.disabled = true;
             precioDiv.textContent = '';
+
+            // Remueve eventos anteriores y asigna nuevos
+            rellenoSelect.onchange = null;
+            saborSelect.onchange = null;
+            coberturaSelect.onchange = null;
 
             function calcularPrecio() {
                 const base = opciones[producto].base;
@@ -497,10 +504,8 @@
             rellenoSelect.onchange = calcularPrecio;
             saborSelect.onchange = calcularPrecio;
             coberturaSelect.onchange = calcularPrecio;
-            calcularPrecio();
         }
 
-        // Agregar producto al carrito
         function agregarAlCarrito(nombre, precio, detalles) {
             const existente = carrito.find(item => item.nombre === nombre && item.detalles === detalles);
             if (existente) {
@@ -511,14 +516,15 @@
             actualizarCarrito();
         }
 
-        // Actualizar carrito en pantalla
         function actualizarCarrito() {
             lista.innerHTML = '';
             let total = 0;
             carrito.forEach(item => {
                 total += item.precio * item.cantidad;
                 const li = document.createElement('li');
-                li.innerHTML = `<strong>${item.nombre}</strong> x${item.cantidad}<br><small>${item.detalles}</small><br>$${item.precio * item.cantidad} MXN`;
+                li.innerHTML = `<strong>${item.nombre}</strong> x${item.cantidad}<br>
+                <small>${item.detalles}</small><br>
+                $${item.precio * item.cantidad} MXN`;
                 lista.appendChild(li);
             });
             totalSpan.textContent = total;
@@ -535,12 +541,8 @@
             });
         });
 
-        // Botón agregar al carrito
         btnAddCart.addEventListener('click', () => {
             const producto = titulo.textContent.replace('Personaliza tu ', '');
             const relleno = rellenoSelect.value || 'Sin relleno';
             const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value || 'Sin cobertura';
-
-            const base = opciones[producto].base;
-            const rellenoPrecio = opciones[producto].rel
+            const cobertura = 
