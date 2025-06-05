@@ -267,10 +267,10 @@
     <div class="section" id="galeria">
         <h2>Galería de Fotos</h2>
         <div class="gallery">
-            <img src="brownie.jpg" alt="Brownies con nuez y helado">
-            <img src="cupcake.jpg" alt="Cupcakes con betún rosa y confites">
-            <img src="pastel.jpg" alt="Pastel con fresas decorado">
-            <img src="galletas.jpg" alt="Galletas con chispas de chocolate">
+            <img src="https://picsum.photos/seed/brownie/300/200" alt="Brownies con nuez y helado">
+            <img src="https://picsum.photos/seed/cupcake/300/200" alt="Cupcakes con betún rosa y confites">
+            <img src="https://picsum.photos/seed/pastel/300/200" alt="Pastel con fresas decorado">
+            <img src="https://picsum.photos/seed/galletas/300/200" alt="Galletas con chispas de chocolate">
         </div>
     </div>
 
@@ -526,8 +526,4 @@
                 const o = document.createElement('option');
                 o.value = opt.nombre;
                 o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
-                coberturaSelect.appendChild(o);
-            });
-            // Reset
-            btnAddCart.disabled = true;
-           
+            
