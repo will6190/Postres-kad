@@ -128,89 +128,81 @@
             text-decoration: underline;
         }
 
-        /* Estilos del carrito */
-        #carrito-container {
+        /* Estilos del carrito modal */
+        #modal-carrito-bg {
+            display: none;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #fff0f5;
-            border: 2px solid #f8a5c2;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+        #modal-carrito {
+            background: #fff;
             border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 15px 20px;
-            z-index: 100;
-            width: 260px;
-            font-size: 0.95em;
+            padding: 25px 30px;
+            max-width: 450px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            position: relative;
         }
-
-        #carrito-container h3 {
-            margin-top: 0;
+        #modal-carrito h3 {
             color: #d63384;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
         }
-
-        #carrito-container ul {
+        #modal-carrito ul {
             list-style: none;
             padding-left: 0;
-            max-height: 150px;
-            overflow-y: auto;
-            margin-bottom: 10px;
+            margin: 0 0 15px 0;
         }
-
-        #carrito-container li {
-            margin-bottom: 6px;
+        #modal-carrito li {
+            border-bottom: 1px solid #f8a5c2;
+            padding: 10px 0;
+            font-size: 1em;
             color: #333;
         }
-
-        #carrito-container p {
-            margin: 0;
-            font-weight: bold;
+        #modal-carrito li:last-child {
+            border-bottom: none;
         }
-
-        /* Estilos del submenú */
-        #submenu-container {
-            display: none;
-            margin-top: 20px;
-            background: #fff8fb;
-            border: 2px solid #f8a5c2;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(216,51,132,0.07);
-            max-width: 400px;
-        }
-        #submenu-titulo {
+        #modal-carrito li strong {
             color: #d63384;
-            margin-bottom: 10px;
         }
-        #submenu-opciones label {
-            display: block;
-            margin-bottom: 8px;
+        #modal-carrito p.total {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: right;
+            margin: 15px 0;
+            color: #d63384;
         }
-        #submenu-opciones select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border: 1px solid #f8a5c2;
-        }
-        #btn-add-cart {
+        #modal-carrito button {
             background: #d63384;
             border: none;
             border-radius: 8px;
-            padding: 10px 18px;
-            color: #fff;
+            padding: 12px 20px;
+            color: white;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
+            width: 100%;
+            font-size: 1.1em;
+            transition: background 0.3s;
         }
-        #btn-add-cart:disabled {
-            background: #ccc;
-            cursor: not-allowed;
+        #modal-carrito button:hover {
+            background: #b02a6f;
         }
-        #submenu-precio {
-            margin-top: 10px;
-            font-weight: bold;
+        #modal-carrito .btn-cerrar {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            font-size: 1.5em;
             color: #d63384;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -307,11 +299,15 @@
         &copy; 2025 Postres Kad - Diseñado con amor
     </footer>
 
-    <!-- Carrito flotante -->
-    <div id="carrito-container">
-        <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
-        <ul id="carrito-lista"></ul>
-        <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
+    <!-- Modal carrito -->
+    <div id="modal-carrito-bg" role="dialog" aria-modal="true" aria-labelledby="modal-carrito-title">
+        <div id="modal-carrito">
+            <button class="btn-cerrar" aria-label="Cerrar carrito">&times;</button>
+            <h3 id="modal-carrito-title"><i class="fas fa-shopping-cart icon"></i> Tu carrito</h3>
+            <ul id="modal-carrito-lista"></ul>
+            <p class="total">Total: $<span id="modal-total">0</span> MXN</p>
+            <button id="btn-finalizar-compra">Finalizar compra</button>
+        </div>
     </div>
 
     <script>
@@ -391,8 +387,11 @@
 
         // Carrito y lógica
         const carrito = [];
-        const lista = document.getElementById('carrito-lista');
-        const totalSpan = document.getElementById('total');
+        const modalBg = document.getElementById('modal-carrito-bg');
+        const modalLista = document.getElementById('modal-carrito-lista');
+        const modalTotal = document.getElementById('modal-total');
+        const btnFinalizar = document.getElementById('btn-finalizar-compra');
+        const btnCerrarModal = document.querySelector('#modal-carrito .btn-cerrar');
 
         function agregarAlCarrito(nombre, precio, detalles) {
             const existente = carrito.find(item => item.nombre === nombre && item.detalles === detalles);
@@ -401,11 +400,22 @@
             } else {
                 carrito.push({ nombre, precio, cantidad: 1, detalles });
             }
-            actualizarCarrito();
+            mostrarModalCarrito();
         }
 
-        function actualizarCarrito() {
-            lista.innerHTML = '';
+        function mostrarModalCarrito() {
+            actualizarModalCarrito();
+            modalBg.style.display = 'flex';
+            // Para accesibilidad, poner foco en el modal
+            btnCerrarModal.focus();
+        }
+
+        function ocultarModalCarrito() {
+            modalBg.style.display = 'none';
+        }
+
+        function actualizarModalCarrito() {
+            modalLista.innerHTML = '';
             let total = 0;
             carrito.forEach(item => {
                 total += item.precio * item.cantidad;
@@ -413,10 +423,29 @@
                 li.innerHTML = `<strong>${item.nombre}</strong> x${item.cantidad}<br>
                 <small>${item.detalles}</small><br>
                 $${item.precio * item.cantidad} MXN`;
-                lista.appendChild(li);
+                modalLista.appendChild(li);
             });
-            totalSpan.textContent = total;
+            modalTotal.textContent = total;
         }
+
+        btnCerrarModal.addEventListener('click', ocultarModalCarrito);
+
+        // Opcional: cerrar modal al hacer clic fuera del contenido
+        modalBg.addEventListener('click', e => {
+            if (e.target === modalBg) {
+                ocultarModalCarrito();
+            }
+        });
+
+        btnFinalizar.addEventListener('click', () => {
+            if(carrito.length === 0){
+                alert("Tu carrito está vacío.");
+                return;
+            }
+            alert("¡Gracias por tu compra! Pronto nos pondremos en contacto contigo.");
+            carrito.length = 0; // Vaciar carrito
+            ocultarModalCarrito();
+        });
 
         // Submenú dinámico
         const filas = document.querySelectorAll('.menu-table tr');
@@ -511,15 +540,4 @@
         }
 
         btnAddCart.addEventListener('click', function() {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value || "Sin relleno";
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value || "Sin cobertura";
-            const precio = parseInt(btnAddCart.dataset.precio);
-            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
-            agregarAlCarrito(producto, precio, detalles);
-            submenu.style.display = 'none';
-        });
-    </script>
-</body>
-</html>
+            const producto = subme
