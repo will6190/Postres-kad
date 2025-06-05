@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Postres KAD</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #fff0f5;
@@ -127,6 +127,7 @@
         a:hover {
             text-decoration: underline;
         }
+
         /* Estilos del carrito */
         #carrito-container {
             position: fixed;
@@ -141,10 +142,12 @@
             width: 260px;
             font-size: 0.95em;
         }
+
         #carrito-container h3 {
             margin-top: 0;
             color: #d63384;
         }
+
         #carrito-container ul {
             list-style: none;
             padding-left: 0;
@@ -152,14 +155,17 @@
             overflow-y: auto;
             margin-bottom: 10px;
         }
+
         #carrito-container li {
             margin-bottom: 6px;
             color: #333;
         }
+
         #carrito-container p {
             margin: 0;
             font-weight: bold;
         }
+
         /* Estilos del submenú */
         #submenu-container {
             display: none;
@@ -227,25 +233,28 @@
             <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
             <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
             <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
-            <tr><td>Carlotas</td><td>$40 MXN</td></tr>
-            <tr><td>Donas</td><td>$20 MXN</td></tr>
-            <tr><td>Pasteles para diabéticos</td><td>$55 MXN</td></tr>
         </table>
         <!-- Submenú dinámico -->
         <div id="submenu-container">
             <h3 id="submenu-titulo"></h3>
-            <form id="submenu-opciones" onsubmit="return false;">
+            <form id="submenu-opciones">
                 <label>
                     Relleno (opcional):
-                    <select id="relleno-select"></select>
+                    <select id="relleno-select">
+                        <option value="">Sin relleno</option>
+                    </select>
                 </label>
                 <label>
                     Sabor:
-                    <select id="sabor-select"></select>
+                    <select id="sabor-select">
+                        <option value="">Selecciona un sabor</option>
+                    </select>
                 </label>
                 <label>
                     Cobertura (opcional):
-                    <select id="cobertura-select"></select>
+                    <select id="cobertura-select">
+                        <option value="">Sin cobertura</option>
+                    </select>
                 </label>
                 <div id="submenu-precio"></div>
                 <button type="button" id="btn-add-cart" disabled>Agregar al carrito</button>
@@ -256,10 +265,10 @@
     <div class="section" id="galeria">
         <h2>Galería de Fotos</h2>
         <div class="gallery">
-            <img src="brownie.jpg" alt="Brownies con nuez y helado" />
-            <img src="cupcake.jpg" alt="Cupcakes con betún rosa y confites" />
-            <img src="pastel.jpg" alt="Pastel con fresas decorado" />
-            <img src="galletas.jpg" alt="Galletas con chispas de chocolate" />
+            <img src="brownie.jpg" alt="Brownies con nuez y helado">
+            <img src="cupcake.jpg" alt="Cupcakes con betún rosa y confites">
+            <img src="pastel.jpg" alt="Pastel con fresas decorado">
+            <img src="galletas.jpg" alt="Galletas con chispas de chocolate">
         </div>
     </div>
 
@@ -286,8 +295,8 @@
 
     <div class="section" id="contacto">
         <h2>Contacto y Redes Sociales</h2>
-        <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank" rel="noopener">Postres Kad</a></p>
-        <p><i class="fab fa-instagram icon"></i><strong>Instagram:</strong> <a href="https://www.instagram.com/postres_kad" target="_blank" rel="noopener">@postres_kad</a></p>
+        <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank">Postres Kad</a></p>
+        <p><i class="fab fa-instagram icon"></i><strong>Instagram:</strong> <a href="https://www.instagram.com/postres_kad" target="_blank">@postres_kad</a></p>
         <p><i class="fas fa-envelope icon"></i><strong>Correo:</strong> postreakad@gmail.com</p>
         <p><i class="fas fa-phone icon"></i><strong>Teléfono:</strong> +52 5648184476</p>
         <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingos de 12:00 a 20:00 hrs</p>
@@ -377,54 +386,6 @@
                     { nombre: "Glaseado", precio: 5 },
                     { nombre: "Chocolate", precio: 6 }
                 ]
-            },
-            "Carlotas": {
-                base: 40,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
-                    { nombre: "Crema de limón", precio: 7 },
-                    { nombre: "Crema pastelera", precio: 8 }
-                ],
-                sabor: [
-                    { nombre: "Clásica", precio: 0 },
-                    { nombre: "Fresa", precio: 5 }
-                ],
-                cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Merengue", precio: 6 }
-                ]
-            },
-            "Donas": {
-                base: 20,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
-                    { nombre: "Chocolate", precio: 5 },
-                    { nombre: "Vainilla", precio: 4 }
-                ],
-                sabor: [
-                    { nombre: "Clásica", precio: 0 },
-                    { nombre: "Azucarada", precio: 2 }
-                ],
-                cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Glaseado", precio: 3 },
-                    { nombre: "Chocolate", precio: 5 }
-                ]
-            },
-            "Pasteles para diabéticos": {
-                base: 55,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
-                    { nombre: "Crema sin azúcar", precio: 10 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla sin azúcar", precio: 5 },
-                    { nombre: "Chocolate sin azúcar", precio: 7 }
-                ],
-                cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Fondant sin azúcar", precio: 15 }
-                ]
             }
         };
 
@@ -432,79 +393,6 @@
         const carrito = [];
         const lista = document.getElementById('carrito-lista');
         const totalSpan = document.getElementById('total');
-        const submenu = document.getElementById('submenu-container');
-        const titulo = document.getElementById('submenu-titulo');
-        const rellenoSelect = document.getElementById('relleno-select');
-        const saborSelect = document.getElementById('sabor-select');
-        const coberturaSelect = document.getElementById('cobertura-select');
-        const btnAddCart = document.getElementById('btn-add-cart');
-        const precioDiv = document.getElementById('submenu-precio');
-
-        function limpiarSelect(select) {
-            select.innerHTML = '';
-        }
-
-        function mostrarSubmenu(producto) {
-            if (!opciones[producto]) {
-                submenu.style.display = 'none';
-                return;
-            }
-            submenu.style.display = 'block';
-            titulo.textContent = `Personaliza tu ${producto}`;
-
-            limpiarSelect(rellenoSelect);
-            limpiarSelect(saborSelect);
-            limpiarSelect(coberturaSelect);
-
-            // Relleno
-            opciones[producto].relleno.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre}${opt.precio > 0 ? ` (+ $${opt.precio})` : ''}`;
-                rellenoSelect.appendChild(o);
-            });
-
-            // Sabor
-            saborSelect.innerHTML = '<option value="">Selecciona un sabor</option>';
-            opciones[producto].sabor.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre}${opt.precio > 0 ? ` (+ $${opt.precio})` : ''}`;
-                saborSelect.appendChild(o);
-            });
-
-            // Cobertura
-            opciones[producto].cobertura.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre}${opt.precio > 0 ? ` (+ $${opt.precio})` : ''}`;
-                coberturaSelect.appendChild(o);
-            });
-
-            btnAddCart.disabled = true;
-            precioDiv.textContent = '';
-
-            // Remueve eventos anteriores y asigna nuevos
-            rellenoSelect.onchange = null;
-            saborSelect.onchange = null;
-            coberturaSelect.onchange = null;
-
-            function calcularPrecio() {
-                const base = opciones[producto].base;
-                const relleno = opciones[producto].relleno.find(r => r.nombre === rellenoSelect.value)?.precio || 0;
-                const sabor = opciones[producto].sabor.find(s => s.nombre === saborSelect.value)?.precio || 0;
-                const cobertura = opciones[producto].cobertura.find(c => c.nombre === coberturaSelect.value)?.precio || 0;
-
-                const total = base + relleno + sabor + cobertura;
-                precioDiv.textContent = `Precio: $${total} MXN`;
-
-                btnAddCart.disabled = saborSelect.value === '';
-            }
-
-            rellenoSelect.onchange = calcularPrecio;
-            saborSelect.onchange = calcularPrecio;
-            coberturaSelect.onchange = calcularPrecio;
-        }
 
         function agregarAlCarrito(nombre, precio, detalles) {
             const existente = carrito.find(item => item.nombre === nombre && item.detalles === detalles);
@@ -530,10 +418,10 @@
             totalSpan.textContent = total;
         }
 
-        // Asignar evento click a filas del menú para abrir submenú
+        // Submenú dinámico
         const filas = document.querySelectorAll('.menu-table tr');
         filas.forEach((fila, index) => {
-            if (index === 0) return; // Saltar encabezado
+            if (index === 0) return; // Encabezado
             fila.style.cursor = 'pointer';
             fila.addEventListener('click', () => {
                 const nombre = fila.cells[0].textContent;
@@ -541,8 +429,97 @@
             });
         });
 
-        btnAddCart.addEventListener('click', () => {
-            const producto = titulo.textContent.replace('Personaliza tu ', '');
-            const relleno = rellenoSelect.value || 'Sin relleno';
+        // Submenú
+        const submenu = document.getElementById('submenu-container');
+        const titulo = document.getElementById('submenu-titulo');
+        const rellenoSelect = document.getElementById('relleno-select');
+        const saborSelect = document.getElementById('sabor-select');
+        const coberturaSelect = document.getElementById('cobertura-select');
+        const btnAddCart = document.getElementById('btn-add-cart');
+        const precioDiv = document.getElementById('submenu-precio');
+
+        function mostrarSubmenu(producto) {
+            submenu.style.display = 'block';
+            titulo.textContent = `Personaliza tu ${producto}`;
+            // Limpiar selects
+            limpiarSelect(rellenoSelect);
+            limpiarSelect(saborSelect);
+            limpiarSelect(coberturaSelect);
+            // Llenar selects con opciones y precios
+            opciones[producto].relleno.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.nombre;
+                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                rellenoSelect.appendChild(o);
+            });
+            opciones[producto].sabor.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.nombre;
+                o.textContent = `${opt.nombre} (+ $${opt.precio})`;
+                saborSelect.appendChild(o);
+            });
+            opciones[producto].cobertura.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.nombre;
+                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                coberturaSelect.appendChild(o);
+            });
+            // Reset
+            btnAddCart.disabled = true;
+            precioDiv.textContent = '';
+            // Guardar producto actual
+            submenu.dataset.producto = producto;
+        }
+
+        function limpiarSelect(select) {
+            while (select.options.length > 1) select.remove(1);
+            select.selectedIndex = 0;
+        }
+
+        // Escuchar cambios en los tres selects para actualizar precio y estado del botón
+        [rellenoSelect, saborSelect, coberturaSelect].forEach(sel => {
+            sel.addEventListener('change', actualizarPrecioSubmenu);
+        });
+
+        function actualizarPrecioSubmenu() {
+            const producto = submenu.dataset.producto;
+            const relleno = rellenoSelect.value;
             const sabor = saborSelect.value;
-            const cobertura = 
+            const cobertura = coberturaSelect.value;
+
+            // Solo sabor es obligatorio para habilitar el botón
+            if (sabor) {
+                btnAddCart.disabled = false;
+
+                const base = opciones[producto].base;
+
+                // Precio relleno, si no seleccionado o no existe, 0
+                const pRelleno = relleno ? (opciones[producto].relleno.find(o => o.nombre === relleno)?.precio || 0) : 0;
+                // Precio sabor, obligatorio y seguro existe
+                const pSabor = opciones[producto].sabor.find(o => o.nombre === sabor)?.precio || 0;
+                // Precio cobertura, si no seleccionado o no existe, 0
+                const pCobertura = cobertura ? (opciones[producto].cobertura.find(o => o.nombre === cobertura)?.precio || 0) : 0;
+
+                const precioFinal = base + pRelleno + pSabor + pCobertura;
+
+                precioDiv.textContent = `Precio final: $${precioFinal} MXN`;
+                btnAddCart.dataset.precio = precioFinal;
+            } else {
+                btnAddCart.disabled = true;
+                precioDiv.textContent = '';
+            }
+        }
+
+        btnAddCart.addEventListener('click', function() {
+            const producto = submenu.dataset.producto;
+            const relleno = rellenoSelect.value || "Sin relleno";
+            const sabor = saborSelect.value;
+            const cobertura = coberturaSelect.value || "Sin cobertura";
+            const precio = parseInt(btnAddCart.dataset.precio);
+            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
+            agregarAlCarrito(producto, precio, detalles);
+            submenu.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
