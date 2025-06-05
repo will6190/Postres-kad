@@ -233,24 +233,26 @@
             <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
             <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
             <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
+            <tr><td>Dona</td><td>$20 MXN</td></tr>
+            <tr><td>Carlota (por rebanada)</td><td>$45 MXN</td></tr>
+            <tr><td>Pastel para diabéticos (por rebanada)</td><td>$70 MXN</td></tr>
         </table>
-        <!-- Submenú dinámico -->
         <div id="submenu-container">
             <h3 id="submenu-titulo"></h3>
             <form id="submenu-opciones">
-                <label>
+                <label id="relleno-label">
                     Relleno (opcional):
                     <select id="relleno-select">
                         <option value="">Sin relleno</option>
                     </select>
                 </label>
-                <label>
+                <label id="sabor-label">
                     Sabor:
                     <select id="sabor-select">
                         <option value="">Selecciona un sabor</option>
                     </select>
                 </label>
-                <label>
+                <label id="cobertura-label">
                     Cobertura (opcional):
                     <select id="cobertura-select">
                         <option value="">Sin cobertura</option>
@@ -269,6 +271,9 @@
             <img src="cupcake.jpg" alt="Cupcakes con betún rosa y confites">
             <img src="pastel.jpg" alt="Pastel con fresas decorado">
             <img src="galletas.jpg" alt="Galletas con chispas de chocolate">
+            <img src="dona.jpg" alt="Donas variadas con glaseado">
+            <img src="carlota.jpg" alt="Carlota de limón decorada">
+            <img src="pastel-diabeticos.jpg" alt="Pastel para diabéticos sin azúcar">
         </div>
     </div>
 
@@ -307,7 +312,6 @@
         &copy; 2025 Postres Kad - Diseñado con amor
     </footer>
 
-    <!-- Carrito flotante -->
     <div id="carrito-container">
         <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
         <ul id="carrito-lista"></ul>
@@ -386,6 +390,57 @@
                     { nombre: "Glaseado", precio: 5 },
                     { nombre: "Chocolate", precio: 6 }
                 ]
+            },
+            "Dona": {
+                base: 20,
+                relleno: [
+                    { nombre: "Sin relleno", precio: 0 },
+                    { nombre: "Crema pastelera", precio: 5 },
+                    { nombre: "Mermelada de fresa", precio: 4 }
+                ],
+                sabor: [
+                    { nombre: "Clásica", precio: 0 },
+                    { nombre: "Chocolate", precio: 3 },
+                    { nombre: "Fresa", precio: 3 }
+                ],
+                cobertura: [
+                    { nombre: "Sin cobertura", precio: 0 },
+                    { nombre: "Glaseado", precio: 3 },
+                    { nombre: "Chocolate", precio: 4 },
+                    { nombre: "Azúcar glass", precio: 2 }
+                ]
+            },
+            "Carlota (por rebanada)": {
+                base: 45,
+                relleno: [
+                    { nombre: "Sin relleno", precio: 0 }
+                ],
+                sabor: [
+                    { nombre: "Limón", precio: 0 },
+                    { nombre: "Mango", precio: 5 },
+                    { nombre: "Fresa", precio: 5 }
+                ],
+                cobertura: [
+                    { nombre: "Sin cobertura", precio: 0 },
+                    { nombre: "Crema batida", precio: 7 }
+                ]
+            },
+            "Pastel para diabéticos (por rebanada)": {
+                base: 70,
+                relleno: [
+                    { nombre: "Sin relleno", precio: 0 },
+                    { nombre: "Crema sin azúcar", precio: 10 },
+                    { nombre: "Frutos rojos sin azúcar", precio: 12 }
+                ],
+                sabor: [
+                    { nombre: "Vainilla sin azúcar", precio: 8 },
+                    { nombre: "Chocolate sin azúcar", precio: 10 }
+                ],
+                cobertura: [
+                    { nombre: "Sin cobertura", precio: 0 },
+                    { nombre: "Crema batida sin azúcar", precio: 8 },
+                    { nombre: "Chocolate amargo sin azúcar", precio: 10 }
+                ]
             }
         };
 
@@ -438,88 +493,55 @@
         const btnAddCart = document.getElementById('btn-add-cart');
         const precioDiv = document.getElementById('submenu-precio');
 
+        const rellenoLabel = document.getElementById('relleno-label');
+        const saborLabel = document.getElementById('sabor-label');
+        const coberturaLabel = document.getElementById('cobertura-label');
+
+
         function mostrarSubmenu(producto) {
             submenu.style.display = 'block';
             titulo.textContent = `Personaliza tu ${producto}`;
+            
             // Limpiar selects
             limpiarSelect(rellenoSelect);
             limpiarSelect(saborSelect);
             limpiarSelect(coberturaSelect);
+
+            // Hide all labels by default
+            rellenoLabel.style.display = 'none';
+            saborLabel.style.display = 'none';
+            coberturaLabel.style.display = 'none';
+            
             // Llenar selects con opciones y precios
-            opciones[producto].relleno.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
-                rellenoSelect.appendChild(o);
-            });
-            opciones[producto].sabor.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+ $${opt.precio})`;
-                saborSelect.appendChild(o);
-            });
-            opciones[producto].cobertura.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
-                coberturaSelect.appendChild(o);
-            });
-            // Reset
-            btnAddCart.disabled = true;
-            precioDiv.textContent = '';
-            // Guardar producto actual
-            submenu.dataset.producto = producto;
-        }
-
-        function limpiarSelect(select) {
-            while (select.options.length > 1) select.remove(1);
-            select.selectedIndex = 0;
-        }
-
-        // Escuchar cambios en los tres selects para actualizar precio y estado del botón
-        [rellenoSelect, saborSelect, coberturaSelect].forEach(sel => {
-            sel.addEventListener('change', actualizarPrecioSubmenu);
-        });
-
-        function actualizarPrecioSubmenu() {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value;
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value;
-
-            // Solo sabor es obligatorio para habilitar el botón
-            if (sabor) {
-                btnAddCart.disabled = false;
-
-                const base = opciones[producto].base;
-
-                // Precio relleno, si no seleccionado o no existe, 0
-                const pRelleno = relleno ? (opciones[producto].relleno.find(o => o.nombre === relleno)?.precio || 0) : 0;
-                // Precio sabor, obligatorio y seguro existe
-                const pSabor = opciones[producto].sabor.find(o => o.nombre === sabor)?.precio || 0;
-                // Precio cobertura, si no seleccionado o no existe, 0
-                const pCobertura = cobertura ? (opciones[producto].cobertura.find(o => o.nombre === cobertura)?.precio || 0) : 0;
-
-                const precioFinal = base + pRelleno + pSabor + pCobertura;
-
-                precioDiv.textContent = `Precio final: $${precioFinal} MXN`;
-                btnAddCart.dataset.precio = precioFinal;
-            } else {
-                btnAddCart.disabled = true;
-                precioDiv.textContent = '';
+            if (opciones[producto].relleno && opciones[producto].relleno.length > 0) {
+                rellenoLabel.style.display = 'block';
+                opciones[producto].relleno.forEach(opt => {
+                    const o = document.createElement('option');
+                    o.value = opt.nombre;
+                    o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                    rellenoSelect.appendChild(o);
+                });
             }
-        }
 
-        btnAddCart.addEventListener('click', function() {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value || "Sin relleno";
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value || "Sin cobertura";
-            const precio = parseInt(btnAddCart.dataset.precio);
-            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
-            agregarAlCarrito(producto, precio, detalles);
-            submenu.style.display = 'none';
-        });
-    </script>
-</body>
-</html>
+            if (opciones[producto].sabor && opciones[producto].sabor.length > 0) {
+                saborLabel.style.display = 'block';
+                opciones[producto].sabor.forEach(opt => {
+                    const o = document.createElement('option');
+                    o.value = opt.nombre;
+                    o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                    saborSelect.appendChild(o);
+                });
+            }
+
+            if (opciones[producto].cobertura && opciones[producto].cobertura.length > 0) {
+                coberturaLabel.style.display = 'block';
+                opciones[producto].cobertura.forEach(opt => {
+                    const o = document.createElement('option');
+                    o.value = opt.nombre;
+                    o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                    coberturaSelect.appendChild(o);
+                });
+            }
+
+            // Reset
+            btnAddCar
