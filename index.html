@@ -127,6 +127,7 @@
         a:hover {
             text-decoration: underline;
         }
+
         /* Estilos del carrito */
         #carrito-container {
             position: fixed;
@@ -141,10 +142,12 @@
             width: 260px;
             font-size: 0.95em;
         }
+
         #carrito-container h3 {
             margin-top: 0;
             color: #d63384;
         }
+
         #carrito-container ul {
             list-style: none;
             padding-left: 0;
@@ -152,14 +155,17 @@
             overflow-y: auto;
             margin-bottom: 10px;
         }
+
         #carrito-container li {
             margin-bottom: 6px;
             color: #333;
         }
+
         #carrito-container p {
             margin: 0;
             font-weight: bold;
         }
+
         /* Estilos del submenú */
         #submenu-container {
             display: none;
@@ -206,50 +212,6 @@
             font-weight: bold;
             color: #d63384;
         }
-        /* Modal carrito */
-        #modal-carrito {
-            display:none;
-            position:fixed;
-            top:0; left:0;
-            width:100%; height:100%;
-            background: rgba(0,0,0,0.5);
-            justify-content:center;
-            align-items:center;
-            z-index: 200;
-        }
-        #modal-carrito > div {
-            background:#fff;
-            border-radius:15px;
-            padding:20px;
-            max-width:400px;
-            width:90%;
-        }
-        #modal-carrito h3 {
-            margin-top: 0;
-            color: #d63384;
-        }
-        #modal-carrito-lista {
-            max-height:200px;
-            overflow-y:auto;
-            padding-left:0;
-            list-style:none;
-        }
-        #modal-carrito-lista li {
-            margin-bottom:8px;
-        }
-        #btn-pagar {
-            background:#d63384;
-            color:#fff;
-            border:none;
-            border-radius:8px;
-            padding:10px 20px;
-            cursor:pointer;
-        }
-        #btn-cerrar-modal {
-            margin-left:10px;
-            padding:10px 20px;
-            cursor:pointer;
-        }
     </style>
 </head>
 <body>
@@ -262,6 +224,7 @@
         <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
         <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
     </nav>
+
     <div class="section" id="menu">
         <h2>Menú de Postres</h2>
         <table class="menu-table">
@@ -276,9 +239,9 @@
             <h3 id="submenu-titulo"></h3>
             <form id="submenu-opciones">
                 <label>
-                    Relleno:
+                    Relleno (opcional):
                     <select id="relleno-select">
-                        <option value="">Selecciona un relleno</option>
+                        <option value="">Sin relleno</option>
                     </select>
                 </label>
                 <label>
@@ -288,13 +251,13 @@
                     </select>
                 </label>
                 <label>
-                    Cobertura:
+                    Cobertura (opcional):
                     <select id="cobertura-select">
-                        <option value="">Selecciona una cobertura</option>
+                        <option value="">Sin cobertura</option>
                     </select>
                 </label>
                 <div id="submenu-precio"></div>
-                <button type="button" id="btn-add-cart">Agregar al carrito</button>
+                <button type="button" id="btn-add-cart" disabled>Agregar al carrito</button>
             </form>
         </div>
     </div>
@@ -351,23 +314,13 @@
         <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
     </div>
 
-    <!-- Modal carrito -->
-    <div id="modal-carrito">
-        <div>
-            <h3>Carrito de Compras</h3>
-            <ul id="modal-carrito-lista"></ul>
-            <p><strong>Total:</strong> $<span id="modal-total">0</span> MXN</p>
-            <button id="btn-pagar">Pagar</button>
-            <button id="btn-cerrar-modal">Cerrar</button>
-        </div>
-    </div>
-
     <script>
         // Opciones y precios de cada producto
         const opciones = {
             "Pastel decorado (por rebanada)": {
                 base: 50,
                 relleno: [
+                    { nombre: "Sin relleno", precio: 0 },
                     { nombre: "Crema pastelera", precio: 8 },
                     { nombre: "Chocolate", precio: 10 },
                     { nombre: "Mermelada de fresa", precio: 9 }
@@ -378,6 +331,7 @@
                     { nombre: "Red Velvet", precio: 12 }
                 ],
                 cobertura: [
+                    { nombre: "Sin cobertura", precio: 0 },
                     { nombre: "Fondant", precio: 15 },
                     { nombre: "Chantilly", precio: 10 },
                     { nombre: "Chocolate", precio: 12 }
@@ -386,9 +340,9 @@
             "Cupcake decorado": {
                 base: 25,
                 relleno: [
+                    { nombre: "Sin relleno", precio: 0 },
                     { nombre: "Nutella", precio: 7 },
-                    { nombre: "Dulce de leche", precio: 6 },
-                    { nombre: "Sin relleno", precio: 0 }
+                    { nombre: "Dulce de leche", precio: 6 }
                 ],
                 sabor: [
                     { nombre: "Vainilla", precio: 3 },
@@ -396,6 +350,7 @@
                     { nombre: "Chocolate", precio: 4 }
                 ],
                 cobertura: [
+                    { nombre: "Sin cobertura", precio: 0 },
                     { nombre: "Betún de mantequilla", precio: 6 },
                     { nombre: "Fondant", precio: 8 },
                     { nombre: "Chantilly", precio: 5 }
@@ -404,16 +359,16 @@
             "Brownie de chocolate": {
                 base: 30,
                 relleno: [
-                    { nombre: "Nuez", precio: 5 },
-                    { nombre: "Sin relleno", precio: 0 }
+                    { nombre: "Sin relleno", precio: 0 },
+                    { nombre: "Nuez", precio: 5 }
                 ],
                 sabor: [
                     { nombre: "Chocolate clásico", precio: 4 },
                     { nombre: "Chocolate con menta", precio: 6 }
                 ],
                 cobertura: [
-                    { nombre: "Chocolate derretido", precio: 6 },
-                    { nombre: "Sin cobertura", precio: 0 }
+                    { nombre: "Sin cobertura", precio: 0 },
+                    { nombre: "Chocolate derretido", precio: 6 }
                 ]
             },
             "Galletas decoradas (paquete)": {
@@ -427,9 +382,9 @@
                     { nombre: "Chocolate", precio: 5 }
                 ],
                 cobertura: [
+                    { nombre: "Sin cobertura", precio: 0 },
                     { nombre: "Glaseado", precio: 5 },
-                    { nombre: "Chocolate", precio: 6 },
-                    { nombre: "Sin cobertura", precio: 0 }
+                    { nombre: "Chocolate", precio: 6 }
                 ]
             }
         };
@@ -483,73 +438,88 @@
         const btnAddCart = document.getElementById('btn-add-cart');
         const precioDiv = document.getElementById('submenu-precio');
 
-        function limpiarSelect(select) {
-            while (select.options.length > 1) {
-                select.remove(1);
-            }
-        }
-
         function mostrarSubmenu(producto) {
             submenu.style.display = 'block';
             titulo.textContent = `Personaliza tu ${producto}`;
+            // Limpiar selects
             limpiarSelect(rellenoSelect);
             limpiarSelect(saborSelect);
             limpiarSelect(coberturaSelect);
+            // Llenar selects con opciones y precios
             opciones[producto].relleno.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
                 rellenoSelect.appendChild(o);
             });
             opciones[producto].sabor.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                o.textContent = `${opt.nombre} (+ $${opt.precio})`;
                 saborSelect.appendChild(o);
             });
             opciones[producto].cobertura.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
                 coberturaSelect.appendChild(o);
             });
-            precioDiv.textContent = `Precio base: $${opciones[producto].base} MXN`;
-            btnAddCart.disabled = false;
-            btnAddCart.onclick = function() {
-                const nombreProducto = producto;
-                const relleno = rellenoSelect.value || "Sin selección";
-                const sabor = saborSelect.value || "Sin selección";
-                const cobertura = coberturaSelect.value || "Sin selección";
-                let precioBase = opciones[nombreProducto].base;
-                let precioRelleno = opciones[nombreProducto].relleno.find(r => r.nombre === relleno)?.precio || 0;
-                let precioSabor = opciones[nombreProducto].sabor.find(s => s.nombre === sabor)?.precio || 0;
-                let precioCobertura = opciones[nombreProducto].cobertura.find(c => c.nombre === cobertura)?.precio || 0;
-                let precioTotal = precioBase + precioRelleno + precioSabor + precioCobertura;
-                const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
-                agregarAlCarrito(nombreProducto, precioTotal, detalles);
-                mostrarModalCarrito();
-            };
+            // Reset
+            btnAddCart.disabled = true;
+            precioDiv.textContent = '';
+            // Guardar producto actual
+            submenu.dataset.producto = producto;
         }
 
-        // MODAL CARRITO
-        const modalCarrito = document.getElementById('modal-carrito');
-        const modalLista = document.getElementById('modal-carrito-lista');
-        const modalTotal = document.getElementById('modal-total');
-        const btnPagar = document.getElementById('btn-pagar');
-        const btnCerrarModal = document.getElementById('btn-cerrar-modal');
-
-        function mostrarModalCarrito() {
-            modalLista.innerHTML = '';
-            let total = 0;
-            carrito.forEach(item => {
-                total += item.precio * item.cantidad;
-                const li = document.createElement('li');
-                li.style.marginBottom = '8px';
-                li.innerHTML = `<strong>${item.nombre}</strong> x${item.cantidad}<br><small>${item.detalles}</small><br>$${item.precio * item.cantidad} MXN`;
-                modalLista.appendChild(li);
-            });
-            modalTotal.textContent = total;
-            modalCarrito.style.display = 'flex';
+        function limpiarSelect(select) {
+            while (select.options.length > 1) select.remove(1);
+            select.selectedIndex = 0;
         }
 
-        btnCerrarModal.addEven
+        // Escuchar cambios en los tres selects para actualizar precio y estado del botón
+        [rellenoSelect, saborSelect, coberturaSelect].forEach(sel => {
+            sel.addEventListener('change', actualizarPrecioSubmenu);
+        });
+
+        function actualizarPrecioSubmenu() {
+            const producto = submenu.dataset.producto;
+            const relleno = rellenoSelect.value;
+            const sabor = saborSelect.value;
+            const cobertura = coberturaSelect.value;
+
+            // Solo sabor es obligatorio para habilitar el botón
+            if (sabor) {
+                btnAddCart.disabled = false;
+
+                const base = opciones[producto].base;
+
+                // Precio relleno, si no seleccionado o no existe, 0
+                const pRelleno = relleno ? (opciones[producto].relleno.find(o => o.nombre === relleno)?.precio || 0) : 0;
+                // Precio sabor, obligatorio y seguro existe
+                const pSabor = opciones[producto].sabor.find(o => o.nombre === sabor)?.precio || 0;
+                // Precio cobertura, si no seleccionado o no existe, 0
+                const pCobertura = cobertura ? (opciones[producto].cobertura.find(o => o.nombre === cobertura)?.precio || 0) : 0;
+
+                const precioFinal = base + pRelleno + pSabor + pCobertura;
+
+                precioDiv.textContent = `Precio final: $${precioFinal} MXN`;
+                btnAddCart.dataset.precio = precioFinal;
+            } else {
+                btnAddCart.disabled = true;
+                precioDiv.textContent = '';
+            }
+        }
+
+        btnAddCart.addEventListener('click', function() {
+            const producto = submenu.dataset.producto;
+            const relleno = rellenoSelect.value || "Sin relleno";
+            const sabor = saborSelect.value;
+            const cobertura = coberturaSelect.value || "Sin cobertura";
+            const precio = parseInt(btnAddCart.dataset.precio);
+            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
+            agregarAlCarrito(producto, precio, detalles);
+            submenu.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
