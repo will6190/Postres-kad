@@ -233,17 +233,15 @@
             <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
             <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
             <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
-            <tr><td>Dona</td><td>$20 MXN</td></tr>
-            <tr><td>Carlota (por rebanada)</td><td>$45 MXN</td></tr>
-            <tr><td>Pastel para diabéticos (por rebanada)</td><td>$60 MXN</td></tr>
         </table>
+        <!-- Submenú dinámico -->
         <div id="submenu-container">
             <h3 id="submenu-titulo"></h3>
             <form id="submenu-opciones">
                 <label>
-                    Relleno (opcional):
+                    Relleno:
                     <select id="relleno-select">
-                        <option value="">Sin relleno</option>
+                        <option value="">Selecciona un relleno</option>
                     </select>
                 </label>
                 <label>
@@ -253,9 +251,9 @@
                     </select>
                 </label>
                 <label>
-                    Cobertura (opcional):
+                    Cobertura:
                     <select id="cobertura-select">
-                        <option value="">Sin cobertura</option>
+                        <option value="">Selecciona una cobertura</option>
                     </select>
                 </label>
                 <div id="submenu-precio"></div>
@@ -267,10 +265,10 @@
     <div class="section" id="galeria">
         <h2>Galería de Fotos</h2>
         <div class="gallery">
-            <img src="https://picsum.photos/seed/brownie/300/200" alt="Brownies con nuez y helado">
-            <img src="https://picsum.photos/seed/cupcake/300/200" alt="Cupcakes con betún rosa y confites">
-            <img src="https://picsum.photos/seed/pastel/300/200" alt="Pastel con fresas decorado">
-            <img src="https://picsum.photos/seed/galletas/300/200" alt="Galletas con chispas de chocolate">
+            <img src="brownie.jpg" alt="Brownies con nuez y helado">
+            <img src="cupcake.jpg" alt="Cupcakes con betún rosa y confites">
+            <img src="pastel.jpg" alt="Pastel con fresas decorado">
+            <img src="galletas.jpg" alt="Galletas con chispas de chocolate">
         </div>
     </div>
 
@@ -309,6 +307,7 @@
         &copy; 2025 Postres Kad - Diseñado con amor
     </footer>
 
+    <!-- Carrito flotante -->
     <div id="carrito-container">
         <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
         <ul id="carrito-lista"></ul>
@@ -321,7 +320,6 @@
             "Pastel decorado (por rebanada)": {
                 base: 50,
                 relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
                     { nombre: "Crema pastelera", precio: 8 },
                     { nombre: "Chocolate", precio: 10 },
                     { nombre: "Mermelada de fresa", precio: 9 }
@@ -332,7 +330,6 @@
                     { nombre: "Red Velvet", precio: 12 }
                 ],
                 cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
                     { nombre: "Fondant", precio: 15 },
                     { nombre: "Chantilly", precio: 10 },
                     { nombre: "Chocolate", precio: 12 }
@@ -341,9 +338,9 @@
             "Cupcake decorado": {
                 base: 25,
                 relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
                     { nombre: "Nutella", precio: 7 },
-                    { nombre: "Dulce de leche", precio: 6 }
+                    { nombre: "Dulce de leche", precio: 6 },
+                    { nombre: "Sin relleno", precio: 0 }
                 ],
                 sabor: [
                     { nombre: "Vainilla", precio: 3 },
@@ -351,7 +348,6 @@
                     { nombre: "Chocolate", precio: 4 }
                 ],
                 cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
                     { nombre: "Betún de mantequilla", precio: 6 },
                     { nombre: "Fondant", precio: 8 },
                     { nombre: "Chantilly", precio: 5 }
@@ -360,16 +356,16 @@
             "Brownie de chocolate": {
                 base: 30,
                 relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
-                    { nombre: "Nuez", precio: 5 }
+                    { nombre: "Nuez", precio: 5 },
+                    { nombre: "Sin relleno", precio: 0 }
                 ],
                 sabor: [
                     { nombre: "Chocolate clásico", precio: 4 },
                     { nombre: "Chocolate con menta", precio: 6 }
                 ],
                 cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Chocolate derretido", precio: 6 }
+                    { nombre: "Chocolate derretido", precio: 6 },
+                    { nombre: "Sin cobertura", precio: 0 }
                 ]
             },
             "Galletas decoradas (paquete)": {
@@ -383,63 +379,9 @@
                     { nombre: "Chocolate", precio: 5 }
                 ],
                 cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
                     { nombre: "Glaseado", precio: 5 },
-                    { nombre: "Chocolate", precio: 6 }
-                ]
-            },
-            "Dona": { // Nueva entrada para Dona
-                base: 20,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
-                    { nombre: "Crema pastelera", precio: 5 },
-                    { nombre: "Chocolate", precio: 7 },
-                    { nombre: "Mermelada de fresa", precio: 6 }
-                ],
-                sabor: [ // Para donas, "sabor" puede referirse a la masa o glaseado principal
-                    { nombre: "Clásica azucarada", precio: 2 },
-                    { nombre: "Chocolate", precio: 4 },
-                    { nombre: "Maple", precio: 5 }
-                ],
-                cobertura: [ // Toppings o glaseados adicionales
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Glaseado simple", precio: 3 },
-                    { nombre: "Chispas de chocolate", precio: 4 },
-                    { nombre: "Cobertura de chocolate", precio: 6 }
-                ]
-            },
-            "Carlota (por rebanada)": { // Nueva entrada para Carlota
-                base: 45,
-                relleno: [ // Las carlotas no suelen tener "relleno" en el sentido tradicional, pero mantenemos la estructura
-                    { nombre: "Sin relleno adicional", precio: 0 }
-                ],
-                sabor: [ // Sabor principal de la carlota
-                    { nombre: "Limón", precio: 5 },
-                    { nombre: "Fresa", precio: 7 },
-                    { nombre: "Mango", precio: 8 }
-                ],
-                cobertura: [ // Puede ser un topping o decoración
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Merengue ligero", precio: 6 },
-                    { nombre: "Frutas frescas de temporada", precio: 10 }
-                ]
-            },
-            "Pastel para diabéticos (por rebanada)": { // Nueva entrada para Pastel para diabéticos
-                base: 60,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 },
-                    { nombre: "Mousse de frutos rojos (sin azúcar)", precio: 10 },
-                    { nombre: "Crema de vainilla (sin azúcar)", precio: 12 }
-                ],
-                sabor: [ // Sabores de bizcocho adaptados
-                    { nombre: "Vainilla (endulzado con stevia)", precio: 8 },
-                    { nombre: "Chocolate amargo (endulzado con eritritol)", precio: 10 },
-                    { nombre: "Zanahoria y nuez (sin azúcar añadida)", precio: 12 }
-                ],
-                cobertura: [ // Coberturas adaptadas
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Ganache de chocolate amargo (sin azúcar)", precio: 15 },
-                    { nombre: "Crema batida ligera (sin azúcar)", precio: 12 }
+                    { nombre: "Chocolate", precio: 6 },
+                    { nombre: "Sin cobertura", precio: 0 }
                 ]
             }
         };
@@ -480,13 +422,7 @@
             fila.style.cursor = 'pointer';
             fila.addEventListener('click', () => {
                 const nombre = fila.cells[0].textContent;
-                if (opciones[nombre]) { // Verificar que el producto exista en las opciones
-                    mostrarSubmenu(nombre);
-                } else {
-                    console.warn("Producto no encontrado en las opciones:", nombre);
-                    // Opcionalmente, podrías ocultar el submenú o mostrar un mensaje
-                    submenu.style.display = 'none';
-                }
+                mostrarSubmenu(nombre);
             });
         });
 
@@ -506,24 +442,73 @@
             limpiarSelect(rellenoSelect);
             limpiarSelect(saborSelect);
             limpiarSelect(coberturaSelect);
-
-            const productoOpciones = opciones[producto];
-
             // Llenar selects con opciones y precios
-            productoOpciones.relleno.forEach(opt => {
+            opciones[producto].relleno.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                o.textContent = `${opt.nombre} (+$${opt.precio})`;
                 rellenoSelect.appendChild(o);
             });
-            productoOpciones.sabor.forEach(opt => {
+            opciones[producto].sabor.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+ $${opt.precio})`; // Sabor siempre tiene precio > 0 o es el base
+                o.textContent = `${opt.nombre} (+$${opt.precio})`;
                 saborSelect.appendChild(o);
             });
-            productoOpciones.cobertura.forEach(opt => {
+            opciones[producto].cobertura.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
-            
+                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                coberturaSelect.appendChild(o);
+            });
+            // Reset
+            btnAddCart.disabled = true;
+            precioDiv.textContent = '';
+            // Guardar producto actual
+            submenu.dataset.producto = producto;
+        }
+
+        function limpiarSelect(select) {
+            while (select.options.length > 1) select.remove(1);
+            select.selectedIndex = 0;
+        }
+
+        // Habilitar botón y mostrar precio cuando todo esté seleccionado
+        [rellenoSelect, saborSelect, coberturaSelect].forEach(sel => {
+            sel.addEventListener('change', actualizarPrecioSubmenu);
+        });
+
+        function actualizarPrecioSubmenu() {
+            const producto = submenu.dataset.producto;
+            const relleno = rellenoSelect.value;
+            const sabor = saborSelect.value;
+            const cobertura = coberturaSelect.value;
+            if (relleno && sabor && cobertura) {
+                btnAddCart.disabled = false;
+                // Calcular precio
+                const base = opciones[producto].base;
+                const pRelleno = opciones[producto].relleno.find(o => o.nombre === relleno).precio;
+                const pSabor = opciones[producto].sabor.find(o => o.nombre === sabor).precio;
+                const pCobertura = opciones[producto].cobertura.find(o => o.nombre === cobertura).precio;
+                const precioFinal = base + pRelleno + pSabor + pCobertura;
+                precioDiv.textContent = `Precio final: $${precioFinal} MXN`;
+                btnAddCart.dataset.precio = precioFinal;
+            } else {
+                btnAddCart.disabled = true;
+                precioDiv.textContent = '';
+            }
+        }
+
+        btnAddCart.addEventListener('click', function() {
+            const producto = submenu.dataset.producto;
+            const relleno = rellenoSelect.value;
+            const sabor = saborSelect.value;
+            const cobertura = coberturaSelect.value;
+            const precio = parseInt(btnAddCart.dataset.precio);
+            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
+            agregarAlCarrito(producto, precio, detalles);
+            submenu.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
