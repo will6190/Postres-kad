@@ -240,19 +240,19 @@
         <div id="submenu-container">
             <h3 id="submenu-titulo"></h3>
             <form id="submenu-opciones">
-                <label id="relleno-label">
+                <label id="relleno-label" style="display: none;">
                     Relleno (opcional):
                     <select id="relleno-select">
                         <option value="">Sin relleno</option>
                     </select>
                 </label>
-                <label id="sabor-label">
+                <label id="sabor-label" style="display: none;">
                     Sabor:
                     <select id="sabor-select">
                         <option value="">Selecciona un sabor</option>
                     </select>
                 </label>
-                <label id="cobertura-label">
+                <label id="cobertura-label" style="display: none;">
                     Cobertura (opcional):
                     <select id="cobertura-select">
                         <option value="">Sin cobertura</option>
@@ -377,9 +377,9 @@
             },
             "Galletas decoradas (paquete)": {
                 base: 60,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
+                // For items without specific 'relleno', 'sabor', or 'cobertura' options,
+                // define them as empty arrays or with a "Sin" option
+                relleno: [{ nombre: "Sin relleno", precio: 0 }],
                 sabor: [
                     { nombre: "Vainilla", precio: 3 },
                     { nombre: "Mantequilla", precio: 4 },
@@ -412,9 +412,7 @@
             },
             "Carlota (por rebanada)": {
                 base: 45,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
+                relleno: [{ nombre: "Sin relleno", precio: 0 }],
                 sabor: [
                     { nombre: "Limón", precio: 0 },
                     { nombre: "Mango", precio: 5 },
@@ -512,10 +510,12 @@
             saborLabel.style.display = 'none';
             coberturaLabel.style.display = 'none';
             
-            // Llenar selects con opciones y precios
-            if (opciones[producto].relleno && opciones[producto].relleno.length > 0) {
+            const productoOpciones = opciones[producto];
+
+            // Llenar selects con opciones y precios, and show labels if options exist
+            if (productoOpciones.relleno && productoOpciones.relleno.length > 0) {
                 rellenoLabel.style.display = 'block';
-                opciones[producto].relleno.forEach(opt => {
+                productoOpciones.relleno.forEach(opt => {
                     const o = document.createElement('option');
                     o.value = opt.nombre;
                     o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
@@ -523,9 +523,9 @@
                 });
             }
 
-            if (opciones[producto].sabor && opciones[producto].sabor.length > 0) {
+            if (productoOpciones.sabor && productoOpciones.sabor.length > 0) {
                 saborLabel.style.display = 'block';
-                opciones[producto].sabor.forEach(opt => {
+                productoOpciones.sabor.forEach(opt => {
                     const o = document.createElement('option');
                     o.value = opt.nombre;
                     o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
@@ -533,15 +533,9 @@
                 });
             }
 
-            if (opciones[producto].cobertura && opciones[producto].cobertura.length > 0) {
+            if (productoOpciones.cobertura && productoOpciones.cobertura.length > 0) {
                 coberturaLabel.style.display = 'block';
-                opciones[producto].cobertura.forEach(opt => {
+                productoOpciones.cobertura.forEach(opt => {
                     const o = document.createElement('option');
                     o.value = opt.nombre;
-                    o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
-                    coberturaSelect.appendChild(o);
-                });
-            }
-
-            // Reset
-            btnAddCar
+ 
