@@ -235,24 +235,24 @@
             <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
             <tr><td>Dona</td><td>$20 MXN</td></tr>
             <tr><td>Carlota (por rebanada)</td><td>$45 MXN</td></tr>
-            <tr><td>Pastel para diabéticos (por rebanada)</td><td>$70 MXN</td></tr>
+            <tr><td>Pastel para diabéticos (por rebanada)</td><td>$60 MXN</td></tr>
         </table>
         <div id="submenu-container">
             <h3 id="submenu-titulo"></h3>
             <form id="submenu-opciones">
-                <label id="relleno-label" style="display: none;">
+                <label>
                     Relleno (opcional):
                     <select id="relleno-select">
                         <option value="">Sin relleno</option>
                     </select>
                 </label>
-                <label id="sabor-label" style="display: none;">
+                <label>
                     Sabor:
                     <select id="sabor-select">
                         <option value="">Selecciona un sabor</option>
                     </select>
                 </label>
-                <label id="cobertura-label" style="display: none;">
+                <label>
                     Cobertura (opcional):
                     <select id="cobertura-select">
                         <option value="">Sin cobertura</option>
@@ -271,9 +271,6 @@
             <img src="cupcake.jpg" alt="Cupcakes con betún rosa y confites">
             <img src="pastel.jpg" alt="Pastel con fresas decorado">
             <img src="galletas.jpg" alt="Galletas con chispas de chocolate">
-            <img src="dona.jpg" alt="Donas variadas con glaseado">
-            <img src="carlota.jpg" alt="Carlota de limón decorada">
-            <img src="pastel-diabeticos.jpg" alt="Pastel para diabéticos sin azúcar">
         </div>
     </div>
 
@@ -377,9 +374,9 @@
             },
             "Galletas decoradas (paquete)": {
                 base: 60,
-                // For items without specific 'relleno', 'sabor', or 'cobertura' options,
-                // define them as empty arrays or with a "Sin" option
-                relleno: [{ nombre: "Sin relleno", precio: 0 }],
+                relleno: [
+                    { nombre: "Sin relleno", precio: 0 }
+                ],
                 sabor: [
                     { nombre: "Vainilla", precio: 3 },
                     { nombre: "Mantequilla", precio: 4 },
@@ -391,53 +388,58 @@
                     { nombre: "Chocolate", precio: 6 }
                 ]
             },
-            "Dona": {
+            "Dona": { // Nueva entrada para Dona
                 base: 20,
                 relleno: [
                     { nombre: "Sin relleno", precio: 0 },
                     { nombre: "Crema pastelera", precio: 5 },
-                    { nombre: "Mermelada de fresa", precio: 4 }
+                    { nombre: "Chocolate", precio: 7 },
+                    { nombre: "Mermelada de fresa", precio: 6 }
                 ],
-                sabor: [
-                    { nombre: "Clásica", precio: 0 },
-                    { nombre: "Chocolate", precio: 3 },
-                    { nombre: "Fresa", precio: 3 }
-                ],
-                cobertura: [
-                    { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Glaseado", precio: 3 },
+                sabor: [ // Para donas, "sabor" puede referirse a la masa o glaseado principal
+                    { nombre: "Clásica azucarada", precio: 2 },
                     { nombre: "Chocolate", precio: 4 },
-                    { nombre: "Azúcar glass", precio: 2 }
-                ]
-            },
-            "Carlota (por rebanada)": {
-                base: 45,
-                relleno: [{ nombre: "Sin relleno", precio: 0 }],
-                sabor: [
-                    { nombre: "Limón", precio: 0 },
-                    { nombre: "Mango", precio: 5 },
-                    { nombre: "Fresa", precio: 5 }
+                    { nombre: "Maple", precio: 5 }
                 ],
-                cobertura: [
+                cobertura: [ // Toppings o glaseados adicionales
                     { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Crema batida", precio: 7 }
+                    { nombre: "Glaseado simple", precio: 3 },
+                    { nombre: "Chispas de chocolate", precio: 4 },
+                    { nombre: "Cobertura de chocolate", precio: 6 }
                 ]
             },
-            "Pastel para diabéticos (por rebanada)": {
-                base: 70,
+            "Carlota (por rebanada)": { // Nueva entrada para Carlota
+                base: 45,
+                relleno: [ // Las carlotas no suelen tener "relleno" en el sentido tradicional, pero mantenemos la estructura
+                    { nombre: "Sin relleno adicional", precio: 0 }
+                ],
+                sabor: [ // Sabor principal de la carlota
+                    { nombre: "Limón", precio: 5 },
+                    { nombre: "Fresa", precio: 7 },
+                    { nombre: "Mango", precio: 8 }
+                ],
+                cobertura: [ // Puede ser un topping o decoración
+                    { nombre: "Sin cobertura", precio: 0 },
+                    { nombre: "Merengue ligero", precio: 6 },
+                    { nombre: "Frutas frescas de temporada", precio: 10 }
+                ]
+            },
+            "Pastel para diabéticos (por rebanada)": { // Nueva entrada para Pastel para diabéticos
+                base: 60,
                 relleno: [
                     { nombre: "Sin relleno", precio: 0 },
-                    { nombre: "Crema sin azúcar", precio: 10 },
-                    { nombre: "Frutos rojos sin azúcar", precio: 12 }
+                    { nombre: "Mousse de frutos rojos (sin azúcar)", precio: 10 },
+                    { nombre: "Crema de vainilla (sin azúcar)", precio: 12 }
                 ],
-                sabor: [
-                    { nombre: "Vainilla sin azúcar", precio: 8 },
-                    { nombre: "Chocolate sin azúcar", precio: 10 }
+                sabor: [ // Sabores de bizcocho adaptados
+                    { nombre: "Vainilla (endulzado con stevia)", precio: 8 },
+                    { nombre: "Chocolate amargo (endulzado con eritritol)", precio: 10 },
+                    { nombre: "Zanahoria y nuez (sin azúcar añadida)", precio: 12 }
                 ],
-                cobertura: [
+                cobertura: [ // Coberturas adaptadas
                     { nombre: "Sin cobertura", precio: 0 },
-                    { nombre: "Crema batida sin azúcar", precio: 8 },
-                    { nombre: "Chocolate amargo sin azúcar", precio: 10 }
+                    { nombre: "Ganache de chocolate amargo (sin azúcar)", precio: 15 },
+                    { nombre: "Crema batida ligera (sin azúcar)", precio: 12 }
                 ]
             }
         };
@@ -478,7 +480,13 @@
             fila.style.cursor = 'pointer';
             fila.addEventListener('click', () => {
                 const nombre = fila.cells[0].textContent;
-                mostrarSubmenu(nombre);
+                if (opciones[nombre]) { // Verificar que el producto exista en las opciones
+                    mostrarSubmenu(nombre);
+                } else {
+                    console.warn("Producto no encontrado en las opciones:", nombre);
+                    // Opcionalmente, podrías ocultar el submenú o mostrar un mensaje
+                    submenu.style.display = 'none';
+                }
             });
         });
 
@@ -491,51 +499,35 @@
         const btnAddCart = document.getElementById('btn-add-cart');
         const precioDiv = document.getElementById('submenu-precio');
 
-        const rellenoLabel = document.getElementById('relleno-label');
-        const saborLabel = document.getElementById('sabor-label');
-        const coberturaLabel = document.getElementById('cobertura-label');
-
-
         function mostrarSubmenu(producto) {
             submenu.style.display = 'block';
             titulo.textContent = `Personaliza tu ${producto}`;
-            
             // Limpiar selects
             limpiarSelect(rellenoSelect);
             limpiarSelect(saborSelect);
             limpiarSelect(coberturaSelect);
 
-            // Hide all labels by default
-            rellenoLabel.style.display = 'none';
-            saborLabel.style.display = 'none';
-            coberturaLabel.style.display = 'none';
-            
             const productoOpciones = opciones[producto];
 
-            // Llenar selects con opciones y precios, and show labels if options exist
-            if (productoOpciones.relleno && productoOpciones.relleno.length > 0) {
-                rellenoLabel.style.display = 'block';
-                productoOpciones.relleno.forEach(opt => {
-                    const o = document.createElement('option');
-                    o.value = opt.nombre;
-                    o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
-                    rellenoSelect.appendChild(o);
-                });
-            }
-
-            if (productoOpciones.sabor && productoOpciones.sabor.length > 0) {
-                saborLabel.style.display = 'block';
-                productoOpciones.sabor.forEach(opt => {
-                    const o = document.createElement('option');
-                    o.value = opt.nombre;
-                    o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
-                    saborSelect.appendChild(o);
-                });
-            }
-
-            if (productoOpciones.cobertura && productoOpciones.cobertura.length > 0) {
-                coberturaLabel.style.display = 'block';
-                productoOpciones.cobertura.forEach(opt => {
-                    const o = document.createElement('option');
-                    o.value = opt.nombre;
- 
+            // Llenar selects con opciones y precios
+            productoOpciones.relleno.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.nombre;
+                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                rellenoSelect.appendChild(o);
+            });
+            productoOpciones.sabor.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.nombre;
+                o.textContent = `${opt.nombre} (+ $${opt.precio})`; // Sabor siempre tiene precio > 0 o es el base
+                saborSelect.appendChild(o);
+            });
+            productoOpciones.cobertura.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.nombre;
+                o.textContent = `${opt.nombre} ${opt.precio > 0 ? `(+ $${opt.precio})` : ''}`;
+                coberturaSelect.appendChild(o);
+            });
+            // Reset
+            btnAddCart.disabled = true;
+           
