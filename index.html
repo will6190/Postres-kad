@@ -257,10 +257,12 @@
     <div class="section" id="galeria">
         <h2>Galería de Fotos</h2>
         <div class="gallery">
-            <img src="IMG-20250528-WA0017.jpg" alt="Brownie con helado">
-            <img src="IMG-20250528-WA0013(1).jpg" alt="Cupcakes con betún rosa y confites">
-            <img src="IMG-20250528-WA0015.jpg" alt="Cupcakes de chocolate con Oreo">
-            <img src="IMG-20250528-WA0011(1).jpg" alt="Galletas con chispas de chocolate">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Pastel decorado de frutos rojos">
+            <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" alt="Cupcakes decorados">
+            <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=600&q=80" alt="Brownie de chocolate">
+            <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=600&q=80" alt="Galletas decoradas">
+            <img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&w=600&q=80" alt="Pastel de cumpleaños">
+            <img src="https://images.pexels.com/photos/14105/pexels-photo-14105.jpeg?auto=compress&w=600&q=80" alt="Cupcakes de colores">
         </div>
     </div>
 
@@ -528,17 +530,4 @@
             const relleno = rellenoSelect.value;
             const sabor = saborSelect.value;
             const cobertura = coberturaSelect.value;
-            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
-            const precio = calcularPrecio(producto, relleno, sabor, cobertura);
-            agregarAlCarrito(producto, precio, detalles);
-            submenu.style.display = 'none';
-        });
-
-        // Cerrar el submenú si se hace clic fuera de él
-        document.addEventListener('click', function(e) {
-            if (
-                submenu.style.display === 'block' &&
-                !submenu.contains(e.target) &&
-                !e.target.closest('.menu-table')
-            ) {
-                subm
+            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${c
