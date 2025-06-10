@@ -1,385 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Postres KAD</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carrito Dinámico</title>
     <style>
         body {
-            background-color: #fff0f5;
-            font-family: 'Quicksand', sans-serif;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-        header {
-            background: linear-gradient(to right, #f78fb3, #f8a5c2);
-            padding: 25px 10px;
-            text-align: center;
-            font-size: 3em;
-            font-family: 'Pacifico', cursive;
-            color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+        #productos button {
+            margin-left: 10px;
         }
-        nav {
-            background-color: #ffd6e0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 12px 0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        #carrito {
+            margin-top: 30px;
         }
-        nav a {
-            color: #d63384;
-            padding: 12px 18px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background 0.3s, transform 0.3s;
-        }
-        nav a:hover {
-            background-color: #f8a5c2;
-            border-radius: 12px;
-            transform: scale(1.05);
-            color: white;
-        }
-        .section {
-            padding: 50px 20px;
-            max-width: 960px;
-            margin: 40px auto;
-            background: #fff;
-            border-radius: 25px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            animation: fadeIn 0.8s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h2 {
-            color: #d63384;
-            text-align: center;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        img {
-            max-width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        img:hover {
-            transform: scale(1.03);
-        }
-        p, li {
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        ul {
-            list-style-type: square;
-            padding-left: 25px;
-        }
-        .icon {
-            margin-right: 10px;
-            color: #d63384;
-        }
-        footer {
-            background-color: #f8a5c2;
-            color: white;
-            text-align: center;
-            padding: 25px;
-            font-size: 1.1em;
-            margin-top: 50px;
-            border-top: 5px solid #d63384;
-            box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-        }
-        .menu-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 1.05em;
-        }
-        .menu-table th, .menu-table td {
-            border: 1px solid #ffd6e0;
-            padding: 12px;
-            text-align: left;
-        }
-        .menu-table th {
-            background-color: #ffe3ec;
-            color: #d63384;
-        }
-        .menu-table td {
-            background-color: #fff8fb;
-        }
-        a {
-            color: #d63384;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        /* Estilos del carrito */
-        #carrito-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #fff0f5;
-            border: 2px solid #f8a5c2;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 15px 20px;
-            z-index: 100;
-            width: 260px;
-            font-size: 0.95em;
-        }
-        #carrito-container h3 {
-            margin-top: 0;
-            color: #d63384;
-        }
-        #carrito-container ul {
-            list-style: none;
-            padding-left: 0;
-            max-height: 150px;
-            overflow-y: auto;
+        #carrito-lista li {
             margin-bottom: 10px;
         }
-        #carrito-container li {
-            margin-bottom: 6px;
-            color: #333;
-        }
-        #carrito-container p {
-            margin: 0;
-            font-weight: bold;
-        }
-        /* Estilos del submenú */
-        #submenu-container {
-            display: none;
-            margin-top: 20px;
-            background: #fff8fb;
-            border: 2px solid #f8a5c2;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(216,51,132,0.07);
-            max-width: 400px;
-        }
-        #submenu-titulo {
-            color: #d63384;
-            margin-bottom: 10px;
-        }
-        #submenu-opciones label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        #submenu-opciones select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border: 1px solid #f8a5c2;
-        }
-        #btn-add-cart {
-            background: #d63384;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 18px;
-            color: #fff;
-            font-weight: bold;
+        #carrito-lista button {
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
-        }
-        #btn-add-cart:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        #submenu-precio {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #d63384;
         }
     </style>
 </head>
 <body>
-    <header>POSTRES KAD</header>
-    <nav>
-        <a href="#menu"><i class="fas fa-birthday-cake icon"></i>Menú</a>
-        <a href="#galeria"><i class="fas fa-image icon"></i>Galería</a>
-        <a href="#mision"><i class="fas fa-bullseye icon"></i>Misión</a>
-        <a href="#vision"><i class="fas fa-eye icon"></i>Visión</a>
-        <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
-        <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
-    </nav>
-    <div class="section" id="menu">
-        <h2>Menú de Postres</h2>
-        <table class="menu-table">
-            <tr><th>Producto</th><th>Precio</th></tr>
-            <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
-            <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
-            <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
-            <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
-        </table>
-        <div id="submenu-container">
-            <h3 id="submenu-titulo"></h3>
-            <form id="submenu-opciones">
-                <label>
-                    Relleno:
-                    <select id="relleno-select">
-                        <option value="">Selecciona un relleno</option>
-                    </select>
-                </label>
-                <label>
-                    Sabor:
-                    <select id="sabor-select">
-                        <option value="">Selecciona un sabor</option>
-                    </select>
-                </label>
-                <label>
-                    Cobertura:
-                    <select id="cobertura-select">
-                        <option value="">Selecciona una cobertura</option>
-                    </select>
-                </label>
-                <div id="submenu-precio"></div>
-                <button type="button" id="btn-add-cart" disabled>Agregar al carrito</button>
-            </form>
+
+    <h1>Productos</h1>
+    <div id="productos">
+        <div>
+            <span>Producto A - $100 MXN</span>
+            <button onclick="agregarAlCarrito('Producto A', 100, 'Descripción del Producto A')">Agregar</button>
+        </div>
+        <div>
+            <span>Producto B - $200 MXN</span>
+            <button onclick="agregarAlCarrito('Producto B', 200, 'Descripción del Producto B')">Agregar</button>
+        </div>
+        <div>
+            <span>Producto C - $150 MXN</span>
+            <button onclick="agregarAlCarrito('Producto C', 150, 'Descripción del Producto C')">Agregar</button>
         </div>
     </div>
 
-    <div class="section" id="galeria">
-        <h2>Galería de Fotos</h2>
-        <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Pastel decorado de frutos rojos">
-            <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=600&q=80" alt="Cupcakes decorados">
-            <img src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=600&q=80" alt="Brownie de chocolate">
-            <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=600&q=80" alt="Galletas decoradas">
-            <img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&w=600&q=80" alt="Pastel de cumpleaños">
-            <img src="https://images.pexels.com/photos/14105/pexels-photo-14105.jpeg?auto=compress&w=600&q=80" alt="Cupcakes de colores">
-        </div>
-    </div>
-
-    <div class="section" id="mision">
-        <h2>Misión</h2>
-        <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
-    </div>
-
-    <div class="section" id="vision">
-        <h2>Visión</h2>
-        <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
-    </div>
-
-    <div class="section" id="valores">
-        <h2>Valores</h2>
-        <ul>
-            <li>Calidad</li>
-            <li>Creatividad</li>
-            <li>Compromiso</li>
-            <li>Pasión</li>
-            <li>Amor por los detalles</li>
+    <section id="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="carrito-lista">
+            <li>El carrito está vacío.</li>
         </ul>
-    </div>
-
-    <div class="section" id="contacto">
-        <h2>Contacto y Redes Sociales</h2>
-        <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank">Postres Kad</a></p>
-        <p><i class="fab fa-instagram icon"></i><strong>Instagram:</strong> <a href="https://www.instagram.com/postres_kad" target="_blank">@postres_kad</a></p>
-        <p><i class="fas fa-envelope icon"></i><strong>Correo:</strong> postreakad@gmail.com</p>
-        <p><i class="fas fa-phone icon"></i><strong>Teléfono:</strong> +52 5648184476</p>
-        <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingos de 12:00 a 20:00 hrs</p>
-        <p><strong>Frase:</strong> "En Postres Kad, cada bocado es una experiencia única."</p>
-    </div>
-
-    <footer>
-        &copy; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÉRREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÍNEZ HERNÁNDEZ
-    </footer>
-
-    <div id="carrito-container">
-        <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
-        <ul id="carrito-lista"></ul>
-        <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
-    </div>
+        <p><strong>Total: $<span id="total">0</span> MXN</strong></p>
+    </section>
 
     <script>
-        // Opciones y precios de cada producto
-        const opciones = {
-            "Pastel decorado (por rebanada)": {
-                base: 50,
-                relleno: [
-                    { nombre: "Crema pastelera", precio: 8 },
-                    { nombre: "Chocolate", precio: 10 },
-                    { nombre: "Mermelada de fresa", precio: 9 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla", precio: 5 },
-                    { nombre: "Chocolate", precio: 7 },
-                    { nombre: "Red Velvet", precio: 12 }
-                ],
-                cobertura: [
-                    { nombre: "Fondant", precio: 15 },
-                    { nombre: "Chantilly", precio: 10 },
-                    { nombre: "Chocolate", precio: 12 }
-                ]
-            },
-            "Cupcake decorado": {
-                base: 25,
-                relleno: [
-                    { nombre: "Nutella", precio: 7 },
-                    { nombre: "Dulce de leche", precio: 6 },
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla", precio: 3 },
-                    { nombre: "Zanahoria", precio: 5 },
-                    { nombre: "Chocolate", precio: 4 }
-                ],
-                cobertura: [
-                    { nombre: "Betún de mantequilla", precio: 6 },
-                    { nombre: "Fondant", precio: 8 },
-                    { nombre: "Chantilly", precio: 5 }
-                ]
-            },
-            "Brownie de chocolate": {
-                base: 30,
-                relleno: [
-                    { nombre: "Nuez", precio: 5 },
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
-                sabor: [
-                    { nombre: "Chocolate clásico", precio: 4 },
-                    { nombre: "Chocolate con menta", precio: 6 }
-                ],
-                cobertura: [
-                    { nombre: "Chocolate derretido", precio: 6 },
-                    { nombre: "Sin cobertura", precio: 0 }
-                ]
-            },
-            "Galletas decoradas (paquete)": {
-                base: 60,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla", precio: 3 },
-                    { nombre: "Mantequilla", precio: 4 },
-                    { nombre: "Chocolate", precio: 5 }
-                ],
-                cobertura: [
-                    { nombre: "Glaseado", precio: 5 },
-                    { nombre: "Chocolate", precio: 6 },
-                    { nombre: "Sin cobertura", precio: 0 }
-                ]
-            }
-        };
-
-        // Carrito y lógica mejorada
+        // Carrito y lógica MEJORADA
         const carrito = [];
         const lista = document.getElementById('carrito-lista');
         const totalSpan = document.getElementById('total');
@@ -394,7 +65,7 @@
             actualizarCarrito();
         }
 
-        function quitarDelCarrito(index) {
+        function eliminarDelCarrito(index) {
             carrito.splice(index, 1);
             actualizarCarrito();
         }
@@ -402,7 +73,7 @@
         function cambiarCantidad(index, delta) {
             carrito[index].cantidad += delta;
             if (carrito[index].cantidad <= 0) {
-                quitarDelCarrito(index);
+                eliminarDelCarrito(index);
             } else {
                 actualizarCarrito();
             }
@@ -411,123 +82,32 @@
         function actualizarCarrito() {
             lista.innerHTML = '';
             let total = 0;
-            carrito.forEach((item, idx) => {
-                total += item.precio * item.cantidad;
+            if (carrito.length === 0) {
                 const li = document.createElement('li');
-                li.innerHTML = `
-                    <strong>${item.nombre}</strong> x${item.cantidad}
-                    <button onclick="cambiarCantidad(${idx}, 1)">+</button>
-                    <button onclick="cambiarCantidad(${idx}, -1)">-</button>
-                    <button onclick="quitarDelCarrito(${idx})" style="color:red;">Eliminar</button>
-                    <br><small>${item.detalles}</small>
-                    <br>$${item.precio * item.cantidad} MXN
-                `;
+                li.textContent = 'El carrito está vacío.';
                 lista.appendChild(li);
-            });
+            } else {
+                carrito.forEach((item, i) => {
+                    total += item.precio * item.cantidad;
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <strong>${item.nombre}</strong> x${item.cantidad}
+                        <button style="margin-left:6px;" onclick="cambiarCantidad(${i},1)">+</button>
+                        <button onclick="cambiarCantidad(${i},-1)">-</button>
+                        <button onclick="eliminarDelCarrito(${i})" style="color:red;">&times;</button><br>
+                        <small>${item.detalles}</small><br>
+                        $${item.precio * item.cantidad} MXN
+                    `;
+                    lista.appendChild(li);
+                });
+            }
             totalSpan.textContent = total;
         }
 
-        // Exponer funciones al ámbito global para los botones inline
+        // Expón las funciones para los botones inline
+        window.eliminarDelCarrito = eliminarDelCarrito;
         window.cambiarCantidad = cambiarCantidad;
-        window.quitarDelCarrito = quitarDelCarrito;
+    </script>
 
-        // Submenú dinámico
-        const filas = document.querySelectorAll('.menu-table tr');
-        filas.forEach((fila, index) => {
-            if (index === 0) return; // Encabezado
-            fila.style.cursor = 'pointer';
-            fila.addEventListener('click', () => {
-                const nombre = fila.cells[0].textContent;
-                mostrarSubmenu(nombre);
-            });
-        });
-
-        // Submenú
-        const submenu = document.getElementById('submenu-container');
-        const titulo = document.getElementById('submenu-titulo');
-        const rellenoSelect = document.getElementById('relleno-select');
-        const saborSelect = document.getElementById('sabor-select');
-        const coberturaSelect = document.getElementById('cobertura-select');
-        const btnAddCart = document.getElementById('btn-add-cart');
-        const precioDiv = document.getElementById('submenu-precio');
-
-        function limpiarSelect(select) {
-            while (select.options.length > 1) select.remove(1);
-        }
-
-        function mostrarSubmenu(producto) {
-            submenu.style.display = 'block';
-            titulo.textContent = `Personaliza tu ${producto}`;
-            // Limpiar selects
-            limpiarSelect(rellenoSelect);
-            limpiarSelect(saborSelect);
-            limpiarSelect(coberturaSelect);
-            // Llenar selects con opciones y precios
-            opciones[producto].relleno.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
-                rellenoSelect.appendChild(o);
-            });
-            opciones[producto].sabor.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
-                saborSelect.appendChild(o);
-            });
-            opciones[producto].cobertura.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
-                coberturaSelect.appendChild(o);
-            });
-            // Reset selects y precio
-            rellenoSelect.selectedIndex = 0;
-            saborSelect.selectedIndex = 0;
-            coberturaSelect.selectedIndex = 0;
-            precioDiv.textContent = '';
-            btnAddCart.disabled = true;
-
-            // Guardar producto actual
-            submenu.dataset.producto = producto;
-        }
-
-        function calcularPrecio(producto, relleno, sabor, cobertura) {
-            let total = opciones[producto].base;
-            if (relleno) total += opciones[producto].relleno.find(o => o.nombre === relleno).precio;
-            if (sabor) total += opciones[producto].sabor.find(o => o.nombre === sabor).precio;
-            if (cobertura) total += opciones[producto].cobertura.find(o => o.nombre === cobertura).precio;
-            return total;
-        }
-
-        function opcionesSeleccionadas() {
-            return (
-                rellenoSelect.value &&
-                saborSelect.value &&
-                coberturaSelect.value
-            );
-        }
-
-        [rellenoSelect, saborSelect, coberturaSelect].forEach(select => {
-            select.addEventListener('change', () => {
-                if (opcionesSeleccionadas()) {
-                    const producto = submenu.dataset.producto;
-                    const relleno = rellenoSelect.value;
-                    const sabor = saborSelect.value;
-                    const cobertura = coberturaSelect.value;
-                    const precio = calcularPrecio(producto, relleno, sabor, cobertura);
-                    precioDiv.textContent = `Precio: $${precio} MXN`;
-                    btnAddCart.disabled = false;
-                } else {
-                    precioDiv.textContent = '';
-                    btnAddCart.disabled = true;
-                }
-            });
-        });
-
-        btnAddCart.addEventListener('click', () => {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value;
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value;
-            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${c
+</body>
+</html>
