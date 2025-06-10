@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -261,25 +260,70 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
     <div class="section" id="galeria">
         <h2>Galería de Fotos</h2>
         <div class="gallery">
-            <img src="IMG-20250528-WA0017.jpg" alt="Brownie con helado">
-            <img src="IMG-20250528-WA0013(1).jpg" alt="Cupcakes con betún rosa y confites">
-            <img src="IMG-20250528-WA0015.jpg" alt="Cupcakes de chocolate con Oreo">
-            <img src="IMG-20250528-WA0011(1).jpg" alt="Galletas con chispas de chocolate">
+            <img src="C:\Users\EQ00\Documents\MICRO\Brownie.jpg" alt="Brownie con helado">
+            <img src="C:\Users\EQ00\Documents\MICRO\Cupcake.jpg" alt="Cupcakes con betún rosa y confites">
+            <img src="C:\Users\EQ00\Documents\MICRO\Oreo.jpg" alt="Cupcakes de chocolate con Oreo">
+            <img src="C:\Users\EQ00\Documents\MICRO\Galleta.jpg" alt="Galletas con chispas de chocolate">
         </div>
     </div>
+
+
+
+
+
+
+
+
 
     <div class="section" id="mision">
         <h2>Misión</h2>
         <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="section" id="vision">
         <h2>Visión</h2>
         <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="section" id="valores">
         <h2>Valores</h2>
@@ -292,9 +336,20 @@
         </ul>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
     <div class="section" id="contacto">
         <h2>Contacto y Redes Sociales</h2>
-        <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1LoqwcWUyC" target="_blank">Postres Kad</a></p>
+        <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1D5iAHiMGn/?mibextid=wwXIfr" target="_blank">Postres Kad</a></p>
         <p><i class="fab fa-instagram icon"></i><strong>Instagram:</strong> <a href="https://www.instagram.com/postres_kad" target="_blank">@postres_kad</a></p>
         <p><i class="fas fa-envelope icon"></i><strong>Correo:</strong> postreakad@gmail.com</p>
         <p><i class="fas fa-phone icon"></i><strong>Teléfono:</strong> +52 5648184476</p>
@@ -302,9 +357,17 @@
         <p><strong>Frase:</strong> "En Postres Kad, cada bocado es una experiencia única."</p>
     </div>
 
+
+
+
+
+
+
+
     <footer>
-        &copy; 2025 Postres Kad - Diseñado con amor
-    </footer>
+    &copy; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÉRREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÍNEZ HERNÁNDEZ
+
+</footer>
 
     <div id="carrito-container">
         <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
@@ -464,7 +527,7 @@
 
         function mostrarSubmenu(producto) {
             submenu.style.display = 'block';
-            titulo.textContent = `Personaliza tu ${producto}`;
+            titulo.textContent = Personaliza tu ${producto};
             // Limpiar selects
             limpiarSelect(rellenoSelect);
             limpiarSelect(saborSelect);
@@ -473,19 +536,19 @@
             opciones[producto].relleno.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                o.textContent = ${opt.nombre} (+$${opt.precio});
                 rellenoSelect.appendChild(o);
             });
             opciones[producto].sabor.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                o.textContent = ${opt.nombre} (+$${opt.precio});
                 saborSelect.appendChild(o);
             });
             opciones[producto].cobertura.forEach(opt => {
                 const o = document.createElement('option');
                 o.value = opt.nombre;
-                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                o.textContent = ${opt.nombre} (+$${opt.precio});
                 coberturaSelect.appendChild(o);
             });
             // Reset
@@ -525,7 +588,7 @@
                 coberturaSelect.value
             ) {
                 const precio = calcularPrecio(producto);
-                precioDiv.textContent = `Precio: $${precio} MXN`;
+                precioDiv.textContent = Precio: $${precio} MXN;
                 btnAddCart.disabled = false;
             } else {
                 precioDiv.textContent = '';
@@ -539,7 +602,7 @@
 
         btnAddCart.addEventListener('click', function () {
             const producto = btnAddCart.dataset.producto;
-            const detalles = `Relleno: ${rellenoSelect.value}, Sabor: ${saborSelect.value}, Cobertura: ${coberturaSelect.value}`;
+            const detalles = Relleno: ${rellenoSelect.value}, Sabor: ${saborSelect.value}, Cobertura: ${coberturaSelect.value};
             const precio = calcularPrecio(producto);
             agregarAlCarrito(producto, precio, detalles);
             submenu.style.display = 'none';
