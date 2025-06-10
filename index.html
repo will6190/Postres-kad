@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* ... Tus estilos originales ... */
         body {
             background-color: #fff0f5;
             font-family: 'Quicksand', sans-serif;
@@ -224,7 +225,6 @@
         <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
         <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
     </nav>
-
     <div class="section" id="menu">
         <h2>Menú de Postres</h2>
         <table class="menu-table">
@@ -384,7 +384,7 @@
             }
         };
 
-        // Carrito y lógica
+        // Carrito y lógica MEJORADA
         const carrito = [];
         const lista = document.getElementById('carrito-lista');
         const totalSpan = document.getElementById('total');
@@ -399,19 +399,48 @@
             actualizarCarrito();
         }
 
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function cambiarCantidad(index, delta) {
+            carrito[index].cantidad += delta;
+            if (carrito[index].cantidad <= 0) {
+                eliminarDelCarrito(index);
+            } else {
+                actualizarCarrito();
+            }
+        }
+
         function actualizarCarrito() {
             lista.innerHTML = '';
             let total = 0;
-            carrito.forEach(item => {
-                total += item.precio * item.cantidad;
+            if (carrito.length === 0) {
                 const li = document.createElement('li');
-                li.innerHTML = `<strong>${item.nombre}</strong> x${item.cantidad}<br>
-                <small>${item.detalles}</small><br>
-                $${item.precio * item.cantidad} MXN`;
+                li.textContent = 'El carrito está vacío.';
                 lista.appendChild(li);
-            });
+            } else {
+                carrito.forEach((item, i) => {
+                    total += item.precio * item.cantidad;
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <strong>${item.nombre}</strong> x${item.cantidad}
+                        <button style="margin-left:6px;" onclick="cambiarCantidad(${i},1)">+</button>
+                        <button onclick="cambiarCantidad(${i},-1)">-</button>
+                        <button onclick="eliminarDelCarrito(${i})" style="color:red;">&times;</button><br>
+                        <small>${item.detalles}</small><br>
+                        $${item.precio * item.cantidad} MXN
+                    `;
+                    lista.appendChild(li);
+                });
+            }
             totalSpan.textContent = total;
         }
+
+        // Expón las funciones para los botones inline
+        window.eliminarDelCarrito = eliminarDelCarrito;
+        window.cambiarCantidad = cambiarCantidad;
 
         // Submenú dinámico
         const filas = document.querySelectorAll('.menu-table tr');
@@ -460,53 +489,64 @@
                 coberturaSelect.appendChild(o);
             });
             // Reset
-            btnAddCart.disabled = true;
+            rellenoSelect.selectedIndex = 0;
+            saborSelect.selectedIndex = 0;
+            coberturaSelect.selectedIndex = 0;
             precioDiv.textContent = '';
+            btnAddCart.disabled = true;
+
             // Guardar producto actual
-            submenu.dataset.producto = producto;
+            btnAddCart.dataset.producto = producto;
         }
 
         function limpiarSelect(select) {
-            while (select.options.length > 1) select.remove(1);
-            select.selectedIndex = 0;
-        }
-
-        // Habilitar botón y mostrar precio cuando todo esté seleccionado
-        [rellenoSelect, saborSelect, coberturaSelect].forEach(sel => {
-            sel.addEventListener('change', actualizarPrecioSubmenu);
-        });
-
-        function actualizarPrecioSubmenu() {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value;
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value;
-            if (relleno && sabor && cobertura) {
-                btnAddCart.disabled = false;
-                // Calcular precio
-                const base = opciones[producto].base;
-                const pRelleno = opciones[producto].relleno.find(o => o.nombre === relleno).precio;
-                const pSabor = opciones[producto].sabor.find(o => o.nombre === sabor).precio;
-                const pCobertura = opciones[producto].cobertura.find(o => o.nombre === cobertura).precio;
-                const precioFinal = base + pRelleno + pSabor + pCobertura;
-                precioDiv.textContent = `Precio final: $${precioFinal} MXN`;
-                btnAddCart.dataset.precio = precioFinal;
-            } else {
-                btnAddCart.disabled = true;
-                precioDiv.textContent = '';
+            while (select.options.length > 1) {
+                select.remove(1);
             }
         }
 
-        btnAddCart.addEventListener('click', function() {
-            const producto = submenu.dataset.producto;
-            const relleno = rellenoSelect.value;
-            const sabor = saborSelect.value;
-            const cobertura = coberturaSelect.value;
-            const precio = parseInt(btnAddCart.dataset.precio);
-            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
+        function calcularPrecio(producto) {
+            if (!opciones[producto]) return 0;
+            let precio = opciones[producto].base;
+            const relleno = opciones[producto].relleno.find(r => r.nombre === rellenoSelect.value);
+            const sabor = opciones[producto].sabor.find(s => s.nombre === saborSelect.value);
+            const cobertura = opciones[producto].cobertura.find(c => c.nombre === coberturaSelect.value);
+            if (relleno) precio += relleno.precio;
+            if (sabor) precio += sabor.precio;
+            if (cobertura) precio += cobertura.precio;
+            return precio;
+        }
+
+        function actualizarPrecioYBoton() {
+            const producto = btnAddCart.dataset.producto;
+            if (
+                rellenoSelect.value &&
+                saborSelect.value &&
+                coberturaSelect.value
+            ) {
+                const precio = calcularPrecio(producto);
+                precioDiv.textContent = `Precio: $${precio} MXN`;
+                btnAddCart.disabled = false;
+            } else {
+                precioDiv.textContent = '';
+                btnAddCart.disabled = true;
+            }
+        }
+
+        rellenoSelect.addEventListener('change', actualizarPrecioYBoton);
+        saborSelect.addEventListener('change', actualizarPrecioYBoton);
+        coberturaSelect.addEventListener('change', actualizarPrecioYBoton);
+
+        btnAddCart.addEventListener('click', function () {
+            const producto = btnAddCart.dataset.producto;
+            const detalles = `Relleno: ${rellenoSelect.value}, Sabor: ${saborSelect.value}, Cobertura: ${coberturaSelect.value}`;
+            const precio = calcularPrecio(producto);
             agregarAlCarrito(producto, precio, detalles);
             submenu.style.display = 'none';
         });
+
+        // Inicializa carrito vacío
+        actualizarCarrito();
     </script>
 </body>
 </html>
