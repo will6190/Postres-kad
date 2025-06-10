@@ -127,50 +127,19 @@
         a:hover {
             text-decoration: underline;
         }
-
-        /* Botón flotante carrito */
-        #btn-ver-carrito {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #d63384;
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            padding: 18px 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            box-shadow: 0 4px 16px rgba(216,51,132,0.15);
-            cursor: pointer;
-            z-index: 200;
-            transition: background 0.2s;
-        }
-        #btn-ver-carrito:hover {
-            background: #b52e6b;
-        }
-
-        /* Modal carrito */
-        #carrito-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.35);
-            justify-content: center;
-            align-items: center;
-        }
+        /* Estilos del carrito */
         #carrito-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: #fff0f5;
             border: 2px solid #f8a5c2;
             border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-            padding: 25px 28px 18px 28px;
-            width: 340px;
-            max-width: 95vw;
-            font-size: 1em;
-            position: relative;
-            animation: fadeIn 0.4s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            z-index: 100;
+            width: 260px;
+            font-size: 0.95em;
         }
         #carrito-container h3 {
             margin-top: 0;
@@ -179,48 +148,18 @@
         #carrito-container ul {
             list-style: none;
             padding-left: 0;
-            max-height: 180px;
+            max-height: 150px;
             overflow-y: auto;
             margin-bottom: 10px;
         }
         #carrito-container li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #333;
-            border-bottom: 1px solid #ffe3ec;
-            padding-bottom: 6px;
         }
         #carrito-container p {
             margin: 0;
             font-weight: bold;
         }
-        #cerrar-carrito {
-            position: absolute;
-            right: 15px;
-            top: 13px;
-            background: none;
-            border: none;
-            font-size: 1.7em;
-            color: #d63384;
-            cursor: pointer;
-        }
-        #carrito-container button {
-            margin-left: 2px;
-        }
-        #carrito-container .btn-finalizar {
-            background: #d63384;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 18px;
-            font-weight: bold;
-            font-size: 1em;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-        #carrito-container .btn-finalizar:hover {
-            background: #b52e6b;
-        }
-
         /* Estilos del submenú */
         #submenu-container {
             display: none;
@@ -357,21 +296,13 @@
     </div>
 
     <footer>
-        &copy; 2025 Postres Kad - Diseñado con amor
+        &copy; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÉRREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÍNEZ HERNÁNDEZ
     </footer>
 
-    <!-- BOTÓN FLOTANTE PARA VER CARRITO -->
-    <button id="btn-ver-carrito"><i class="fas fa-shopping-cart"></i> Confirmar compra</button>
-
-    <!-- MODAL DEL CARRITO -->
-    <div id="carrito-modal">
-        <div id="carrito-container">
-            <button id="cerrar-carrito" title="Cerrar">&times;</button>
-            <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
-            <ul id="carrito-lista"></ul>
-            <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
-            <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar compra</button>
-        </div>
+    <div id="carrito-container">
+        <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
+        <ul id="carrito-lista"></ul>
+        <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
     </div>
 
     <script>
@@ -446,7 +377,7 @@
             }
         };
 
-        // Carrito y lógica MEJORADA
+        // Carrito y lógica mejorada
         const carrito = [];
         const lista = document.getElementById('carrito-lista');
         const totalSpan = document.getElementById('total');
@@ -461,7 +392,7 @@
             actualizarCarrito();
         }
 
-        function eliminarDelCarrito(index) {
+        function quitarDelCarrito(index) {
             carrito.splice(index, 1);
             actualizarCarrito();
         }
@@ -469,7 +400,7 @@
         function cambiarCantidad(index, delta) {
             carrito[index].cantidad += delta;
             if (carrito[index].cantidad <= 0) {
-                eliminarDelCarrito(index);
+                quitarDelCarrito(index);
             } else {
                 actualizarCarrito();
             }
@@ -478,50 +409,25 @@
         function actualizarCarrito() {
             lista.innerHTML = '';
             let total = 0;
-            if (carrito.length === 0) {
+            carrito.forEach((item, idx) => {
+                total += item.precio * item.cantidad;
                 const li = document.createElement('li');
-                li.textContent = 'El carrito está vacío.';
+                li.innerHTML = `
+                    <strong>${item.nombre}</strong> x${item.cantidad}
+                    <button onclick="cambiarCantidad(${idx}, 1)">+</button>
+                    <button onclick="cambiarCantidad(${idx}, -1)">-</button>
+                    <button onclick="quitarDelCarrito(${idx})" style="color:red;">Eliminar</button>
+                    <br><small>${item.detalles}</small>
+                    <br>$${item.precio * item.cantidad} MXN
+                `;
                 lista.appendChild(li);
-            } else {
-                carrito.forEach((item, i) => {
-                    total += item.precio * item.cantidad;
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <strong>${item.nombre}</strong> x${item.cantidad}
-                        <button onclick="cambiarCantidad(${i},1)">+</button>
-                        <button onclick="cambiarCantidad(${i},-1)">-</button>
-                        <button onclick="eliminarDelCarrito(${i})" style="color:red;">&times;</button><br>
-                        <small>${item.detalles}</small><br>
-                        $${item.precio * item.cantidad} MXN
-                    `;
-                    lista.appendChild(li);
-                });
-            }
+            });
             totalSpan.textContent = total;
         }
 
-        // Expón las funciones para los botones inline
-        window.eliminarDelCarrito = eliminarDelCarrito;
+        // Exponer funciones al ámbito global para los botones inline
         window.cambiarCantidad = cambiarCantidad;
-
-        // Modal carrito
-        const btnVerCarrito = document.getElementById('btn-ver-carrito');
-        const modalCarrito = document.getElementById('carrito-modal');
-        const btnCerrarCarrito = document.getElementById('cerrar-carrito');
-
-        btnVerCarrito.addEventListener('click', () => {
-            actualizarCarrito();
-            modalCarrito.style.display = 'flex';
-        });
-        btnCerrarCarrito.addEventListener('click', () => {
-            modalCarrito.style.display = 'none';
-        });
-        // Cerrar modal al hacer clic fuera del contenedor
-        modalCarrito.addEventListener('click', (e) => {
-            if (e.target === modalCarrito) {
-                modalCarrito.style.display = 'none';
-            }
-        });
+        window.quitarDelCarrito = quitarDelCarrito;
 
         // Submenú dinámico
         const filas = document.querySelectorAll('.menu-table tr');
@@ -542,6 +448,10 @@
         const coberturaSelect = document.getElementById('cobertura-select');
         const btnAddCart = document.getElementById('btn-add-cart');
         const precioDiv = document.getElementById('submenu-precio');
+
+        function limpiarSelect(select) {
+            while (select.options.length > 1) select.remove(1);
+        }
 
         function mostrarSubmenu(producto) {
             submenu.style.display = 'block';
@@ -564,4 +474,71 @@
                 saborSelect.appendChild(o);
             });
             opciones[producto].cobertura.forEach(opt => {
-        
+                const o = document.createElement('option');
+                o.value = opt.nombre;
+                o.textContent = `${opt.nombre} (+$${opt.precio})`;
+                coberturaSelect.appendChild(o);
+            });
+            // Reset selects y precio
+            rellenoSelect.selectedIndex = 0;
+            saborSelect.selectedIndex = 0;
+            coberturaSelect.selectedIndex = 0;
+            precioDiv.textContent = '';
+            btnAddCart.disabled = true;
+
+            // Guardar producto actual
+            submenu.dataset.producto = producto;
+        }
+
+        function calcularPrecio(producto, relleno, sabor, cobertura) {
+            let total = opciones[producto].base;
+            if (relleno) total += opciones[producto].relleno.find(o => o.nombre === relleno).precio;
+            if (sabor) total += opciones[producto].sabor.find(o => o.nombre === sabor).precio;
+            if (cobertura) total += opciones[producto].cobertura.find(o => o.nombre === cobertura).precio;
+            return total;
+        }
+
+        function opcionesSeleccionadas() {
+            return (
+                rellenoSelect.value &&
+                saborSelect.value &&
+                coberturaSelect.value
+            );
+        }
+
+        [rellenoSelect, saborSelect, coberturaSelect].forEach(select => {
+            select.addEventListener('change', () => {
+                if (opcionesSeleccionadas()) {
+                    const producto = submenu.dataset.producto;
+                    const relleno = rellenoSelect.value;
+                    const sabor = saborSelect.value;
+                    const cobertura = coberturaSelect.value;
+                    const precio = calcularPrecio(producto, relleno, sabor, cobertura);
+                    precioDiv.textContent = `Precio: $${precio} MXN`;
+                    btnAddCart.disabled = false;
+                } else {
+                    precioDiv.textContent = '';
+                    btnAddCart.disabled = true;
+                }
+            });
+        });
+
+        btnAddCart.addEventListener('click', () => {
+            const producto = submenu.dataset.producto;
+            const relleno = rellenoSelect.value;
+            const sabor = saborSelect.value;
+            const cobertura = coberturaSelect.value;
+            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
+            const precio = calcularPrecio(producto, relleno, sabor, cobertura);
+            agregarAlCarrito(producto, precio, detalles);
+            submenu.style.display = 'none';
+        });
+
+        // Cerrar el submenú si se hace clic fuera de él
+        document.addEventListener('click', function(e) {
+            if (
+                submenu.style.display === 'block' &&
+                !submenu.contains(e.target) &&
+                !e.target.closest('.menu-table')
+            ) {
+                subm
