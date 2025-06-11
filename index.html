@@ -1,317 +1,224 @@
 <html lang="es">
-<cabeza>
-    <meta charset="UTF-8">
-    Postres KAD
-    <link rel="hoja de estilo" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="hoja de estilo">
-    <estilo>
-        cuerpo {
-            color de fondo: #fff0f5;
-            familia de fuentes: 'Quicksand', sans-serif;
-            margen: 0;
-            relleno: 0;
-            comportamiento de desplazamiento: suave;
+<head>
+    <meta charset="UTF-8" />
+    <title>Postres KAD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        /* Tus estilos originales */
+        body {
+            background-color: #fff0f5;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
             color: #333;
         }
-        encabezado {
-            fondo: gradiente lineal (a la derecha, #f78fb3, #f8a5c2);
-            relleno: 25px 10px;
-            alinear texto: centro;
-            tamaño de fuente: 3em;
-            familia de fuentes: 'Pacifico', cursiva;
+        header {
+            background: linear-gradient(to right, #f78fb3, #f8a5c2);
+            padding: 25px 10px;
+            text-align: center;
+            font-size: 3em;
+            font-family: 'Pacifico', cursive;
             color: #fff;
-            caja-sombra: 0 2px 10px rgba(0,0,0,0.1);
-            posición: pegajosa;
-            arriba: 0;
-            índice z: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
-        navegación {
-            color de fondo: #ffd6e0;
-            pantalla: flex;
-            justificar-contenido: centro;
-            flex-wrap: envolver;
-            relleno: 12px 0;
-            caja-sombra: 0 2px 6px rgba(0,0,0,0.05);
+        nav {
+            background-color: #ffd6e0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 12px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
-        navegar a {
+        nav a {
             color: #d63384;
-            relleno: 12px 18px;
-            decoración de texto: ninguna;
-            peso de fuente: negrita;
-            tamaño de fuente: 1.1em;
-            transición: fondo 0,3 s, transformación 0,3 s;
+            padding: 12px 18px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background 0.3s, transform 0.3s;
         }
-        navegación a:hover {
-            color de fondo: #f8a5c2;
-            radio del borde: 12px;
-            transformar: escala(1.05);
-            color: blanco;
+        nav a:hover {
+            background-color: #f8a5c2;
+            border-radius: 12px;
+            transform: scale(1.05);
+            color: white;
         }
-        .sección {
-            relleno: 50px 20px;
-            ancho máximo: 960px;
-            margen: 40px automático;
-            fondo: #fff;
-            radio del borde: 25px;
-            caja-sombra: 0 6px 20px rgba(0, 0, 0, 0.08);
-            animación: fadeIn 0.8s facilidad;
+        .section {
+            padding: 50px 20px;
+            max-width: 960px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.8s ease;
         }
         @keyframes fadeIn {
-            desde { opacidad: 0; transformar: translateY(30px); }
-            a { opacidad: 1; transformar: translateY(0); }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h2 {
             color: #d63384;
-            alinear texto: centro;
-            tamaño de fuente: 2em;
-            margen inferior: 20px;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
-        imagen {
-            ancho máximo: 100%;
-            radio del borde: 15px;
-            caja-sombra: 0 3px 12px rgba(0, 0, 0, 0.1);
-            transición: transformar 0,3s facilidad;
+        img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
         img:hover {
-            transformar: escala(1.03);
+            transform: scale(1.03);
         }
         p, li {
-            tamaño de fuente: 1.1em;
-            altura de línea: 1.6;
+            font-size: 1.1em;
+            line-height: 1.6;
         }
         ul {
-            tipo-de-estilo-de-lista: cuadrado;
-            relleno-izquierdo: 25px;
+            list-style-type: square;
+            padding-left: 25px;
         }
-        .icono {
-            margen derecho: 10px;
+        .icon {
+            margin-right: 10px;
             color: #d63384;
         }
-        pie de página {
-            color de fondo: #f8a5c2;
-            color: blanco;
-            alinear texto: centro;
-            relleno: 25px;
-            tamaño de fuente: 1.1em;
-            margen superior: 50px;
-            borde superior: 5px sólido #d63384;
-            caja-sombra: 0 -2px 6px rgba(0,0,0,0.05);
+        footer {
+            background-color: #f8a5c2;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 1.1em;
+            margin-top: 50px;
+            border-top: 5px solid #d63384;
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
         }
-        .galería {
-            pantalla: cuadrícula;
-            cuadrícula-plantilla-columnas: repeat(autocompletar, minmax(240px, 1fr));
-            espacio: 20px;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
         }
         .menu-table {
-            ancho: 100%;
-            colapso de frontera: colapso;
-            margen superior: 20px;
-            tamaño de fuente: 1.05em;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1.05em;
         }
         .menu-table th, .menu-table td {
-            borde: 1px sólido #ffd6e0;
-            relleno: 12px;
-            alinear texto: izquierda;
-            cursor: puntero;
+            border: 1px solid #ffd6e0;
+            padding: 12px;
+            text-align: left;
+            cursor: pointer;
         }
         .menu-table th {
-            color de fondo: #ffe3ec;
+            background-color: #ffe3ec;
             color: #d63384;
-            cursor: predeterminado;
+            cursor: default;
         }
         .menu-table td {
-            color de fondo: #fff8fb;
+            background-color: #fff8fb;
         }
         a {
             color: #d63384;
         }
         a:hover {
-            decoración de texto: subrayado;
+            text-decoration: underline;
         }
-        /*Submenú*/
-        #submenu-contenedor {
-            pantalla: ninguna;
-            margen superior: 20px;
-            fondo: #fff8fb;
-            borde: 2px sólido #f8a5c2;
-            radio del borde: 15px;
-            relleno: 20px;
-            caja-sombra: 0 2px 10px rgba(216,51,132,0.07);
-            ancho máximo: 400px;
+
+        /* Estilos del carrito */
+        #carrito-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #fff0f5;
+            border: 2px solid #f8a5c2;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            z-index: 100;
+            width: 260px;
+            font-size: 0.95em;
+        }
+
+        #carrito-container h3 {
+            margin-top: 0;
+            color: #d63384;
+        }
+
+        #carrito-container ul {
+            list-style: none;
+            padding-left: 0;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        #carrito-container li {
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        #carrito-container p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Estilos del submenú */
+        #submenu-container {
+            display: none;
+            margin-top: 20px;
+            background: #fff8fb;
+            border: 2px solid #f8a5c2;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(216,51,132,0.07);
+            max-width: 400px;
         }
         #submenu-titulo {
             color: #d63384;
-            margen inferior: 10px;
+            margin-bottom: 10px;
         }
-        #submenu-opciones etiqueta {
-            pantalla: bloque;
-            margen inferior: 8px;
+        #submenu-opciones label {
+            display: block;
+            margin-bottom: 8px;
         }
-        #submenu-opciones seleccionar {
-            ancho: 100%;
-            relleno: 5px;
-            margen inferior: 10px;
-            radio del borde: 6px;
-            borde: 1px sólido #f8a5c2;
+        #submenu-opciones select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #f8a5c2;
         }
         #btn-add-cart {
-            fondo: #d63384;
-            borde: ninguno;
-            radio del borde: 8px;
-            relleno: 10px 18px;
+            background: #d63384;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
             color: #fff;
-            peso de fuente: negrita;
-            cursor: puntero;
-            transición: fondo 0,2s;
-            margen superior: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
         }
-        #btn-add-cart:deshabilitado {
-            fondo: #ccc;
-            cursor: no permitido;
+        #btn-add-cart:disabled {
+            background: #ccc;
+            cursor: not-allowed;
         }
         #submenu-precio {
-            margen superior: 10px;
-            peso de fuente: negrita;
+            margin-top: 10px;
+            font-weight: bold;
             color: #d63384;
         }
-        /* Carrito pantalla completa */
-        #carrito-superposición {
-            pantalla: ninguna;
-            posición: fija;
-            índice z: 10000;
-            izquierda: 0; arriba: 0; derecha: 0; abajo: 0;
-            ancho: 100vw;
-            altura: 100vh;
-            fondo: rgba(255,240,245,0.98);
-            justificar-contenido: centro;
-            alinear-elementos: centro;
-        }
-        #carrito-contenedor {
-            fondo: #fff;
-            radio del borde: 18px;
-            caja-sombra: 0 8px 32px rgba(0,0,0,0.18);
-            relleno: 32px 36px 24px 36px;
-            ancho máximo: 420px;
-            ancho: 95vw;
-            alinear texto: centro;
-            posición: relativa;
-            margen:auto;
-        }
-        #carrito-contenedor h3 {
-            color: #d63384;
-        }
-        #carrito-lista {
-            estilo de lista: ninguno;
-            relleno-izquierdo: 0;
-            altura máxima: 200px;
-            desbordamiento-y: automático;
-            margen inferior: 10px;
-            alinear texto: izquierda;
-        }
-        #carrito-lista li {
-            margen inferior: 10px;
-            fondo: #ffe3ec;
-            radio del borde: 10px;
-            relleno: 7px 10px;
-            caja-sombra: 0 1px 5px rgba(216,51,132,0.06);
-        }
-        botón #carrito-lista {
-            fondo: #f8a5c2;
-            borde: ninguno;
-            radio del borde: 5px;
-            color: #fff;
-            tamaño de fuente: 1em;
-            margen: 0 2px;
-            relleno: 2px 8px;
-            cursor: puntero;
-            transición: fondo 0,2s;
-        }
-        #carrito-lista botón:hover {
-            fondo: #d63384;
-        }
-        #carrito-lista .eliminar-btn {
-            fondo: #fff0f5;
-            color: #d63384;
-            borde: 1,5 px sólido #d63384;
-            peso de fuente: negrita;
-            relleno: 2px 7px;
-            margen izquierdo: 6px;
-        }
-        #carrito-lista .eliminar-btn:hover {
-            fondo: #d63384;
-            color: #fff;
-        }
-        #carrito-pagar-btn {
-            pantalla: bloque;
-            ancho: 100%;
-            fondo: #d63384;
-            color: #fff;
-            borde: ninguno;
-            radio del borde: 10px;
-            relleno: 12px;
-            tamaño de fuente: 1.1em;
-            margen superior: 15px;
-            cursor: puntero;
-            peso de fuente: negrita;
-            transición: fondo 0,2s;
-        }
-        #carrito-pagar-btn:hover {
-            fondo: #f8a5c2;
-        }
-        #carrito-volver-btn {
-            posición: absoluta;
-            izquierda: 18px;
-            superior: 18px;
-            fondo: #f8a5c2;
-            color: #fff;
-            borde: ninguno;
-            radio del borde: 8px;
-            relleno: 8px 16px;
-            tamaño de fuente: 1em;
-            peso de fuente: negrita;
-            cursor: puntero;
-            transición: fondo 0,2s;
-        }
-        #carrito-volver-btn:hover {
-            fondo: #d63384;
-        }
-        /*Métodos de pago*/
-        #metodos-pago {
-            pantalla: ninguna;
-            margen superior: 20px;
-        }
-        #metodos-pago h4 {
-            color: #d63384;
-            margen inferior: 15px;
-        }
-        .pago-btn {
-            pantalla: bloque;
-            ancho: 100%;
-            fondo: #d63384;
-            color: #fff;
-            borde: ninguno;
-            radio del borde: 10px;
-            relleno: 12px;
-            tamaño de fuente: 1.1em;
-            margen: 10px 0;
-            cursor: puntero;
-            peso de fuente: negrita;
-            transición: fondo 0,2s;
-        }
-        .pago-btn:hover {
-            fondo: #f8a5c2;
-        }
-        @media (ancho máximo: 600px) {
-            #carrito-contenedor {
-                relleno: 12px 5vw;
-                ancho máximo: 98vw;
-            }
-        }
-    </estilo>
-</cabeza>
-<cuerpo>
-    POSTRES KAD
-    <navegación>
+    </style>
+</head>
+<body>
+    <header>POSTRES KAD</header>
+    <nav>
         <a href="#menu"><i class="fas fa-birthday-cake icon"></i>Menú</a>
         <a href="#galeria"><i class="fas fa-image icon"></i>Galería</a>
         <a href="#mision"><i class="fas fa-bullseye icon"></i>Misión</a>
@@ -319,67 +226,67 @@
         <a href="#valores"><i class="fas fa-heart icon"></i>Valores</a>
         <a href="#contacto"><i class="fas fa-phone icon"></i>Contacto</a>
     </nav>
-    <div class="sección" id="menú">
-        Menú de Postres
-        <table class="tabla-de-menú">
+    <div class="section" id="menu">
+        <h2>Menú de Postres</h2>
+        <table class="menu-table">
             <tr><th>Producto</th><th>Precio</th></tr>
             <tr><td>Pastel decorado (por rebanada)</td><td>$50 MXN</td></tr>
             <tr><td>Cupcake decorado</td><td>$25 MXN</td></tr>
             <tr><td>Brownie de chocolate</td><td>$30 MXN</td></tr>
             <tr><td>Galletas decoradas (paquete)</td><td>$60 MXN</td></tr>
-        </tabla>
+        </table>
         <div id="submenu-container">
             <h3 id="submenu-titulo"></h3>
             <form id="submenu-opciones" onsubmit="return false;">
-                <etiqueta>
+                <label>
                     Relleno:
                     <select id="relleno-select">
                         <option value="">Selecciona un relleno</option>
-                    </seleccionar>
-                </etiqueta>
-                <etiqueta>
+                    </select>
+                </label>
+                <label>
                     Sabor:
                     <select id="sabor-select">
                         <option value="">Selecciona un sabor</option>
-                    </seleccionar>
-                </etiqueta>
-                <etiqueta>
+                    </select>
+                </label>
+                <label>
                     Cobertura:
                     <select id="cobertura-select">
                         <option value="">Selecciona una cobertura</option>
-                    </seleccionar>
-                </etiqueta>
+                    </select>
+                </label>
                 <div id="submenu-precio"></div>
-                Agregar al carrito
+                <button type="button" id="btn-add-cart" disabled>Agregar al carrito</button>
             </form>
         </div>
     </div>
 
-    <div class="sección" id="galería">
-        Galería de Fotos
-        <div class="galería">
-            <img src="C:\Usuarios\EQ00\Documentos\MICRO\Brownie.jpg" alt="Brownie con helado">
-            <img src="C:\Usuarios\EQ00\Documentos\MICRO\Cupcake.jpg" alt="Cupcakes con betún rosa y confites">
-            <img src="C:\Usuarios\EQ00\Documentos\MICRO\Oreo.jpg" alt="Cupcakes de chocolate con Oreo">
-            <img src="C:\Users\EQ00\Documents\MICRO\Galleta.jpg" alt="Galletas con chispas de chocolate">
+    <div class="section" id="galeria">
+        <h2>Galería de Fotos</h2>
+        <div class="gallery">
+            <img src="C:\Users\EQ00\Documents\MICRO\Brownie.jpg" alt="Brownie con helado" />
+            <img src="C:\Users\EQ00\Documents\MICRO\Cupcake.jpg" alt="Cupcakes con betún rosa y confites" />
+            <img src="C:\Users\EQ00\Documents\MICRO\Oreo.jpg" alt="Cupcakes de chocolate con Oreo" />
+            <img src="C:\Users\EQ00\Documents\MICRO\Galleta.jpg" alt="Galletas con chispas de chocolate" />
         </div>
     </div>
 
-    <div class="sección" id="misión">
-        Misión
+    <div class="section" id="mision">
+        <h2>Misión</h2>
         <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
     </div>
-    <div class="sección" id="visión">
-        Visión
+    <div class="section" id="vision">
+        <h2>Visión</h2>
         <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
     </div>
     <div class="section" id="valores">
-        Valores
+        <h2>Valores</h2>
         <ul>
             <li>Calidad</li>
-            Creatividad
+            <li>Creatividad</li>
             <li>Compromiso</li>
-            Pasión
+            <li>Pasión</li>
             <li>Amor por los detalles</li>
         </ul>
     </div>
@@ -389,23 +296,22 @@
         <p><i class="fab fa-instagram icon"></i><strong>Instagram:</strong> <a href="https://www.instagram.com/postres_kad" target="_blank">@postres_kad</a></p>
         <p><i class="fas fa-envelope icon"></i><strong>Correo:</strong> postreakad@gmail.com</p>
         <p><i class="fas fa-phone icon"></i><strong>Teléfono:</strong> +52 5648184476</p>
-        <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingo de 12:00 a 20:00 horas</p>
+        <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingos de 12:00 a 20:00 hrs</p>
         <p><strong>Frase:</strong> "En Postres Kad, cada bocado es una experiencia única."</p>
     </div>
-    <pie de página>
-        &Copiar; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÃ‰RREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÃ NEZ HERNÃ NDEZ
-    </pie de página>
-
+    <footer>
+        &copy; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÉRREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÍNEZ HERNÁNDEZ
+    </footer>
     <!-- Carrito pantalla completa, oculto por defecto -->
     <div id="carrito-overlay">
-        <div id="contenedor-de-carrito">
-            <botón id="carrito-volver-btn">Volver</botón>
+        <div id="carrito-container">
+            <button id="carrito-volver-btn">Volver</button>
             <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
             <ul id="carrito-lista"></ul>
             <p><strong>Total:</strong> $<span id="total">0</span> MXN</p>
-            <botón id="carrito-pagar-btn">Pagar</botón>
-            <div id="métodos-de-pago">
-                Método de pago
+            <button id="carrito-pagar-btn">Pagar</button>
+            <div id="metodos-pago">
+                <h4>Método de pago</h4>
                 <button class="pago-btn" onclick="alert('Seleccionaste Tarjeta de Débito')">Tarjeta de Débito</button>
                 <button class="pago-btn" onclick="alert('Seleccionaste Tarjeta de Crédito')">Tarjeta de Crédito</button>
                 <button class="pago-btn" onclick="alert('Seleccionaste Efectivo')">Efectivo</button>
@@ -413,7 +319,7 @@
         </div>
     </div>
 
-    <guión>
+    <script>
         // Opciones y precios de cada producto
         const opciones = {
             "Pastel decorado (por rebanada)": {
@@ -426,7 +332,7 @@
                 sabor: [
                     { nombre: "Vainilla", precio: 5 },
                     { nombre: "Chocolate", precio: 7 },
-                    { nombre: "Terciopelo Rojo", precio: 12 }
+                    { nombre: "Red Velvet", precio: 12 }
                 ],
                 cobertura: [
                     { nombre: "Fondant", precio: 15 },
@@ -496,38 +402,38 @@
 
         function agregarAlCarrito(nombre, precio, detalles) {
             const existente = carrito.find(item => item.nombre === nombre && item.detalles === detalles);
-            si (existente) {
-                existencia.cantidad += 1;
-            } demás {
+            if (existente) {
+                existente.cantidad += 1;
+            } else {
                 carrito.push({ nombre, precio, cantidad: 1, detalles });
             }
             actualizarCarrito();
             mostrarCarrito();
         }
 
-        función eliminarDelCarrito(índice) {
-            carrito.splice(índice, 1);
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
             actualizarCarrito();
         }
 
-        function cambiarCantidad(índice, delta) {
+        function cambiarCantidad(index, delta) {
             carrito[index].cantidad += delta;
-            if (carrito[índice].cantidad <= 0) {
-                eliminarDelCarrito(índice);
-            } demás {
+            if (carrito[index].cantidad <= 0) {
+                eliminarDelCarrito(index);
+            } else {
                 actualizarCarrito();
             }
         }
 
-        función actualizarCarrito() {
+        function actualizarCarrito() {
             lista.innerHTML = '';
-            sea total = 0;
-            si (carrito.length === 0) {
+            let total = 0;
+            if (carrito.length === 0) {
                 const li = document.createElement('li');
                 li.textContent = 'El carrito está vacío.';
                 lista.appendChild(li);
                 carritoPagarBtn.style.display = "none";
-            } demás {
+            } else {
                 carrito.forEach((item, i) => {
                     total += item.precio * item.cantidad;
                     const li = document.createElement('li');
@@ -535,22 +441,121 @@
                         <strong>${item.nombre}</strong> x${item.cantidad}
                         <button onclick="cambiarCantidad(${i},1)">+</button>
                         <button onclick="cambiarCantidad(${i},-1)">-</button>
-                        <button class="eliminar-btn" onclick="eliminarDelCarrito(${i})">×</button><br>
+                        <button class="eliminar-btn" onclick="eliminarDelCarrito(${i})">&times;</button><br>
                         <small>${item.detalles}</small><br>
                         <span style="color:#d63384;">$${item.precio * item.cantidad} MXN</span>
                     `;
                     lista.appendChild(li);
                 });
-                carritoPagarBtn.style.display = "bloque";
+                carritoPagarBtn.style.display = "block";
             }
             totalSpan.textContent = total;
             metodosPago.style.display = "none";
         }
 
-        función mostrarCarrito() {
+        function mostrarCarrito() {
             carritoOverlay.style.display = "flex";
             metodosPago.style.display = "none";
         }
-        función ocultarCarrito() {
+        function ocultarCarrito() {
             carritoOverlay.style.display = "none";
-            metodosPago.style.displ
+            metodosPago.style.display = "none";
+        }
+        carritoVolverBtn.addEventListener('click', ocultarCarrito);
+        carritoPagarBtn.addEventListener('click', function() {
+            if (carrito.length > 0) {
+                metodosPago.style.display = "block";
+            }
+        });
+
+        // Submenú
+        const submenuContainer = document.getElementById('submenu-container');
+        const submenuTitulo = document.getElementById('submenu-titulo');
+        const rellenoSelect = document.getElementById('relleno-select');
+        const saborSelect = document.getElementById('sabor-select');
+        const coberturaSelect = document.getElementById('cobertura-select');
+        const submenuPrecio = document.getElementById('submenu-precio');
+        const btnAddCart = document.getElementById('btn-add-cart');
+
+        let productoSeleccionado = null;
+
+        function llenarSelect(selectElement, opcionesArray) {
+            selectElement.innerHTML = '<option value="">Selecciona una opción</option>';
+            opcionesArray.forEach(op => {
+                const option = document.createElement('option');
+                option.value = op.nombre;
+                option.textContent = `${op.nombre} (+$${op.precio} MXN)`;
+                option.dataset.precio = op.precio;
+                selectElement.appendChild(option);
+            });
+        }
+
+        function mostrarSubmenu(producto) {
+            productoSeleccionado = producto;
+            submenuTitulo.textContent = producto;
+            const opcionesProducto = opciones[producto];
+            if (!opcionesProducto) return;
+
+            llenarSelect(rellenoSelect, opcionesProducto.relleno);
+            llenarSelect(saborSelect, opcionesProducto.sabor);
+            llenarSelect(coberturaSelect, opcionesProducto.cobertura);
+
+            rellenoSelect.value = '';
+            saborSelect.value = '';
+            coberturaSelect.value = '';
+            submenuPrecio.textContent = `Precio base: $${opcionesProducto.base} MXN`;
+            btnAddCart.disabled = true;
+
+            submenuContainer.style.display = 'block';
+        }
+
+        function calcularPrecio() {
+            if (!productoSeleccionado) return 0;
+            const base = opciones[productoSeleccionado].base;
+            const rellenoPrecio = rellenoSelect.selectedOptions[0]?.dataset.precio || 0;
+            const saborPrecio = saborSelect.selectedOptions[0]?.dataset.precio || 0;
+            const coberturaPrecio = coberturaSelect.selectedOptions[0]?.dataset.precio || 0;
+            return base + Number(rellenoPrecio) + Number(saborPrecio) + Number(coberturaPrecio);
+        }
+
+        function actualizarEstado() {
+            if (rellenoSelect.value && saborSelect.value && coberturaSelect.value) {
+                const total = calcularPrecio();
+                submenuPrecio.textContent = `Precio total: $${total} MXN`;
+                btnAddCart.disabled = false;
+            } else {
+                const base = opciones[productoSeleccionado]?.base || 0;
+                submenuPrecio.textContent = `Precio base: $${base} MXN`;
+                btnAddCart.disabled = true;
+            }
+        }
+
+        btnAddCart.addEventListener('click', () => {
+            if (!productoSeleccionado) return;
+            const detalles = `Relleno: ${rellenoSelect.value}, Sabor: ${saborSelect.value}, Cobertura: ${coberturaSelect.value}`;
+            const precio = calcularPrecio();
+            agregarAlCarrito(productoSeleccionado, precio, detalles);
+            submenuContainer.style.display = 'none';
+        });
+
+        rellenoSelect.addEventListener('change', actualizarEstado);
+        saborSelect.addEventListener('change', actualizarEstado);
+        coberturaSelect.addEventListener('change', actualizarEstado);
+
+        // Evento click en filas del menú para mostrar submenú
+        document.querySelectorAll('.menu-table tr').forEach((row, index) => {
+            if (index === 0) return; // Saltar encabezado
+            row.addEventListener('click', () => {
+                const producto = row.cells[0]?.textContent.trim();
+                if (producto && opciones[producto]) {
+                    mostrarSubmenu(producto);
+                }
+            });
+        });
+
+        // Expón las funciones para los botones inline
+        window.cambiarCantidad = cambiarCantidad;
+        window.eliminarDelCarrito = eliminarDelCarrito;
+    </script>
+</body>
+</html>
