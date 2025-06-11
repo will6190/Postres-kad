@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -235,7 +236,7 @@
         </table>
         <div id="submenu-container">
             <h3 id="submenu-titulo"></h3>
-            <form id="submenu-opciones">
+            <form id="submenu-opciones" onsubmit="return false;">
                 <label>
                     Relleno:
                     <select id="relleno-select">
@@ -260,14 +261,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
     <div class="section" id="galeria">
         <h2>Galería de Fotos</h2>
         <div class="gallery">
@@ -278,53 +271,14 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
     <div class="section" id="mision">
         <h2>Misión</h2>
         <p>Endulzar momentos especiales con postres caseros y personalizados, elaborados con amor y los mejores ingredientes.</p>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="section" id="vision">
         <h2>Visión</h2>
         <p>Ser reconocidos como una repostería local creativa y confiable, ofreciendo experiencias únicas en cada bocado.</p>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="section" id="valores">
         <h2>Valores</h2>
         <ul>
@@ -335,18 +289,6 @@
             <li>Amor por los detalles</li>
         </ul>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="section" id="contacto">
         <h2>Contacto y Redes Sociales</h2>
         <p><i class="fab fa-facebook icon"></i><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1D5iAHiMGn/?mibextid=wwXIfr" target="_blank">Postres Kad</a></p>
@@ -356,18 +298,9 @@
         <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingos de 12:00 a 20:00 hrs</p>
         <p><strong>Frase:</strong> "En Postres Kad, cada bocado es una experiencia única."</p>
     </div>
-
-
-
-
-
-
-
-
     <footer>
-    &copy; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÉRREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÍNEZ HERNÁNDEZ
-
-</footer>
+        &copy; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÉRREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÍNEZ HERNÁNDEZ
+    </footer>
 
     <div id="carrito-container">
         <h3><i class="fas fa-shopping-cart icon"></i>Carrito</h3>
@@ -447,7 +380,7 @@
             }
         };
 
-        // Carrito y lógica MEJORADA
+        // Carrito y lógica
         const carrito = [];
         const lista = document.getElementById('carrito-lista');
         const totalSpan = document.getElementById('total');
@@ -500,116 +433,117 @@
             }
             totalSpan.textContent = total;
         }
-
         // Expón las funciones para los botones inline
         window.eliminarDelCarrito = eliminarDelCarrito;
         window.cambiarCantidad = cambiarCantidad;
 
         // Submenú dinámico
         const filas = document.querySelectorAll('.menu-table tr');
-        filas.forEach((fila, index) => {
-            if (index === 0) return; // Encabezado
-            fila.style.cursor = 'pointer';
-            fila.addEventListener('click', () => {
-                const nombre = fila.cells[0].textContent;
-                mostrarSubmenu(nombre);
-            });
-        });
-
-        // Submenú
-        const submenu = document.getElementById('submenu-container');
-        const titulo = document.getElementById('submenu-titulo');
+        const submenuContainer = document.getElementById('submenu-container');
+        const submenuTitulo = document.getElementById('submenu-titulo');
         const rellenoSelect = document.getElementById('relleno-select');
         const saborSelect = document.getElementById('sabor-select');
         const coberturaSelect = document.getElementById('cobertura-select');
+        const submenuPrecio = document.getElementById('submenu-precio');
         const btnAddCart = document.getElementById('btn-add-cart');
-        const precioDiv = document.getElementById('submenu-precio');
 
-        function mostrarSubmenu(producto) {
-            submenu.style.display = 'block';
-            titulo.textContent = Personaliza tu ${producto};
-            // Limpiar selects
-            limpiarSelect(rellenoSelect);
-            limpiarSelect(saborSelect);
-            limpiarSelect(coberturaSelect);
-            // Llenar selects con opciones y precios
-            opciones[producto].relleno.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = ${opt.nombre} (+$${opt.precio});
-                rellenoSelect.appendChild(o);
+        let productoSeleccionado = null;
+
+        filas.forEach((fila, index) => {
+            if (index === 0) return; // Saltar encabezado
+            fila.style.cursor = 'pointer';
+            fila.addEventListener('click', () => {
+                const nombreProducto = fila.cells[0].textContent.trim();
+                productoSeleccionado = opciones[nombreProducto];
+                if (!productoSeleccionado) return;
+
+                // Mostrar submenú
+                submenuContainer.style.display = 'block';
+                submenuTitulo.textContent = nombreProducto;
+
+                // Limpiar selects
+                rellenoSelect.innerHTML = '<option value="">Selecciona un relleno</option>';
+                saborSelect.innerHTML = '<option value="">Selecciona un sabor</option>';
+                coberturaSelect.innerHTML = '<option value="">Selecciona una cobertura</option>';
+
+                // Llenar selects con opciones
+                productoSeleccionado.relleno.forEach(op => {
+                    const option = document.createElement('option');
+                    option.value = op.nombre;
+                    option.textContent = `${op.nombre} (+$${op.precio})`;
+                    rellenoSelect.appendChild(option);
+                });
+                productoSeleccionado.sabor.forEach(op => {
+                    const option = document.createElement('option');
+                    option.value = op.nombre;
+                    option.textContent = `${op.nombre} (+$${op.precio})`;
+                    saborSelect.appendChild(option);
+                });
+                productoSeleccionado.cobertura.forEach(op => {
+                    const option = document.createElement('option');
+                    option.value = op.nombre;
+                    option.textContent = `${op.nombre} (+$${op.precio})`;
+                    coberturaSelect.appendChild(option);
+                });
+
+                // Resetear precio y botón
+                submenuPrecio.textContent = `Precio base: $${productoSeleccionado.base} MXN`;
+                btnAddCart.disabled = true;
+
+                // Escuchar cambios para actualizar precio y habilitar botón
+                rellenoSelect.onchange = actualizarPrecio;
+                saborSelect.onchange = actualizarPrecio;
+                coberturaSelect.onchange = actualizarPrecio;
             });
-            opciones[producto].sabor.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = ${opt.nombre} (+$${opt.precio});
-                saborSelect.appendChild(o);
-            });
-            opciones[producto].cobertura.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.nombre;
-                o.textContent = ${opt.nombre} (+$${opt.precio});
-                coberturaSelect.appendChild(o);
-            });
-            // Reset
-            rellenoSelect.selectedIndex = 0;
-            saborSelect.selectedIndex = 0;
-            coberturaSelect.selectedIndex = 0;
-            precioDiv.textContent = '';
-            btnAddCart.disabled = true;
+        });
 
-            // Guardar producto actual
-            btnAddCart.dataset.producto = producto;
-        }
+        function actualizarPrecio() {
+            if (!productoSeleccionado) return;
 
-        function limpiarSelect(select) {
-            while (select.options.length > 1) {
-                select.remove(1);
-            }
-        }
+            const relleno = productoSeleccionado.relleno.find(r => r.nombre === rellenoSelect.value);
+            const sabor = productoSeleccionado.sabor.find(s => s.nombre === saborSelect.value);
+            const cobertura = productoSeleccionado.cobertura.find(c => c.nombre === coberturaSelect.value);
 
-        function calcularPrecio(producto) {
-            if (!opciones[producto]) return 0;
-            let precio = opciones[producto].base;
-            const relleno = opciones[producto].relleno.find(r => r.nombre === rellenoSelect.value);
-            const sabor = opciones[producto].sabor.find(s => s.nombre === saborSelect.value);
-            const cobertura = opciones[producto].cobertura.find(c => c.nombre === coberturaSelect.value);
-            if (relleno) precio += relleno.precio;
-            if (sabor) precio += sabor.precio;
-            if (cobertura) precio += cobertura.precio;
-            return precio;
-        }
-
-        function actualizarPrecioYBoton() {
-            const producto = btnAddCart.dataset.producto;
-            if (
-                rellenoSelect.value &&
-                saborSelect.value &&
-                coberturaSelect.value
-            ) {
-                const precio = calcularPrecio(producto);
-                precioDiv.textContent = Precio: $${precio} MXN;
+            // Solo habilitar botón si todas las opciones están seleccionadas
+            if (relleno && sabor && cobertura) {
+                const precioTotal = productoSeleccionado.base + relleno.precio + sabor.precio + cobertura.precio;
+                submenuPrecio.textContent = `Precio total: $${precioTotal} MXN`;
                 btnAddCart.disabled = false;
             } else {
-                precioDiv.textContent = '';
+                submenuPrecio.textContent = `Precio base: $${productoSeleccionado.base} MXN`;
                 btnAddCart.disabled = true;
             }
         }
 
-        rellenoSelect.addEventListener('change', actualizarPrecioYBoton);
-        saborSelect.addEventListener('change', actualizarPrecioYBoton);
-        coberturaSelect.addEventListener('change', actualizarPrecioYBoton);
+        // Agregar al carrito
+        btnAddCart.addEventListener('click', () => {
+            if (!productoSeleccionado) return;
 
-        btnAddCart.addEventListener('click', function () {
-            const producto = btnAddCart.dataset.producto;
-            const detalles = Relleno: ${rellenoSelect.value}, Sabor: ${saborSelect.value}, Cobertura: ${coberturaSelect.value};
-            const precio = calcularPrecio(producto);
-            agregarAlCarrito(producto, precio, detalles);
-            submenu.style.display = 'none';
+            const relleno = rellenoSelect.value;
+            const sabor = saborSelect.value;
+            const cobertura = coberturaSelect.value;
+
+            if (!relleno || !sabor || !cobertura) return; // Validar selección
+
+            const rellenoObj = productoSeleccionado.relleno.find(r => r.nombre === relleno);
+            const saborObj = productoSeleccionado.sabor.find(s => s.nombre === sabor);
+            const coberturaObj = productoSeleccionado.cobertura.find(c => c.nombre === cobertura);
+
+            const precioTotal = productoSeleccionado.base + rellenoObj.precio + saborObj.precio + coberturaObj.precio;
+
+            const detalles = `Relleno: ${relleno}, Sabor: ${sabor}, Cobertura: ${cobertura}`;
+
+            agregarAlCarrito(submenuTitulo.textContent, precioTotal, detalles);
+
+            // Opcional: ocultar submenú después de agregar
+            submenuContainer.style.display = 'none';
+
+            // Resetear selects y botón
+            rellenoSelect.value = '';
+            saborSelect.value = '';
+            coberturaSelect.value = '';
+            btnAddCart.disabled = true;
         });
-
-        // Inicializa carrito vacío
-        actualizarCarrito();
     </script>
 </body>
 </html>
