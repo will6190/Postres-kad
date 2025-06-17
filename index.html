@@ -24,14 +24,18 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
         }
-        /* Estilo para el logo dentro del header */
         header img {
-            height: 60px;
+            height: 70px;
             vertical-align: middle;
-            margin-right: 12px;
-            border-radius: 12px;
+            margin-right: 0;
+            border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+            background: #fff0f5;
         }
         nav {
             background-color: #ffd6e0;
@@ -314,12 +318,20 @@
                 padding: 12px 5vw;
                 max-width: 98vw;
             }
+            header {
+                flex-direction: column;
+                font-size: 2em;
+                gap: 8px;
+            }
+            header img {
+                height: 50px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="img/logo.jpg" alt="logo de empresa">
+        <img src="https://pplx-res.cloudinary.com/image/private/user_uploads/73722912/404921f0-8c8c-4073-bde8-45d34f8a56f0/IMG-20250617-WA0001.jpg" alt="logo de empresa KAD">
         POSTRES KAD
     </header>
     <nav>
@@ -406,26 +418,26 @@
         <p><i class="fas fa-clock icon"></i><strong>Horario:</strong> Jueves a domingos de 12:00 a 20:00 hrs</p>
         <p><strong>Frase:</strong> "En Postres Kad, cada bocado es una experiencia única."</p>
     </div>
-<div class="sección" id="satisfaccion">
-    <h2>Cuestionario de Satisfacción al Cliente</h2>
-    <form id="form-satisfaccion" onsubmit="return enviarSatisfaccion();">
-        <label for="satisfaccion-calificacion">¿Cómo calificarías tu experiencia?</label><br>
-        <select id="satisfaccion-calificacion" required>
-            <option value="">Selecciona</option>
-            <option value="5">Excelente</option>
-            <option value="4">Muy buena</option>
-            <option value="3">Buena</option>
-            <option value="2">Regular</option>
-            <option value="1">Mala</option>
-        </select>
-        <br><br>
-        <label for="satisfaccion-comentario">Comentarios adicionales:</label><br>
-        <textarea id="satisfaccion-comentario" rows="3" cols="35" placeholder="Escribe tus sugerencias o comentarios"></textarea>
-        <br><br>
-        <button type="submit" class="pago-btn">Enviar</button>
-    </form>
-    <div id="satisfaccion-mensaje" style="color:green; margin-top:10px;"></div>
-</div>
+    <div class="sección" id="satisfaccion">
+        <h2>Cuestionario de Satisfacción al Cliente</h2>
+        <form id="form-satisfaccion" onsubmit="return enviarSatisfaccion();">
+            <label for="satisfaccion-calificacion">¿Cómo calificarías tu experiencia?</label><br>
+            <select id="satisfaccion-calificacion" required>
+                <option value="">Selecciona</option>
+                <option value="5">Excelente</option>
+                <option value="4">Muy buena</option>
+                <option value="3">Buena</option>
+                <option value="2">Regular</option>
+                <option value="1">Mala</option>
+            </select>
+            <br><br>
+            <label for="satisfaccion-comentario">Comentarios adicionales:</label><br>
+            <textarea id="satisfaccion-comentario" rows="3" cols="35" placeholder="Escribe tus sugerencias o comentarios"></textarea>
+            <br><br>
+            <button type="submit" class="pago-btn">Enviar</button>
+        </form>
+        <div id="satisfaccion-mensaje" style="color:green; margin-top:10px;"></div>
+    </div>
     <footer>
         &copy; 2025 Postres Kad - Diseñado por DANIEL EDUARDO HUERTA GUTIÉRREZ, WILLIAMS SAEED ORTIZ PEREZ, ALLISON AGUILAR ROMERO, DANIEL ABDIEL BARRERA PEREZ, DANIELA NAOMI MARTÍNEZ HERNÁNDEZ
     </footer>
@@ -446,149 +458,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Opciones y precios de cada producto
-        const opciones = {
-            "Pastel decorado (por rebanada)": {
-                base: 50,
-                relleno: [
-                    { nombre: "Crema pastelera", precio: 8 },
-                    { nombre: "Chocolate", precio: 10 },
-                    { nombre: "Mermelada de fresa", precio: 9 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla", precio: 5 },
-                    { nombre: "Chocolate", precio: 7 },
-                    { nombre: "Red Velvet", precio: 12 }
-                ],
-                cobertura: [
-                    { nombre: "Fondant", precio: 15 },
-                    { nombre: "Chantilly", precio: 10 },
-                    { nombre: "Chocolate", precio: 12 }
-                ]
-            },
-            "Cupcake decorado": {
-                base: 25,
-                relleno: [
-                    { nombre: "Nutella", precio: 7 },
-                    { nombre: "Dulce de leche", precio: 6 },
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla", precio: 3 },
-                    { nombre: "Zanahoria", precio: 5 },
-                    { nombre: "Chocolate", precio: 4 }
-                ],
-                cobertura: [
-                    { nombre: "Betún de mantequilla", precio: 6 },
-                    { nombre: "Fondant", precio: 8 },
-                    { nombre: "Chantilly", precio: 5 }
-                ]
-            },
-            "Brownie de chocolate": {
-                base: 30,
-                relleno: [
-                    { nombre: "Nuez", precio: 5 },
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
-                sabor: [
-                    { nombre: "Chocolate clásico", precio: 4 },
-                    { nombre: "Chocolate con menta", precio: 6 }
-                ],
-                cobertura: [
-                    { nombre: "Chocolate derretido", precio: 6 },
-                    { nombre: "Sin cobertura", precio: 0 }
-                ]
-            },
-            "Galletas decoradas (paquete)": {
-                base: 60,
-                relleno: [
-                    { nombre: "Sin relleno", precio: 0 }
-                ],
-                sabor: [
-                    { nombre: "Vainilla", precio: 3 },
-                    { nombre: "Mantequilla", precio: 4 },
-                    { nombre: "Chocolate", precio: 5 }
-                ],
-                cobertura: [
-                    { nombre: "Glaseado", precio: 5 },
-                    { nombre: "Chocolate", precio: 6 },
-                    { nombre: "Sin cobertura", precio: 0 }
-                ]
-            }
-        };
-
-        // Carrito y lógica
-        const carrito = [];
-        const lista = document.getElementById('carrito-lista');
-        const totalSpan = document.getElementById('total');
-        const carritoOverlay = document.getElementById('carrito-overlay');
-        const carritoPagarBtn = document.getElementById('carrito-pagar-btn');
-        const metodosPago = document.getElementById('metodos-pago');
-        const carritoVolverBtn = document.getElementById('carrito-volver-btn');
-
-        function agregarAlCarrito(nombre, precio, detalles) {
-            const existente = carrito.find(item => item.nombre === nombre && item.detalles === detalles);
-            if (existente) {
-                existente.cantidad += 1;
-            } else {
-                carrito.push({ nombre, precio, cantidad: 1, detalles });
-            }
-            actualizarCarrito();
-            mostrarCarrito();
-        }
-
-        function eliminarDelCarrito(index) {
-            carrito.splice(index, 1);
-            actualizarCarrito();
-        }
-
-        function cambiarCantidad(index, delta) {
-            carrito[index].cantidad += delta;
-            if (carrito[index].cantidad <= 0) {
-                eliminarDelCarrito(index);
-            } else {
-                actualizarCarrito();
-            }
-        }
-
-        function actualizarCarrito() {
-            lista.innerHTML = '';
-            let total = 0;
-            if (carrito.length === 0) {
-                const li = document.createElement('li');
-                li.textContent = 'El carrito está vacío.';
-                lista.appendChild(li);
-                carritoPagarBtn.style.display = "none";
-            } else {
-                carrito.forEach((item, i) => {
-                    total += item.precio * item.cantidad;
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <strong>${item.nombre}</strong> (${item.detalles}) - Cantidad: ${item.cantidad} - $${item.precio * item.cantidad} MXN
-                        <button onclick="cambiarCantidad(${i}, 1)">+</button>
-                        <button onclick="cambiarCantidad(${i}, -1)">-</button>
-                        <button class="eliminar-btn" onclick="eliminarDelCarrito(${i})">X</button>
-                    `;
-                    lista.appendChild(li);
-                });
-                carritoPagarBtn.style.display = "block";
-            }
-            totalSpan.textContent = total.toFixed(2);
-        }
-
-        function mostrarCarrito() {
-            carritoOverlay.style.display = "flex";
-        }
-
-        carritoVolverBtn.addEventListener('click', () => {
-            carritoOverlay.style.display = "none";
-        });
-
-        carritoPagarBtn.addEventListener('click', () => {
-            metodosPago.style.display = "block";
-        });
-    </script>
+    <!-- Aquí iría tu script JS, igual que antes -->
 </body>
 </html>
